@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-surface-50 text-surface-900 font-sans;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(45, 71, 166, 0.04), transparent),
+      linear-gradient(180deg, rgba(245, 244, 240, 0.6) 0%, rgba(250, 250, 248, 1) 100%);
+    background-attachment: fixed;
+  }
+
+  /* Headings use serif display font */
+  h1, h2 {
+    @apply font-display;
+    letter-spacing: -0.01em;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-brand-200/60 text-brand-900;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-400;
+  }
+
+  /* Firefox scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.surface.300') transparent;
+  }
+}
+
+@layer components {
+  /* Shared input styles */
+  .input-base {
+    @apply w-full px-3.5 py-2.5 text-sm bg-white border border-surface-200 rounded-xl
+      placeholder:text-surface-400
+      focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400
+      transition-all duration-200;
+  }
+
+  .select-base {
+    @apply input-base bg-white appearance-none cursor-pointer;
+  }
+
+  .textarea-base {
+    @apply input-base resize-none leading-relaxed;
+  }
+
+  /* Card hover lift effect */
+  .card-interactive {
+    @apply transition-all duration-200 hover:shadow-elevated hover:-translate-y-0.5;
+  }
+
+  /* Subtle grain texture overlay */
+  .grain-overlay::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.015;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    z-index: 9999;
+  }
+}
+
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
