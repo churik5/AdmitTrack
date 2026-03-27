@@ -71,7 +71,7 @@ const navGroups: NavGroup[] = [
 export default function Sidebar() {
   const pathname = usePathname()
   const { signOut, user } = useAuth()
-  const { locale, setLocale, availableLocales, t } = useI18n()
+  const { t } = useI18n()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
@@ -145,23 +145,6 @@ export default function Sidebar() {
             {t.common.signOut}
           </button>
         )}
-        {/* Language switcher */}
-        <div className="flex items-center gap-1 px-3 py-2">
-          {availableLocales.map((loc) => (
-            <button
-              key={loc.code}
-              onClick={() => setLocale(loc.code)}
-              className={cn(
-                'px-2 py-1 rounded-lg text-xs font-medium transition-all duration-200',
-                locale === loc.code
-                  ? 'bg-brand-100 text-brand-700'
-                  : 'text-surface-400 hover:bg-surface-100 hover:text-surface-600'
-              )}
-            >
-              {loc.flag}
-            </button>
-          ))}
-        </div>
       </div>
     </aside>
   )

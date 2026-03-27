@@ -482,6 +482,11 @@ export interface Translations {
     graduationYear: string
     highSchool: string
     city: string
+    region: string
+    language: string
+    noTestScores: string
+    selectYear: string
+    saveProfile: string
     saved: string
   }
 

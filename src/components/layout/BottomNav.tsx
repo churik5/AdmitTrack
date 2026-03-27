@@ -51,7 +51,7 @@ const moreItems: NavItem[] = [
 export default function BottomNav() {
   const pathname = usePathname()
   const [showMore, setShowMore] = useState(false)
-  const { t, locale, setLocale, availableLocales } = useI18n()
+  const { t } = useI18n()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
@@ -91,23 +91,6 @@ export default function BottomNav() {
                   <item.icon size={22} className={isActive(item.href) ? 'text-brand-600' : 'text-surface-400'} />
                   {t.nav[item.labelKey]}
                 </Link>
-              ))}
-            </div>
-            {/* Language switcher in more menu */}
-            <div className="flex items-center justify-center gap-2 px-4 pb-4">
-              {availableLocales.map((loc) => (
-                <button
-                  key={loc.code}
-                  onClick={() => setLocale(loc.code)}
-                  className={cn(
-                    'px-3 py-1.5 rounded-xl text-xs font-medium transition-all duration-200',
-                    locale === loc.code
-                      ? 'bg-brand-100 text-brand-700'
-                      : 'text-surface-400 hover:bg-surface-100 hover:text-surface-600'
-                  )}
-                >
-                  {loc.flag} {loc.label}
-                </button>
               ))}
             </div>
           </div>

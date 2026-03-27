@@ -49,7 +49,6 @@ import {
   APPLICATION_TYPES,
   DEADLINE_TYPES,
   ESSAY_TYPES,
-  US_STATES,
 } from '@/lib/utils'
 import { getLinksFor, createLink, removeLink } from '@/lib/storage'
 import { useI18n } from '@/lib/i18n'
@@ -795,19 +794,13 @@ export default function UniversityDetailPage() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
-            <select
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.state}</label>
+            <input
+              type="text"
               value={editForm.state}
               onChange={(e) => setEditForm({ ...editForm, state: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
-            >
-              <option value="">Select state...</option>
-              {US_STATES.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
+              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>

@@ -4,16 +4,17 @@ import { useState, useEffect, useMemo } from 'react'
 import { useI18n } from '@/lib/i18n'
 import { useProfile } from '@/lib/hooks/useProfile'
 import { TestScore } from '@/lib/types'
-import { generateId, US_STATES } from '@/lib/utils'
+import { generateId } from '@/lib/utils'
 import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import ProgressBar from '@/components/ui/ProgressBar'
 import { Save, Plus, Trash2 } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 export default function ProfilePage() {
   const { profile, updateProfile, loading } = useProfile()
-  const { t } = useI18n()
+  const { t, locale, setLocale, availableLocales } = useI18n()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -101,7 +102,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-pulse text-gray-400 text-sm">{t.common.loading}...</div>
+        <div className="animate-pulse text-gray-400 text-sm">{t.common.loading}</div>
       </div>
     )
   }
@@ -111,46 +112,62 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <PageHeader title="Applicant Profile" description="Manage your personal information and academic details." />
+      <PageHeader title={t.profile.title} description={t.profile.subtitle} />
 
       {/* Profile Completeness */}
       <Card className="mb-6">
-        <ProgressBar value={completeness} label="Profile Completeness" />
+        <ProgressBar value={completeness} label={t.profile.profileCompleteness} />
+      </Card>
+
+      {/* Language */}
+      <Card className="mb-6">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">{t.profile.language}</h2>
+        <div className="flex gap-2">
+          {availableLocales.map((loc) => (
+            <button
+              key={loc.code}
+              onClick={() => setLocale(loc.code)}
+              className={cn(
+                'px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border',
+                locale === loc.code
+                  ? 'bg-brand-600 text-white border-brand-600'
+                  : 'text-gray-600 border-gray-300 hover:bg-gray-50'
+              )}
+            >
+              {loc.flag} {loc.label}
+            </button>
+          ))}
+        </div>
       </Card>
 
       {/* Personal Information */}
       <Card className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">{t.profile.personalInfo}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input type="text" value={name} onChange={e => setName(e.target.value)} className={inputClass} placeholder="Full name" />
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.name}</label>
+            <input type="text" value={name} onChange={e => setName(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.email}</label>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} className={inputClass} placeholder="you@example.com" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">High School</label>
-            <input type="text" value={highSchool} onChange={e => setHighSchool(e.target.value)} className={inputClass} placeholder="School name" />
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.highSchool}</label>
+            <input type="text" value={highSchool} onChange={e => setHighSchool(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
-            <input type="text" value={city} onChange={e => setCity(e.target.value)} className={inputClass} placeholder="City" />
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.city}</label>
+            <input type="text" value={city} onChange={e => setCity(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
-            <select value={state} onChange={e => setState(e.target.value)} className={`${inputClass} bg-white`}>
-              <option value="">Select state</option>
-              {US_STATES.map(s => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.region}</label>
+            <input type="text" value={state} onChange={e => setState(e.target.value)} className={inputClass} />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Graduation Year</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.graduationYear}</label>
             <select value={graduationYear} onChange={e => setGraduationYear(e.target.value)} className={`${inputClass} bg-white`}>
-              <option value="">Select year</option>
+              <option value="">{t.profile.selectYear}</option>
               {[2025, 2026, 2027, 2028, 2029, 2030].map(y => (
                 <option key={y} value={y}>{y}</option>
               ))}
@@ -161,50 +178,49 @@ export default function ProfilePage() {
 
       {/* Academic Information */}
       <Card className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Academic Information</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">{t.profile.academicInfo}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">GPA (Unweighted)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.gpa}</label>
             <input type="text" value={gpa} onChange={e => setGpa(e.target.value)} className={inputClass} placeholder="e.g. 3.85" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">GPA (Weighted)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.weightedGpa}</label>
             <input type="text" value={weightedGpa} onChange={e => setWeightedGpa(e.target.value)} className={inputClass} placeholder="e.g. 4.25" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Class Rank</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.classRank}</label>
             <input type="text" value={classRank} onChange={e => setClassRank(e.target.value)} className={inputClass} placeholder="e.g. 5/450" />
           </div>
         </div>
         <div className="mt-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Intended Majors</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.intendedMajors}</label>
           <input
             type="text"
             value={intendedMajors}
             onChange={e => setIntendedMajors(e.target.value)}
             className={inputClass}
-            placeholder="Comma-separated, e.g. Computer Science, Mathematics"
+            placeholder="e.g. Computer Science, Mathematics"
           />
-          <p className="text-xs text-gray-400 mt-1">Separate multiple majors with commas</p>
         </div>
       </Card>
 
       {/* Test Scores */}
       <Card className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Test Scores</h2>
+          <h2 className="text-lg font-semibold text-gray-900">{t.profile.testScores}</h2>
           <Button variant="secondary" size="sm" icon={<Plus size={14} />} onClick={addTestScore}>
-            Add Score
+            {t.profile.addScore}
           </Button>
         </div>
         {testScores.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-4">No test scores added yet.</p>
+          <p className="text-sm text-gray-400 text-center py-4">{t.profile.noTestScores}</p>
         ) : (
           <div className="space-y-3">
             {testScores.map(ts => (
               <div key={ts.id} className="flex items-end gap-3">
                 <div className="flex-1">
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Test Name</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">{t.profile.testName}</label>
                   <input
                     type="text"
                     value={ts.name}
@@ -214,7 +230,7 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className="w-28">
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Score</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">{t.profile.score}</label>
                   <input
                     type="text"
                     value={ts.score}
@@ -224,7 +240,7 @@ export default function ProfilePage() {
                   />
                 </div>
                 <div className="w-36">
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Date</label>
+                  <label className="block text-xs font-medium text-gray-600 mb-1">{t.common.date}</label>
                   <input
                     type="date"
                     value={ts.date}
@@ -246,33 +262,30 @@ export default function ProfilePage() {
 
       {/* Personal Reflections */}
       <Card className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Personal Reflections</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">{t.profile.personalReflections}</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Strengths</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.strengths}</label>
             <textarea
               value={strengths}
               onChange={e => setStrengths(e.target.value)}
               className={`${inputClass} h-24 resize-y`}
-              placeholder="What are your greatest strengths as a student and person?"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Weaknesses / Areas for Growth</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.weaknesses}</label>
             <textarea
               value={weaknesses}
               onChange={e => setWeaknesses(e.target.value)}
               className={`${inputClass} h-24 resize-y`}
-              placeholder="What areas would you like to improve?"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.additionalNotes}</label>
             <textarea
               value={notes}
               onChange={e => setNotes(e.target.value)}
               className={`${inputClass} h-24 resize-y`}
-              placeholder="Any other information you want to remember..."
             />
           </div>
         </div>
@@ -281,10 +294,10 @@ export default function ProfilePage() {
       {/* Save Button */}
       <div className="flex items-center gap-3 justify-end">
         {saved && (
-          <span className="text-sm text-green-600 font-medium">Profile saved!</span>
+          <span className="text-sm text-green-600 font-medium">{t.profile.saved}</span>
         )}
         <Button onClick={handleSave} icon={<Save size={16} />}>
-          Save Profile
+          {t.profile.saveProfile}
         </Button>
       </div>
     </div>

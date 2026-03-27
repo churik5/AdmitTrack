@@ -778,8 +778,646 @@ const guides: Guide[] = [
   },
 ]
 
+const guideContentRu: Record<string, React.ReactNode> = {
+  'activity-vs-honor': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Это один из самых распространённых поводов для путаницы. Разница проста, как только её понимаешь, но ошибка здесь может ослабить твою заявку.
+      </p>
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+          <h4 className="font-semibold text-blue-900 mb-2">Активность = то, что ты ДЕЛАЕШЬ</h4>
+          <p className="text-sm text-blue-800 mb-3">
+            Активность — это любое регулярное занятие, в котором ты участвуешь, вносишь вклад или руководишь. Это твоё время, усилия и инициатива.
+          </p>
+          <ul className="text-sm text-blue-800 space-y-1.5">
+            <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span> Varsity soccer (3 seasons)</li>
+            <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span> Math tutoring at community center</li>
+            <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span> Part-time job at a restaurant</li>
+            <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span> Founded a coding club</li>
+            <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span> Research assistant in a university lab</li>
+            <li className="flex gap-2"><span className="text-blue-400 shrink-0">-</span> Student newspaper editor</li>
+          </ul>
+        </div>
+        <div className="bg-amber-50 rounded-lg p-4 border border-amber-100">
+          <h4 className="font-semibold text-amber-900 mb-2">Награда = то, что ты ПОЛУЧАЕШЬ</h4>
+          <p className="text-sm text-amber-800 mb-3">
+            Награда — это признание, которое даёт тебе кто-то другой на основе достижений или отбора. Ты её не выбираешь — она вручается тебе.
+          </p>
+          <ul className="text-sm text-amber-800 space-y-1.5">
+            <li className="flex gap-2"><span className="text-amber-400 shrink-0">-</span> AP Scholar with Distinction</li>
+            <li className="flex gap-2"><span className="text-amber-400 shrink-0">-</span> National Merit Semifinalist</li>
+            <li className="flex gap-2"><span className="text-amber-400 shrink-0">-</span> First place at state science fair</li>
+            <li className="flex gap-2"><span className="text-amber-400 shrink-0">-</span> Honor roll every semester</li>
+            <li className="flex gap-2"><span className="text-amber-400 shrink-0">-</span> Eagle Scout</li>
+            <li className="flex gap-2"><span className="text-amber-400 shrink-0">-</span> School-nominated community service award</li>
+          </ul>
+        </div>
+      </div>
+      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <h4 className="font-semibold text-gray-900 mb-2">Пограничные случаи и типичные ошибки</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2">
+            <span className="text-gray-400 shrink-0">-</span>
+            <span><strong>Членство в NHS:</strong> вступление в National Honor Society — это награда (тебя выбрали). Работа президентом или организация мероприятий NHS — это активность.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-gray-400 shrink-0">-</span>
+            <span><strong>Капитан команды:</strong> игра в команде — активность. Назначение капитаном — награда. Укажи спорт как активность, а капитанство — в описании. Отдельно "Team Captain" стоит вносить только если школа официально признаёт это наградой.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-gray-400 shrink-0">-</span>
+            <span><strong>Участие vs победа:</strong> участвовать в Science Olympiad весь год — активность. Выиграть медаль на регионале — награда. Не вноси одно и то же в обе секции, если участие и награда — не отдельные вещи.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-gray-400 shrink-0">-</span>
+            <span><strong>Стипендии:</strong> получить стипендию — награда. Работать ради её получения (например, поддерживать GPA) — отдельной активностью это не является.</span>
+          </li>
+        </ul>
+      </div>
+      <p className="text-sm text-gray-500 italic">
+        Простое правило: если можно сказать «меня выбрали» или «мне вручили» — это награда. Если «я регулярно этим занимался» — это активность.
+      </p>
+    </div>
+  ),
+  'writing-descriptions': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Common App даёт тебе ровно 150 символов на описание каждой активности. Это примерно одно длинное предложение. Каждое слово должно быть на своём месте.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Основные принципы</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2">
+            <span className="font-semibold text-violet-600 shrink-0">1.</span>
+            <span><strong>Начни с роли и результата.</strong> Приёмные комиссии просматривают быстро. Самое важное — сначала. «President» или «Lead developer» сразу показывает твой уровень вовлечённости.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="font-semibold text-violet-600 shrink-0">2.</span>
+            <span><strong>Используй активные конкретные глаголы.</strong> Вместо «was responsible for» — «managed», «designed», «launched», «trained». Активные глаголы показывают инициативу.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="font-semibold text-violet-600 shrink-0">3.</span>
+            <span><strong>Добавляй цифры везде, где возможно.</strong> Цифры быстро передают масштаб. «Organized 12 events» сильнее, чем «organized many events».</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="font-semibold text-violet-600 shrink-0">4.</span>
+            <span><strong>Безжалостно убирай слова-паразиты.</strong> Убери «I», «the», «various», «different», «helped to», «was involved in». Они занимают место, не добавляя смысла.</span>
+          </li>
+        </ul>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Слабые и сильные примеры</h4>
+        <div className="space-y-3">
+          <div className="bg-red-50 rounded-lg p-3 border border-red-100">
+            <p className="text-xs font-medium text-red-500 mb-1">СЛАБО (расплывчато, пассивно)</p>
+            <p className="text-sm text-red-800">"I was a member of the debate team and participated in various tournaments throughout the year and helped organize events."</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+            <p className="text-xs font-medium text-green-600 mb-1">СИЛЬНО (конкретно, активно)</p>
+            <p className="text-sm text-green-800">"Captain; led 14-member team to state finals. Organized 6 invitational tournaments hosting 200+ competitors from 30 schools."</p>
+          </div>
+        </div>
+        <div className="space-y-3 mt-4">
+          <div className="bg-red-50 rounded-lg p-3 border border-red-100">
+            <p className="text-xs font-medium text-red-500 mb-1">СЛАБО</p>
+            <p className="text-sm text-red-800">"I volunteer at a local hospital helping patients and nurses with different things that they need on a weekly basis."</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+            <p className="text-xs font-medium text-green-600 mb-1">СИЛЬНО</p>
+            <p className="text-sm text-green-800">"Assist ER nurses with patient intake and supply restocking 8 hrs/wk. Trained 5 new volunteers on hospital protocols."</p>
+          </div>
+        </div>
+        <div className="space-y-3 mt-4">
+          <div className="bg-red-50 rounded-lg p-3 border border-red-100">
+            <p className="text-xs font-medium text-red-500 mb-1">СЛАБО</p>
+            <p className="text-sm text-red-800">"I started a tutoring program at my school to help other students with their homework and studying."</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+            <p className="text-xs font-medium text-green-600 mb-1">СИЛЬНО</p>
+            <p className="text-sm text-green-800">"Founded peer tutoring program; recruited 20 tutors serving 75+ students weekly. Average tutee GPA rose 0.4 points."</p>
+          </div>
+        </div>
+        <div className="space-y-3 mt-4">
+          <div className="bg-red-50 rounded-lg p-3 border border-red-100">
+            <p className="text-xs font-medium text-red-500 mb-1">СЛАБО</p>
+            <p className="text-sm text-red-800">"I work at a coffee shop after school and on weekends doing various tasks like making drinks and serving customers."</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+            <p className="text-xs font-medium text-green-600 mb-1">СИЛЬНО</p>
+            <p className="text-sm text-green-800">"Shift lead at local cafe, 15 hrs/wk. Manage 3-person team, handle inventory orders, train new hires. Promoted after 4 months."</p>
+          </div>
+        </div>
+      </div>
+      <p className="text-sm text-gray-500 italic">
+        Совет: напиши описание, потом посчитай символы. Если больше 150 — сначала убирай прилагательные и наречия. Они почти всегда самые слабые слова в предложении.
+      </p>
+    </div>
+  ),
+  'honor-levels': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Common App просит указать уровень каждой награды: School, State/Regional, National или International. Это важно — приёмные комиссии хорошо разбираются в различиях. Завышение уровня школьной награды до национального подорвёт твою репутацию.
+      </p>
+      <div className="space-y-3">
+        <div className="flex gap-3 items-start bg-gray-50 rounded-lg p-3 border border-gray-200">
+          <span className="bg-gray-200 text-gray-700 text-xs font-bold px-2 py-1 rounded shrink-0">SCHOOL</span>
+          <div>
+            <p className="text-sm text-gray-700 font-medium">Признание только в пределах твоей школы</p>
+            <p className="text-sm text-gray-500 mt-1">Honor roll, место в классе, предметные награды, школьный MVP, «Student of the Month», valedictorian, школьная стипендия, победитель школьной научной ярмарки.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start bg-blue-50 rounded-lg p-3 border border-blue-100">
+          <span className="bg-blue-200 text-blue-800 text-xs font-bold px-2 py-1 rounded shrink-0">REGIONAL</span>
+          <div>
+            <p className="text-sm text-blue-800 font-medium">Район, округ или несколько школ</p>
+            <p className="text-sm text-blue-600 mt-1">All-county team, региональная научная ярмарка, районный конкурс сочинений, math league honors для нескольких школ, региональный оркестр.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start bg-violet-50 rounded-lg p-3 border border-violet-100">
+          <span className="bg-violet-200 text-violet-800 text-xs font-bold px-2 py-1 rounded shrink-0">STATE</span>
+          <div>
+            <p className="text-sm text-violet-800 font-medium">Признание на уровне штата / страны</p>
+            <p className="text-sm text-violet-600 mt-1">All-State team, финалист государственной научной ярмарки, отбор в Governor's School, победа в DECA/FBLA/TSA на уровне штата, стипендия штата.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start bg-amber-50 rounded-lg p-3 border border-amber-100">
+          <span className="bg-amber-200 text-amber-800 text-xs font-bold px-2 py-1 rounded shrink-0">NATIONAL</span>
+          <div>
+            <p className="text-sm text-amber-800 font-medium">Общенациональное признание</p>
+            <p className="text-sm text-amber-600 mt-1">National Merit Semifinalist/Finalist, AP Scholar, National Science Olympiad medalist, USAMO qualifier, Congressional Award, National YoungArts winner, QuestBridge finalist.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start bg-green-50 rounded-lg p-3 border border-green-100">
+          <span className="bg-green-200 text-green-800 text-xs font-bold px-2 py-1 rounded shrink-0">INTL</span>
+          <div>
+            <p className="text-sm text-green-800 font-medium">Признание на международном уровне</p>
+            <p className="text-sm text-green-600 mt-1">International Math Olympiad medalist, International Science Olympiad, публикация в международном исследовательском издании, «Best Delegate» на международной конференции Model UN.</p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <h4 className="font-semibold text-gray-900 mb-2">Типичные ошибки</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2">
+            <span className="text-red-400 shrink-0">-</span>
+            <span><strong>NHS как «national»:</strong> Несмотря на слово «National» в названии, вступление в школьный клуб NHS — это уровень school. Только национальные награды NHS (например, NHS Scholarship) — national.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-red-400 shrink-0">-</span>
+            <span><strong>AP Scholar как «international»:</strong> Экзамены AP сдают и за пределами США, но AP Scholar выдаётся College Board — американской организацией. Указывай national.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-red-400 shrink-0">-</span>
+            <span><strong>Участие vs призовое место:</strong> Участие в национальном соревновании — не национальная награда. Нужно занять место или получить признание.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-red-400 shrink-0">-</span>
+            <span><strong>Онлайн-конкурсы:</strong> Если участники из разных стран, это может быть international — но только если конкурс авторитетный. Маленький онлайн-конкурс с парой международных участников не даёт международного уровня.</span>
+          </li>
+        </ul>
+      </div>
+      <p className="text-sm text-gray-500 italic">
+        Если сомневаешься — выбирай уровень ниже. Занижение всегда лучше, чем завышение. Приёмные комиссии ценят честность и замечают inflation.
+      </p>
+    </div>
+  ),
+  'organizing-documents': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Поступление в колледж требует десятков документов. Потерять транскрипт или рекомендательное письмо — значит рискнуть дедлайном. Выстрой систему сейчас и избавь себя от стресса позже.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Что хранить в цифровом виде</h4>
+        <div className="grid md:grid-cols-2 gap-2">
+          {[
+            'Official and unofficial transcripts',
+            'Standardized test score reports (SAT, ACT, AP, IB)',
+            'Letters of recommendation (if you receive copies)',
+            'Resume or activity summary',
+            'Personal statement and supplemental essays (all drafts)',
+            'Financial aid documents (FAFSA confirmation, CSS Profile)',
+            'Award certificates and honor verification',
+            'Portfolio pieces (art, writing, coding projects)',
+            'Application confirmation screenshots',
+            'Scholarship applications and responses',
+            'Correspondence with admissions offices',
+            'Interview notes and thank-you emails',
+          ].map((item, i) => (
+            <div key={i} className="flex gap-2 text-sm text-gray-700 bg-gray-50 rounded-lg px-3 py-2">
+              <span className="text-emerald-500 shrink-0">-</span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Соглашение об именовании файлов</h4>
+        <p className="text-sm text-gray-700">
+          Используй единый формат, чтобы мгновенно находить любой файл. Рекомендуемый шаблон:
+        </p>
+        <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm text-green-400 space-y-1">
+          <p>LastName_DocumentType_Detail_Date.pdf</p>
+          <p className="text-gray-500 mt-2"># Примеры:</p>
+          <p>Smith_Transcript_Official_2025-09.pdf</p>
+          <p>Smith_Essay_CommonApp_Personal_v3.docx</p>
+          <p>Smith_Rec_Dr-Johnson_Physics.pdf</p>
+          <p>Smith_Resume_2025-10.pdf</p>
+          <p>Smith_Essay_MIT_WhyUs_Final.docx</p>
+        </div>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Где прикреплять документы в AdmitTrack</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2">
+            <span className="text-emerald-500 shrink-0">-</span>
+            <span><strong>Раздел Profile:</strong> транскрипт, результаты тестов, резюме. Это универсальные документы для всех заявок.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-emerald-500 shrink-0">-</span>
+            <span><strong>Страницы университетов:</strong> supplemental essays, специфичные для школы формы, заметки об интервью.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-emerald-500 shrink-0">-</span>
+            <span><strong>Записи активностей:</strong> сертификаты, фото или ссылки, подтверждающие конкретную активность.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-emerald-500 shrink-0">-</span>
+            <span><strong>Записи наград:</strong> сертификаты наград, письма о получении или скриншоты результатов.</span>
+          </li>
+        </ul>
+      </div>
+      <div className="bg-emerald-50 rounded-lg p-4 border border-emerald-100">
+        <h4 className="font-semibold text-emerald-900 mb-2">Чеклист обязательных документов</h4>
+        <div className="grid md:grid-cols-2 gap-1">
+          {[
+            'Unofficial transcript (request early)',
+            'SAT/ACT score reports',
+            'AP/IB score reports',
+            'At least 2 teacher recommendation letters',
+            '1 counselor recommendation letter',
+            'Completed FAFSA (if applicable)',
+            'CSS Profile (if required by your schools)',
+            'Personal statement (final version)',
+            'Supplemental essays per school',
+            'Updated resume or activity list',
+          ].map((item, i) => (
+            <label key={i} className="flex gap-2 text-sm text-emerald-800 py-0.5">
+              <span className="shrink-0">[ ]</span>
+              <span>{item}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+    </div>
+  ),
+  'writing-essays': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Эссе — единственное место в заявке, где ты не просто список цифр и достижений. Именно здесь приёмные комиссии слышат твой голос, понимают твоё мышление и решают, был ли бы ты интересным человеком на кампусе.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">1. Показывай, а не рассказывай (Show, Don't Tell)</h4>
+        <p className="text-sm text-gray-700">
+          Это самый важный принцип. Не говори читателю, что ты страстный, стойкий или любознательный. Вместо этого опиши момент, который делает эти качества очевидными.
+        </p>
+        <div className="grid md:grid-cols-2 gap-3">
+          <div className="bg-red-50 rounded-lg p-3 border border-red-100">
+            <p className="text-xs font-medium text-red-500 mb-1">TELLING</p>
+            <p className="text-sm text-red-800 italic">"I am very passionate about environmental science and have always cared deeply about the planet."</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+            <p className="text-xs font-medium text-green-600 mb-1">SHOWING</p>
+            <p className="text-sm text-green-800 italic">"The water sample turned brown in my hands. I had collected it from the creek behind my house, the same creek where I had caught tadpoles as a kid."</p>
+          </div>
+        </div>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">2. Конкретные детали сильнее общих утверждений</h4>
+        <p className="text-sm text-gray-700">
+          Общие утверждения забываются. Конкретные детали запоминаются. Вместо «помогал людям» — напиши о конкретном человеке, конкретной проблеме и конкретном моменте, когда что-то изменилось.
+        </p>
+        <ul className="text-sm text-gray-700 space-y-1">
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">-</span> Replace "a student I tutored" with "Marcus, a sophomore who had failed algebra twice"</li>
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">-</span> Replace "I learned a lot" with "I realized that my assumption about X was completely wrong"</li>
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">-</span> Replace "a meaningful experience" with the actual experience, described vividly</li>
+        </ul>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">3. Структура: Зацепка, Контекст, Рефлексия, Взгляд вперёд</h4>
+        <div className="space-y-2">
+          <div className="flex gap-3 items-start">
+            <span className="bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded shrink-0">HOOK</span>
+            <p className="text-sm text-gray-700">Начни с момента, образа или вопроса, который захватывает читателя. Брось его в самый центр событий. Не начинай с определения из словаря, цитаты или «С детства я всегда...»</p>
+          </div>
+          <div className="flex gap-3 items-start">
+            <span className="bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded shrink-0">CONTEXT</span>
+            <p className="text-sm text-gray-700">Дай достаточно контекста, чтобы читатель понял, почему этот момент важен для тебя. Будь краток. Читателю не нужна вся твоя история — лишь столько, чтобы понять ставки.</p>
+          </div>
+          <div className="flex gap-3 items-start">
+            <span className="bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded shrink-0">REFLECT</span>
+            <p className="text-sm text-gray-700">Это сердце эссе. Что ты понял? Как изменилось твоё мышление? Что ты знаешь сейчас, чего не знал раньше? Приёмные комиссии больше всего заботятся о том, как ты осмысляешь опыт.</p>
+          </div>
+          <div className="flex gap-3 items-start">
+            <span className="bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded shrink-0">FORWARD</span>
+            <p className="text-sm text-gray-700">Заверши взглядом вперёд. Как этот опыт связан с тем, кем ты становишься? Избегай громких деклараций. Тихое, честное завершение сильнее пышного вывода.</p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <h4 className="font-semibold text-gray-900 mb-2">Типичные ошибки</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2"><span className="text-red-400 shrink-0">-</span> <span><strong>Эссе-резюме:</strong> не перечисляй достижения в виде абзацев. Эссе должно раскрывать то, чего нет в остальной заявке.</span></li>
+          <li className="flex gap-2"><span className="text-red-400 shrink-0">-</span> <span><strong>Эссе о трудностях без рефлексии:</strong> сложный опыт может быть сильной темой, но только если ты показываешь рост и осмысление. Описание трудности само по себе — недостаточно.</span></li>
+          <li className="flex gap-2"><span className="text-red-400 shrink-0">-</span> <span><strong>Эссе с тезаурусом:</strong> не используй слова, которые не говоришь вслух. Пиши своим голосом. «Utilized» хуже, чем «used».</span></li>
+          <li className="flex gap-2"><span className="text-red-400 shrink-0">-</span> <span><strong>Безопасное эссе:</strong> если его мог написать любой абитуриент — оно слишком общее. Рискуй. Будь конкретным. Будь собой.</span></li>
+          <li className="flex gap-2"><span className="text-red-400 shrink-0">-</span> <span><strong>Попытка произвести впечатление:</strong> лучшие эссе звучат как честный разговор вдумчивого человека, а не как попытка впечатлить комитет.</span></li>
+        </ul>
+      </div>
+    </div>
+  ),
+  'why-us-essay': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Почти каждый топ-университет спрашивает в той или иной форме: «Почему именно наш университет?» Это не проверка лести. Это проверка того, сделал ли ты домашнее задание и действительно ли подходишь именно этой школе.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Шаг 1: Исследуй конкретику</h4>
+        <p className="text-sm text-gray-700">
+          Прежде чем написать хоть слово, потрать минимум 30 минут на исследование университета — за пределами его главной страницы. Ищи детали, которые большинство абитуриентов не найдут.
+        </p>
+        <ul className="text-sm text-gray-700 space-y-1.5">
+          <li className="flex gap-2"><span className="text-pink-400 shrink-0">-</span> <strong>Академические программы:</strong> конкретные курсы, interdisciplinary programs, исследовательские центры, уникальные специальности или особые учебные планы (open curriculum, core programs)</li>
+          <li className="flex gap-2"><span className="text-pink-400 shrink-0">-</span> <strong>Преподаватели:</strong> найди 1-2 профессора, чьи исследования совпадают с твоими интересами. Прочитай их недавние публикации или страницы лаборатории.</li>
+          <li className="flex gap-2"><span className="text-pink-400 shrink-0">-</span> <strong>Студенческие организации:</strong> клубы, издания, команды или группы, к которым ты бы присоединился. Будь конкретен в том, что тебя привлекает.</li>
+          <li className="flex gap-2"><span className="text-pink-400 shrink-0">-</span> <strong>Культура кампуса:</strong> традиции, жизнь в общежитии, программы study abroad, возможности для общественной работы.</li>
+          <li className="flex gap-2"><span className="text-pink-400 shrink-0">-</span> <strong>Мнение студентов:</strong> читай студенческие блоги, смотри видео, посещай форумы для настоящего понимания атмосферы.</li>
+        </ul>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Шаг 2: Свяжи свои интересы с их возможностями</h4>
+        <p className="text-sm text-gray-700">
+          Магическая формула: <strong>Твой конкретный интерес + Их конкретный ресурс = Почему именно эта школа подходит.</strong> Каждый абзац должен связывать что-то о ТЕБЕ с чем-то о НИХ.
+        </p>
+        <div className="bg-pink-50 rounded-lg p-3 border border-pink-100">
+          <p className="text-xs font-medium text-pink-500 mb-1">ПРИМЕР СТРУКТУРЫ</p>
+          <p className="text-sm text-pink-800">"My experience building a water quality database for my town's environmental commission sparked my interest in environmental data science. At [School], I would pursue this through Professor [Name]'s Watershed Analytics Lab, which uses the same GIS methods I have been teaching myself. I also want to take [Course Number]: [Course Name], which combines data science with environmental policy, the exact intersection I want to work in."</p>
+        </div>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Шаг 3: Покажи реальное совпадение, а не лесть</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2">
+            <span className="text-red-400 shrink-0">-</span>
+            <span><strong>Не надо:</strong> «Ваш престижный университет с всемирно известным преподавательским составом и красивым кампусом был бы невероятной возможностью.»</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-green-500 shrink-0">-</span>
+            <span><strong>Нужно:</strong> показать, что ты понимаешь, чем эта школа отличается от других, и объяснить, почему это различие важно именно для твоих целей.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-red-400 shrink-0">-</span>
+            <span><strong>Не надо:</strong> упоминать только то, что можно найти на первой странице сайта (расположение, рейтинг, общая репутация).</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-green-500 shrink-0">-</span>
+            <span><strong>Нужно:</strong> упоминать конкретику, которая показывает, что ты копнул глубже: конкретная лаборатория, уникальный курс, студенческая традиция, которая тебя резонирует.</span>
+          </li>
+        </ul>
+      </div>
+      <p className="text-sm text-gray-500 italic">
+        Главный тест: можно ли заменить название университета на другой — и эссе всё равно работало бы? Если да — оно недостаточно конкретное.
+      </p>
+    </div>
+  ),
+  'managing-deadlines': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Пропустить дедлайн — одна из немногих ошибок в процессе поступления, которую нельзя исправить. Слабое эссе, недостающий тест — всё это обычно можно решить. Пропущенный дедлайн — нет.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Ставь личные дедлайны на 5-7 дней раньше</h4>
+        <p className="text-sm text-gray-700">
+          Твой реальный дедлайн всегда должен быть раньше официального. Этот буфер защитит от технических сбоев (серверы часто падают в день дедлайна), семейных обстоятельств, болезни или просто нужды в ещё одной правке.
+        </p>
+        <div className="bg-orange-50 rounded-lg p-3 border border-orange-100">
+          <p className="text-sm text-orange-800">
+            <strong>Пример:</strong> если дедлайн Regular Decision — 1 января, твой личный дедлайн — 25-26 декабря. Внеси оба в AdmitTrack: личный как рабочий, официальный как страховку.
+          </p>
+        </div>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Группируй дедлайны по типу</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2">
+            <span className="text-orange-500 shrink-0">-</span>
+            <span><strong>Early Decision / Early Action (окт-ноябрь):</strong> обычно 1 или 15 ноября. Эти идут первыми и часто требуют самой отполированной работы, поскольку пул меньше.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-orange-500 shrink-0">-</span>
+            <span><strong>Regular Decision (дек-янв):</strong> большинство — между 1 и 15 января. Объедини их и сначала работай над общими элементами (Common App essay, список активностей), потом — над supplemental essays конкретных школ.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-orange-500 shrink-0">-</span>
+            <span><strong>Financial Aid (варьируется):</strong> FAFSA открывается 1 октября. Дедлайны CSS Profile разные у каждой школы. Некоторые дедлайны финпомощи — РАНЬШЕ дедлайна заявки. Проверяй каждую школу отдельно.</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="text-orange-500 shrink-0">-</span>
+            <span><strong>Стипендии (очень разные):</strong> у них самые разбросанные дедлайны. Вноси каждый в AdmitTrack сразу, как только узнаёшь.</span>
+          </li>
+        </ul>
+      </div>
+      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <h4 className="font-semibold text-gray-900 mb-2">Что делать, если пропустил дедлайн</h4>
+        <ul className="text-sm text-gray-700 space-y-2">
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">1.</span> <span><strong>Не паникуй.</strong> Сразу свяжись с приёмной комиссией. Некоторые школы принимают опоздавшие заявки в течение grace period, особенно при технических проблемах.</span></li>
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">2.</span> <span><strong>Будь честным и кратким.</strong> Объясни ситуацию без лишних извинений: «I experienced a technical issue and was unable to submit before the deadline. Is it possible to submit today?»</span></li>
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">3.</span> <span><strong>Будь готов подать немедленно.</strong> Если дают время — отправь в течение часа. Не проси время и не жди три дня.</span></li>
+          <li className="flex gap-2"><span className="text-gray-400 shrink-0">4.</span> <span><strong>Если школа отказала:</strong> прими это спокойно и двигайся дальше. Скорее всего, у тебя есть другие школы. Именно поэтому важно иметь сбалансированный список.</span></li>
+        </ul>
+      </div>
+    </div>
+  ),
+  'building-college-list': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Хорошо составленный список университетов — твоё важнейшее стратегическое решение. Слишком мало школ — рискуешь остаться без вариантов. Слишком много — размазываешь усилия и не можешь написать сильные заявки. Цель — сбалансированный список, где ты был бы рад учиться в любой из школ.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Reach, Target, Likely: баланс</h4>
+        <div className="grid md:grid-cols-3 gap-3">
+          <div className="bg-red-50 rounded-lg p-3 border border-red-100">
+            <h5 className="font-semibold text-red-800 text-sm">Reach (2-4 школы)</h5>
+            <p className="text-xs text-red-700 mt-1">Твои показатели ниже среднего для этой школы, или acceptance rate ниже 20%. Поступление возможно, но не гарантировано. Сюда идут школы мечты.</p>
+          </div>
+          <div className="bg-amber-50 rounded-lg p-3 border border-amber-100">
+            <h5 className="font-semibold text-amber-800 text-sm">Target (3-5 школ)</h5>
+            <p className="text-xs text-amber-700 mt-1">Твои показатели в пределах или чуть выше среднего диапазона. Реальные шансы на поступление. Здесь должны быть школы, в которые ты с удовольствием пойдёшь.</p>
+          </div>
+          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+            <h5 className="font-semibold text-green-800 text-sm">Likely (2-3 школы)</h5>
+            <p className="text-xs text-green-700 mt-1">Твои показатели значительно выше среднего, acceptance rate выше 50%. Поступление очень вероятно. Это должны быть школы, куда ты действительно готов пойти.</p>
+          </div>
+        </div>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Сколько школ подавать?</h4>
+        <p className="text-sm text-gray-700">
+          Большинство студентов подают в <strong>8-12 школ</strong>. Это обычно оптимальный диапазон:
+        </p>
+        <ul className="text-sm text-gray-700 space-y-1.5">
+          <li className="flex gap-2"><span className="text-teal-500 shrink-0">-</span> <strong>Меньше 6:</strong> рискованно, если нет очень сильных показателей и чёткой safety school. Может не хватить вариантов.</li>
+          <li className="flex gap-2"><span className="text-teal-500 shrink-0">-</span> <strong>8-12:</strong> позволяет иметь баланс reach/target/likely, оставляя время на сильные заявки для каждой школы.</li>
+          <li className="flex gap-2"><span className="text-teal-500 shrink-0">-</span> <strong>Больше 15:</strong> почти наверняка придётся жертвовать качеством ради количества. Supplemental essays для 15+ школ сложно сделать индивидуально сильными.</li>
+        </ul>
+      </div>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Факторы помимо рейтинга</h4>
+        <p className="text-sm text-gray-700">Рейтинги меряют репутацию, а не твоё личное совпадение со школой. Рассмотри:</p>
+        <div className="grid md:grid-cols-2 gap-2">
+          {[
+            'Академические программы по твоей специальности',
+            'Размер классов и соотношение студентов к преподавателям',
+            'Расположение и обстановка (городская vs. сельская, климат)',
+            'Культура кампуса и социальная жизнь',
+            'Возможности для исследований для undergraduate',
+            'Стажировки и показатели трудоустройства',
+            'Финансовая помощь и merit scholarships',
+            'Программы study abroad',
+            'Качество жилья и питания',
+            'Показатели окончания и удовлетворённость студентов',
+            'Разнообразие и инклюзивная среда',
+            'Расстояние от дома (если это важно)',
+          ].map((factor, i) => (
+            <div key={i} className="flex gap-2 text-sm text-gray-700 bg-gray-50 rounded px-3 py-1.5">
+              <span className="text-teal-500 shrink-0">-</span>
+              <span>{factor}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="text-sm text-gray-500 italic">
+        Лучший список университетов — тот, где можно честно сказать: «Я был бы рад учиться в любой из этих школ». Если школа в списке только из-за названия — стоит пересмотреть.
+      </p>
+    </div>
+  ),
+  'research-projects': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        Исследования и самостоятельные проекты могут быть одними из сильнейших элементов заявки, но многие студенты не знают, что считается. Хорошая новость: опубликованная статья — не обязательное условие для включения осмысленной исследовательской работы.
+      </p>
+      <div className="space-y-3">
+        <h4 className="font-semibold text-gray-900">Виды исследований и проектов</h4>
+        <div className="space-y-3">
+          <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-100">
+            <h5 className="font-semibold text-indigo-800 text-sm mb-2">Формальное исследование с наставником</h5>
+            <p className="text-sm text-indigo-700">
+              Работа в университетской лаборатории, исследовательском отделе больницы или с профессиональным учёным. Это наиболее традиционная форма и имеет значительный вес. Даже если ты делаешь базовые задачи — ввод данных или обзор литературы — ты получаешь реальный исследовательский опыт. Упомяни имя наставника и организацию в описании.
+            </p>
+          </div>
+          <div className="bg-violet-50 rounded-lg p-4 border border-violet-100">
+            <h5 className="font-semibold text-violet-800 text-sm mb-2">Самостоятельные проекты</h5>
+            <p className="text-sm text-violet-700">
+              Проекты, которые ты инициировал и выполнил самостоятельно или с коллегами: написание приложения, проведение опроса, исследовательская работа, создание датасета, разработка продукта. Они демонстрируют инициативу и самостоятельность. Проект не должен быть революционным — он должен быть настоящим и хорошо выполненным.
+            </p>
+          </div>
+          <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+            <h5 className="font-semibold text-blue-800 text-sm mb-2">Конкурсные работы</h5>
+            <p className="text-sm text-blue-700">
+              Проекты, созданные для science fairs (ISEF, JSHS), инженерных конкурсов (FIRST Robotics), хакатонов или академических олимпиад. Укажи проект как активность, а награды — как honors. Если проект вышел за рамки конкурса — тоже упомяни.
+            </p>
+          </div>
+          <div className="bg-teal-50 rounded-lg p-4 border border-teal-100">
+            <h5 className="font-semibold text-teal-800 text-sm mb-2">Творческие и гуманитарные исследования</h5>
+            <p className="text-sm text-teal-700">
+              Исследование — не только STEM. Написание исторического анализа, интервью для документального фильма, создание художественного портфолио с тезисом или архивные исследования — всё это считается. Опиши так же: какой вопрос ты исследовал, какие методы использовал, что обнаружил?
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <h4 className="font-semibold text-gray-900 mb-2">Как описать свой вклад</h4>
+        <p className="text-sm text-gray-700 mb-2">
+          Будь честным и конкретным в том, что именно ты делал. Приёмные комиссии знают, что школьники редко руководят прорывными исследованиями. Они ищут интеллектуальное любопытство и искреннюю вовлечённость.
+        </p>
+        <ul className="text-sm text-gray-700 space-y-1.5">
+          <li className="flex gap-2"><span className="text-indigo-500 shrink-0">-</span> Указывай конкретную роль: «Analyzed data using Python», а не «Contributed to research»</li>
+          <li className="flex gap-2"><span className="text-indigo-500 shrink-0">-</span> Упомяни тему/вопрос: «Studying the effect of microplastics on freshwater organisms»</li>
+          <li className="flex gap-2"><span className="text-indigo-500 shrink-0">-</span> Включи осязаемые результаты: постер, черновик статьи, датасет, прототип или отчёт</li>
+          <li className="flex gap-2"><span className="text-indigo-500 shrink-0">-</span> Назови наставника и организацию, если применимо</li>
+          <li className="flex gap-2"><span className="text-indigo-500 shrink-0">-</span> Не преувеличивай: если помогал — пиши «assisted». Если руководил — пиши «led».</li>
+        </ul>
+      </div>
+    </div>
+  ),
+  'using-admittrack': (
+    <div className="space-y-4">
+      <p className="text-gray-700 leading-relaxed">
+        AdmitTrack создан как единый источник правды на протяжении всего процесса поступления. Вот рекомендуемый порядок работы, чтобы получить максимум пользы.
+      </p>
+      <div className="space-y-3">
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">1</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Начни с профиля</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Заполни личную информацию, академические данные (GPA, результаты тестов) и предполагаемую специальность. Эти данные помогут оценивать совместимость при добавлении университетов. Обновляй по мере изменения оценок и баллов.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">2</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Добавь университеты</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Добавь все школы, которые рассматриваешь, даже если ещё не уверен. Категоризируй как reach, target или likely. Укажи тип заявки (EA, ED, RD) и дедлайны. Школы всегда можно убрать позже — лучше начать широко.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">3</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Занеси все активности и награды</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Вноси каждую активность и каждую награду, даже небольшие. Из полного списка легче убирать, чем вспоминать под давлением дедлайна. Для каждой активности — напиши описание из 150 символов сейчас. Ранний черновик даёт время на правки.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">4</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Внеси все дедлайны</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Вноси каждый дедлайн: подачи заявки, финпомощи, стипендий, регистрации на тесты, запросов рекомендательных писем. Ставь личные дедлайны на 5-7 дней раньше официальных. Проверяй страницу дедлайнов регулярно, чтобы ничто не застало врасплох.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">5</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Пиши и правь эссе</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Используй раздел Essays для черновиков personal statement и supplemental essays. Начинай заранее и правь многократно. Отслеживай, какие эссе для каких школ. У многих школ похожие prompts — эссе можно адаптировать для нескольких заявок.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">6</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Загружай и организуй документы</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Загружай или ссылайся на транскрипты, результаты тестов, рекомендательные письма, сертификаты и другие документы. Прикрепляй их к соответствующим разделам (активности, награды, университеты), чтобы всё было связано и легко находилось.</p>
+          </div>
+        </div>
+        <div className="flex gap-3 items-start">
+          <span className="bg-brand-100 text-brand-700 text-xs font-bold px-2.5 py-1 rounded-full shrink-0">7</span>
+          <div>
+            <h5 className="font-semibold text-gray-900 text-sm">Регулярно проверяй чеклист</h5>
+            <p className="text-sm text-gray-600 mt-0.5">Используй дашборд для отслеживания общего прогресса. Проверяй его минимум раз в неделю. Ищи незаполненные позиции, приближающиеся дедлайны, недостающие документы. Чеклист — твоя страховая сеть, которая поймает то, о чём можно забыть.</p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-brand-50 rounded-lg p-4 border border-brand-100">
+        <h4 className="font-semibold text-brand-900 mb-2">Еженедельная рутина</h4>
+        <p className="text-sm text-brand-800">
+          Выдели 15-20 минут каждую неделю на просмотр дашборда AdmitTrack. Обновляй активности и награды, которые изменились, проверяй приближающиеся дедлайны и убедись, что черновики эссе движутся. Маленькие регулярные усилия куда эффективнее марафонских сессий накануне дедлайна.
+        </p>
+      </div>
+    </div>
+  ),
+}
+
 export default function GuidesPage() {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
 
   const guideTitleMap: Record<string, string> = {
     'activity-vs-honor': t.guides.titles.activityVsHonor,
@@ -896,7 +1534,7 @@ export default function GuidesPage() {
                   )}
                 >
                   <div className="px-4 pb-5 pt-0 border-t border-gray-100">
-                    <div className="pt-4">{guide.content}</div>
+                    <div className="pt-4">{locale === 'ru' ? (guideContentRu[guide.id] ?? guide.content) : guide.content}</div>
                   </div>
                 </div>
               </Card>
