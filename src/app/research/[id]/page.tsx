@@ -136,7 +136,7 @@ export default function ResearchDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-gray-500">
         <AlertCircle size={32} className="mb-2" />
-        <p>Research not found.</p>
+        <p>{t.research.researchNotFound}</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/research')}>
           {t.common.back}
         </Button>
@@ -188,7 +188,7 @@ export default function ResearchDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Overview Card */}
           <Card className="space-y-4">
-            <h3 className="font-semibold text-gray-900">Overview</h3>
+            <h3 className="font-semibold text-gray-900">{t.research.overviewLabel}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="text-gray-500">{t.common.type}</span>
@@ -293,36 +293,28 @@ export default function ResearchDetailPage() {
           <Card className="space-y-3">
             <div className="flex items-center gap-2">
               <Info size={16} className="text-blue-500" />
-              <h3 className="font-semibold text-gray-900 text-sm">Research Tips</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{t.research.researchTipsTitle}</h3>
             </div>
             <div className="space-y-3 text-xs">
               <div>
-                <p className="font-medium text-gray-700 mb-1">Describe Your Role Clearly</p>
-                <p className="text-gray-600">
-                  Admissions officers want to know what you specifically did, not just what the project was about. Be explicit about your individual contributions.
-                </p>
+                <p className="font-medium text-gray-700 mb-1">{t.research.describeRoleTitle}</p>
+                <p className="text-gray-600">{t.research.describeRoleText}</p>
               </div>
               <div>
-                <p className="font-medium text-gray-700 mb-1">Highlight Methodology</p>
-                <p className="text-gray-600">
-                  Mention specific tools, techniques, and frameworks you used. This shows depth of understanding and technical competence.
-                </p>
+                <p className="font-medium text-gray-700 mb-1">{t.research.highlightMethodTitle}</p>
+                <p className="text-gray-600">{t.research.highlightMethodText}</p>
               </div>
               <div>
-                <p className="font-medium text-gray-700 mb-1">Quantify When Possible</p>
-                <p className="text-gray-600">
-                  Numbers make your work tangible: sample sizes, accuracy rates, hours invested, pages written, or presentations given.
-                </p>
+                <p className="font-medium text-gray-700 mb-1">{t.research.quantifyTitle}</p>
+                <p className="text-gray-600">{t.research.quantifyText}</p>
               </div>
               <div>
-                <p className="font-medium text-gray-700 mb-1">Connect to Your Goals</p>
-                <p className="text-gray-600">
-                  Show how this research connects to your intended major or career aspirations. This demonstrates purposeful engagement.
-                </p>
+                <p className="font-medium text-gray-700 mb-1">{t.research.connectGoalsTitle}</p>
+                <p className="text-gray-600">{t.research.connectGoalsText}</p>
               </div>
             </div>
             <p className="text-xs text-gray-400 pt-2 border-t border-gray-100">
-              Research experience is highly valued by selective colleges, especially when it shows genuine intellectual curiosity and persistence.
+              {t.research.researchNote}
             </p>
           </Card>
         </div>

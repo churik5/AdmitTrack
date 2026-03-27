@@ -9,12 +9,6 @@ import { cn } from '@/lib/utils'
 import { useI18n } from '@/lib/i18n'
 import { Lightbulb, ThumbsUp, ThumbsDown, ArrowRight } from 'lucide-react'
 
-const tabs = [
-  { id: 'activities', label: 'Activity Descriptions' },
-  { id: 'honors', label: 'Honors & Awards' },
-  { id: 'research', label: 'Research & Projects' },
-  { id: 'essays', label: 'Essay Approaches' },
-]
 
 const activityExamples = [
   {
@@ -238,6 +232,13 @@ export default function ExamplesPage() {
   const { t } = useI18n()
   const [activeTab, setActiveTab] = useState('activities')
 
+  const tabs = [
+    { id: 'activities', label: t.examples.tabs.activities },
+    { id: 'honors', label: t.examples.tabs.honors },
+    { id: 'research', label: t.examples.tabs.research },
+    { id: 'essays', label: t.examples.tabs.essays },
+  ]
+
   return (
     <div className="max-w-4xl mx-auto">
       <PageHeader
@@ -248,7 +249,7 @@ export default function ExamplesPage() {
       <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg flex gap-3">
         <Lightbulb size={20} className="text-amber-600 shrink-0 mt-0.5" />
         <p className="text-sm text-amber-800">
-          These examples are modeled on successful applicants. Adapt the structure and specificity to your own experiences rather than copying content.
+          {t.examples.disclaimer}
         </p>
       </div>
 
@@ -265,13 +266,12 @@ export default function ExamplesPage() {
 }
 
 function ActivityDescriptions() {
+  const { t } = useI18n()
   return (
     <div className="space-y-6">
       <div className="mb-4">
-        <h2 className="text-lg font-semibold text-gray-900">Activity Descriptions</h2>
-        <p className="text-sm text-gray-500 mt-1">
-          You get 150 characters for each activity. Every word must earn its place. Compare these weak and strong versions.
-        </p>
+        <h2 className="text-lg font-semibold text-gray-900">{t.examples.activityTitle}</h2>
+        <p className="text-sm text-gray-500 mt-1">{t.examples.activitySubtitle}</p>
       </div>
 
       {activityExamples.map((example, i) => (
@@ -285,7 +285,7 @@ function ActivityDescriptions() {
             <div className="p-3 rounded-lg bg-red-50 border border-red-100">
               <div className="flex items-center gap-1.5 mb-2">
                 <ThumbsDown size={14} className="text-red-500" />
-                <span className="text-xs font-semibold text-red-600 uppercase tracking-wide">Weak</span>
+                <span className="text-xs font-semibold text-red-600 uppercase tracking-wide">{t.examples.weak}</span>
               </div>
               <p className="text-sm text-gray-700">{example.weak}</p>
             </div>
@@ -293,7 +293,7 @@ function ActivityDescriptions() {
             <div className="p-3 rounded-lg bg-green-50 border border-green-100">
               <div className="flex items-center gap-1.5 mb-2">
                 <ThumbsUp size={14} className="text-green-600" />
-                <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">Strong</span>
+                <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">{t.examples.strong}</span>
               </div>
               <p className="text-sm text-gray-700">{example.strong}</p>
             </div>
@@ -310,13 +310,12 @@ function ActivityDescriptions() {
 }
 
 function HonorsAwards() {
+  const { t } = useI18n()
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-1">Properly Classified Honors</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          Each honor should include the name, recognition level, and a brief description with context about selectivity.
-        </p>
+        <h2 className="text-lg font-semibold text-gray-900 mb-1">{t.examples.honorsTitle}</h2>
+        <p className="text-sm text-gray-500 mb-4">{t.examples.honorsSubtitle}</p>
 
         <div className="space-y-3">
           {honorExamples.map((honor, i) => (
@@ -342,10 +341,8 @@ function HonorsAwards() {
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-1">What is NOT an Honor</h2>
-        <p className="text-sm text-gray-500 mb-4">
-          These are commonly listed in the Honors section but belong elsewhere in your application.
-        </p>
+        <h2 className="text-lg font-semibold text-gray-900 mb-1">{t.examples.notHonorsTitle}</h2>
+        <p className="text-sm text-gray-500 mb-4">{t.examples.notHonorsSubtitle}</p>
 
         <div className="space-y-2">
           {notHonors.map((item, i) => (
@@ -364,10 +361,8 @@ function HonorsAwards() {
         <div className="flex gap-3">
           <Lightbulb size={18} className="text-blue-600 shrink-0 mt-0.5" />
           <div>
-            <p className="text-sm font-medium text-blue-900 mb-1">Activity or Honor? It Can Be Both</p>
-            <p className="text-sm text-blue-800">
-              Science Olympiad is an activity (you practiced, competed, and grew as a team member). Placing 2nd at State is an honor (a competitive recognition). List the participation under Activities and the award under Honors. This is not double-counting; they serve different purposes.
-            </p>
+            <p className="text-sm font-medium text-blue-900 mb-1">{t.examples.activityOrHonorTitle}</p>
+            <p className="text-sm text-blue-800">{t.examples.activityOrHonorText}</p>
           </div>
         </div>
       </Card>
@@ -376,13 +371,12 @@ function HonorsAwards() {
 }
 
 function ResearchProjects() {
+  const { t } = useI18n()
   return (
     <div className="space-y-6">
       <div className="mb-2">
-        <h2 className="text-lg font-semibold text-gray-900">Research & Project Examples</h2>
-        <p className="text-sm text-gray-500 mt-1">
-          Three different types of research entries, each fully filled out. Notice how the &quot;Your Contribution&quot; section is specific about what YOU did.
-        </p>
+        <h2 className="text-lg font-semibold text-gray-900">{t.examples.researchTitle}</h2>
+        <p className="text-sm text-gray-500 mt-1">{t.examples.researchSubtitle}</p>
       </div>
 
       {researchExamples.map((project, i) => (
@@ -395,22 +389,22 @@ function ResearchProjects() {
 
           <div className="space-y-3">
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Description</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{t.examples.descriptionLabel}</p>
               <p className="text-sm text-gray-700">{project.description}</p>
             </div>
 
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Your Contribution</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{t.examples.contributionLabel}</p>
               <p className="text-sm text-gray-700">{project.contribution}</p>
             </div>
 
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Mentor</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{t.examples.mentorLabel}</p>
               <p className="text-sm text-gray-700">{project.mentor}</p>
             </div>
 
             <div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Skills</p>
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">{t.examples.skillsLabel}</p>
               <div className="flex flex-wrap gap-1.5">
                 {project.skills.map((skill) => (
                   <Badge key={skill} color="bg-gray-100 text-gray-700">{skill}</Badge>
@@ -425,22 +419,21 @@ function ResearchProjects() {
 }
 
 function EssayApproachesSection() {
+  const { t } = useI18n()
   const [essayTab, setEssayTab] = useState<'personal' | 'whyUs' | 'community' | 'challenge'>('personal')
 
   const essayTabs = [
-    { id: 'personal', label: 'Personal Statement' },
-    { id: 'whyUs', label: 'Why Us' },
-    { id: 'community', label: 'Community' },
-    { id: 'challenge', label: 'Challenge' },
+    { id: 'personal', label: t.examples.essayTabs.personal },
+    { id: 'whyUs', label: t.examples.essayTabs.whyUs },
+    { id: 'community', label: t.examples.essayTabs.community },
+    { id: 'challenge', label: t.examples.essayTabs.challenge },
   ]
 
   return (
     <div className="space-y-6">
       <div className="mb-2">
-        <h2 className="text-lg font-semibold text-gray-900">Essay Approaches</h2>
-        <p className="text-sm text-gray-500 mt-1">
-          Topic ideas, structural guides, and clear DO / DON&apos;T lists for each common essay type.
-        </p>
+        <h2 className="text-lg font-semibold text-gray-900">{t.examples.essayTitle}</h2>
+        <p className="text-sm text-gray-500 mt-1">{t.examples.essaySubtitle}</p>
       </div>
 
       <div className="flex gap-2 flex-wrap">
@@ -469,11 +462,12 @@ function EssayApproachesSection() {
 }
 
 function PersonalStatementSection() {
+  const { t } = useI18n()
   const data = essayApproaches.personal
   return (
     <div className="space-y-5">
       <Card>
-        <h3 className="font-semibold text-gray-900 mb-3">Topic Ideas</h3>
+        <h3 className="font-semibold text-gray-900 mb-3">{t.examples.topicIdeasTitle}</h3>
         <div className="space-y-3">
           {data.topics.map((topic, i) => (
             <div key={i} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
@@ -490,11 +484,12 @@ function PersonalStatementSection() {
 }
 
 function WhyUsSection() {
+  const { t } = useI18n()
   const data = essayApproaches.whyUs
   return (
     <div className="space-y-5">
       <Card>
-        <h3 className="font-semibold text-gray-900 mb-3">Recommended Structure</h3>
+        <h3 className="font-semibold text-gray-900 mb-3">{t.examples.recommendedStructure}</h3>
         <div className="space-y-2">
           {data.structure.map((item, i) => (
             <div key={i} className="flex gap-3 items-start">
@@ -516,14 +511,13 @@ function WhyUsSection() {
 }
 
 function CommunitySection() {
+  const { t } = useI18n()
   const data = essayApproaches.community
   return (
     <div className="space-y-5">
       <Card>
-        <h3 className="font-semibold text-gray-900 mb-3">What Counts as a Community?</h3>
-        <p className="text-sm text-gray-500 mb-3">
-          Admissions officers define community broadly. Any of these can work:
-        </p>
+        <h3 className="font-semibold text-gray-900 mb-3">{t.examples.whatCountsCommunity}</h3>
+        <p className="text-sm text-gray-500 mb-3">{t.examples.communitySubtext}</p>
         <div className="flex flex-wrap gap-2">
           {data.communities.map((c) => (
             <Badge key={c} color="bg-purple-100 text-purple-700">{c}</Badge>
@@ -537,14 +531,13 @@ function CommunitySection() {
 }
 
 function ChallengeSection() {
+  const { t } = useI18n()
   const data = essayApproaches.challenge
   return (
     <div className="space-y-5">
       <Card>
-        <h3 className="font-semibold text-gray-900 mb-3">How to Frame Growth</h3>
-        <p className="text-sm text-gray-500 mb-3">
-          The best challenge essays spend most of their word count on response and growth, not the problem.
-        </p>
+        <h3 className="font-semibold text-gray-900 mb-3">{t.examples.howToFrameGrowth}</h3>
+        <p className="text-sm text-gray-500 mb-3">{t.examples.challengeSubtext}</p>
         <div className="space-y-2">
           {data.framework.map((item, i) => (
             <div key={i} className="flex gap-3 items-start">
@@ -566,12 +559,13 @@ function ChallengeSection() {
 }
 
 function DosDonts({ dos, donts }: { dos: string[]; donts: string[] }) {
+  const { t } = useI18n()
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <Card className="bg-green-50 border-green-200">
         <div className="flex items-center gap-1.5 mb-3">
           <ThumbsUp size={14} className="text-green-600" />
-          <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">Do</span>
+          <span className="text-xs font-semibold text-green-700 uppercase tracking-wide">{t.examples.doLabel}</span>
         </div>
         <ul className="space-y-2">
           {dos.map((item, i) => (
@@ -586,7 +580,7 @@ function DosDonts({ dos, donts }: { dos: string[]; donts: string[] }) {
       <Card className="bg-red-50 border-red-200">
         <div className="flex items-center gap-1.5 mb-3">
           <ThumbsDown size={14} className="text-red-500" />
-          <span className="text-xs font-semibold text-red-600 uppercase tracking-wide">Don&apos;t</span>
+          <span className="text-xs font-semibold text-red-600 uppercase tracking-wide">{t.examples.dontLabel}</span>
         </div>
         <ul className="space-y-2">
           {donts.map((item, i) => (

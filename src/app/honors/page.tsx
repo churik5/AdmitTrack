@@ -62,6 +62,7 @@ const emptyForm: FormData = {
 
 export default function HonorsPage() {
   const router = useRouter()
+  const { t } = useI18n()
   const { items: honors, loading, create, update } = useHonors()
 
   const [search, setSearch] = useState('')
@@ -137,11 +138,11 @@ export default function HonorsPage() {
   return (
     <div>
       <PageHeader
-        title="Honors & Awards"
-        description="Recognition, awards, and achievements"
+        title={t.honors.title}
+        description={t.honors.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            Add Honor
+            {t.honors.addHonor}
           </Button>
         }
       />
@@ -149,10 +150,7 @@ export default function HonorsPage() {
       {/* Info box */}
       <div className="mb-5 rounded-lg bg-blue-50 border border-blue-200 px-4 py-3 text-sm text-blue-800 flex gap-2.5">
         <Info size={18} className="shrink-0 mt-0.5 text-blue-500" />
-        <p>
-          An honor is a result, recognition, or award &mdash; something you received, won, or were selected for.
-          It&rsquo;s different from an activity, which is something you did.
-        </p>
+        <p>{t.honors.honorIsInfo}</p>
       </div>
 
       {/* Filters */}
@@ -161,7 +159,7 @@ export default function HonorsPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search honors..."
+            placeholder={t.honors.searchPlaceholder}
             className="sm:w-72"
           />
           <div className="flex gap-1.5 overflow-x-auto pb-1">
@@ -176,7 +174,7 @@ export default function HonorsPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                {opt.label}
+                {opt.value === 'all' ? t.common.all : t.honors.levels[opt.value]}
               </button>
             ))}
           </div>
@@ -187,9 +185,9 @@ export default function HonorsPage() {
       {honors.length === 0 && (
         <EmptyState
           icon={Award}
-          title="No honors yet"
-          description="Start tracking your honors, awards, and achievements. Add anything you've been recognized for."
-          actionLabel="Add Your First Honor"
+          title={t.honors.noHonors}
+          description={t.honors.noHonorsDesc}
+          actionLabel={t.honors.firstHonor}
           onAction={openAdd}
         />
       )}
@@ -197,7 +195,7 @@ export default function HonorsPage() {
       {/* Filtered empty */}
       {honors.length > 0 && filtered.length === 0 && (
         <div className="text-center py-12 text-sm text-gray-500">
-          No honors match your search or filter.
+          {t.honors.noMatchFilter}
         </div>
       )}
 
@@ -234,7 +232,7 @@ export default function HonorsPage() {
               {honor.gradeReceived.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
                   <Badge color="bg-gray-100 text-gray-600">
-                    Grade{honor.gradeReceived.length > 1 ? 's' : ''} {honor.gradeReceived.join(', ')}
+                    {honor.gradeReceived.join(', ')}
                   </Badge>
                 </div>
               )}
@@ -253,14 +251,14 @@ export default function HonorsPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingId ? 'Edit Honor' : 'Add Honor'}
+        title={editingId ? t.honors.editHonor : t.honors.addHonor}
         size="lg"
       >
         <div className="space-y-4">
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Honor / Award Title <span className="text-red-500">*</span>
+              {t.honors.honorTitle} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -273,7 +271,7 @@ export default function HonorsPage() {
 
           {/* Level */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Level of Recognition</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.levelOfRecognition}</label>
             <select
               value={form.level}
               onChange={(e) => setForm({ ...form, level: e.target.value as HonorLevel })}
@@ -290,7 +288,7 @@ export default function HonorsPage() {
           {/* Issued By & Date */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Issued By</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.issuedBy}</label>
               <input
                 type="text"
                 value={form.issuedBy}
@@ -300,7 +298,7 @@ export default function HonorsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Date Received</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.dateReceived}</label>
               <input
                 type="date"
                 value={form.date}
@@ -313,7 +311,7 @@ export default function HonorsPage() {
           {/* Grade Received */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Grade(s) When Received
+              {t.honors.gradeWhenReceived}
             </label>
             <div className="flex gap-2">
               {GRADE_OPTIONS.map((grade) => (
@@ -336,7 +334,7 @@ export default function HonorsPage() {
 
           {/* Placement */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Placement / Rank</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.placement}</label>
             <input
               type="text"
               value={form.placement}
@@ -348,7 +346,7 @@ export default function HonorsPage() {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -360,7 +358,7 @@ export default function HonorsPage() {
 
           {/* Significance */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Significance</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.significance}</label>
             <textarea
               value={form.significance}
               onChange={(e) => setForm({ ...form, significance: e.target.value })}
@@ -372,7 +370,7 @@ export default function HonorsPage() {
 
           {/* Link */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.link}</label>
             <input
               type="url"
               value={form.link}
@@ -384,7 +382,7 @@ export default function HonorsPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -397,25 +395,17 @@ export default function HonorsPage() {
           {/* Tips */}
           <div className="rounded-lg bg-amber-50 border border-amber-200 px-4 py-3">
             <h4 className="text-sm font-semibold text-amber-800 mb-2">
-              What counts as an honor?
+              {t.honors.whatCounts}
             </h4>
-            <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
-              <li>Academic awards (Honor Roll, AP Scholar, National Merit)</li>
-              <li>Competition placements (Science Olympiad, Math League, Debate)</li>
-              <li>Scholarships and fellowships</li>
-              <li>Selection to special programs (Governor&apos;s School, summer programs)</li>
-              <li>Published work or recognized research</li>
-              <li>Athletic recognitions (All-State, MVP, team captain awards)</li>
-            </ul>
           </div>
 
           {/* Actions */}
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.title.trim()}>
-              {editingId ? 'Save Changes' : 'Add Honor'}
+              {editingId ? t.common.save : t.honors.addHonor}
             </Button>
           </div>
         </div>

@@ -780,6 +780,19 @@ const guides: Guide[] = [
 
 export default function GuidesPage() {
   const { t } = useI18n()
+
+  const guideTitleMap: Record<string, string> = {
+    'activity-vs-honor': t.guides.titles.activityVsHonor,
+    'writing-descriptions': t.guides.titles.writingDescriptions,
+    'honor-levels': t.guides.titles.honorLevels,
+    'organizing-documents': t.guides.titles.organizingDocuments,
+    'writing-essays': t.guides.titles.writingEssays,
+    'why-us-essay': t.guides.titles.whyUsEssay,
+    'managing-deadlines': t.guides.titles.managingDeadlines,
+    'building-college-list': t.guides.titles.buildingCollegeList,
+    'research-projects': t.guides.titles.researchProjects,
+    'using-admittrack': t.guides.titles.usingAdmittrack,
+  }
   const [search, setSearch] = useState('')
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
 
@@ -824,7 +837,7 @@ export default function GuidesPage() {
         <SearchInput
           value={search}
           onChange={setSearch}
-          placeholder="Search guides..."
+          placeholder={t.guides.searchPlaceholder}
           className="flex-1"
         />
         <div className="flex gap-2 shrink-0">
@@ -832,13 +845,13 @@ export default function GuidesPage() {
             onClick={expandAll}
             className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded hover:bg-gray-100 transition-colors"
           >
-            Expand all
+            {t.guides.expandAll}
           </button>
           <button
             onClick={collapseAll}
             className="text-xs text-gray-500 hover:text-gray-700 px-2 py-1 rounded hover:bg-gray-100 transition-colors"
           >
-            Collapse all
+            {t.guides.collapseAll}
           </button>
         </div>
       </div>
@@ -846,12 +859,12 @@ export default function GuidesPage() {
       {filteredGuides.length === 0 ? (
         <div className="text-center py-16">
           <BookOpen size={40} className="mx-auto text-gray-300 mb-3" />
-          <p className="text-gray-500 text-sm">No guides match your search.</p>
+          <p className="text-gray-500 text-sm">{t.guides.noMatch}</p>
           <button
             onClick={() => setSearch('')}
             className="text-sm text-brand-600 hover:text-brand-700 mt-2"
           >
-            Clear search
+            {t.guides.clearSearch}
           </button>
         </div>
       ) : (
@@ -866,7 +879,7 @@ export default function GuidesPage() {
                 >
                   <div className="shrink-0">{guide.icon}</div>
                   <span className="flex-1 font-medium text-gray-900 text-sm">
-                    {guide.title}
+                    {guideTitleMap[guide.id] || guide.title}
                   </span>
                   <div className="shrink-0 text-gray-400">
                     {isExpanded ? (
@@ -894,7 +907,7 @@ export default function GuidesPage() {
 
       <div className="mt-8 mb-4 text-center">
         <p className="text-xs text-gray-400">
-          10 guides available. Have a question not covered here? Check the specific section of AdmitTrack for contextual tips.
+          {t.guides.footer}
         </p>
       </div>
     </div>

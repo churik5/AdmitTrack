@@ -130,11 +130,9 @@ export default function EssaysPage() {
           <div>
             <h4 className="text-sm font-semibold text-amber-800 mb-1.5">{t.essays.guidanceTitle}</h4>
             <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
-              <li>Start early and write multiple drafts &mdash; great essays take time to develop</li>
-              <li>Show, don&apos;t tell &mdash; use specific stories and examples rather than general statements</li>
-              <li>Be authentic and write in your own voice &mdash; admissions officers read thousands of essays</li>
-              <li>Stay within the word limit; going over signals a lack of editing discipline</li>
-              <li>Have trusted readers review your work, but make sure the final voice is yours</li>
+              {t.essays.guidanceTips.map((tip, i) => (
+                <li key={i}>{tip}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -252,7 +250,7 @@ export default function EssaysPage() {
                 )}
 
                 <p className="text-xs text-gray-400">
-                  Updated {formatDate(essay.updatedAt)}
+                  {t.essays.updatedAt} {formatDate(essay.updatedAt)}
                 </p>
               </Card>
             )

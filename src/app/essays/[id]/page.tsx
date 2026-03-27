@@ -220,7 +220,7 @@ export default function EssayDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-gray-500">
         <AlertCircle size={32} className="mb-2" />
-        <p>Essay not found.</p>
+        <p>{t.essays.essayNotFound}</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/essays')}>
           {t.common.back}
         </Button>
@@ -230,7 +230,7 @@ export default function EssayDetailPage() {
 
   const wc = wordCount(content)
   const overLimit = essay.wordLimit > 0 && wc > essay.wordLimit
-  const tips = ESSAY_TIPS[essay.type] || ESSAY_TIPS.other
+  const tips = t.essays.tips[essay.type] || t.essays.tips.other
   const linkedUnis = universities.filter((u) => essay.universityIds.includes(u.id))
 
   return (
@@ -466,7 +466,7 @@ export default function EssayDetailPage() {
             <div className="flex items-center gap-2">
               <Lightbulb size={14} className="text-amber-500" />
               <h3 className="font-semibold text-gray-900 text-sm">
-                Tips: {t.essays.types[essay.type] || essay.type}
+                {t.essays.tipsLabel} {t.essays.types[essay.type] || essay.type}
               </h3>
             </div>
             <ul className="text-xs text-gray-600 space-y-1.5">
@@ -551,7 +551,7 @@ export default function EssayDetailPage() {
         </div>
         <div className="flex justify-end pt-4">
           <Button variant="secondary" onClick={() => setLinkModalOpen(false)}>
-            Done
+            {t.common.done}
           </Button>
         </div>
       </Modal>
@@ -560,13 +560,13 @@ export default function EssayDetailPage() {
       <Modal
         isOpen={editModalOpen}
         onClose={() => setEditModalOpen(false)}
-        title="Edit Essay Details"
+        title={t.essays.editEssayDetails}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
+              {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -578,21 +578,21 @@ export default function EssayDetailPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
               <select
                 value={editForm.type}
                 onChange={(e) => setEditForm({ ...editForm, type: e.target.value as EssayType })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {Object.entries(ESSAY_TYPES).map(([val, label]) => (
+                {Object.entries(ESSAY_TYPES).map(([val]) => (
                   <option key={val} value={val}>
-                    {label}
+                    {t.essays.types[val as EssayType] || val}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
               <select
                 value={editForm.status}
                 onChange={(e) =>
@@ -602,7 +602,7 @@ export default function EssayDetailPage() {
               >
                 {ESSAY_STATUSES.map((s) => (
                   <option key={s} value={s}>
-                    {statusLabel(s)}
+                    {t.essays.statuses[s]}
                   </option>
                 ))}
               </select>
@@ -610,7 +610,7 @@ export default function EssayDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Prompt</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.prompt}</label>
             <textarea
               value={editForm.prompt}
               onChange={(e) => setEditForm({ ...editForm, prompt: e.target.value })}
@@ -620,7 +620,7 @@ export default function EssayDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Word Limit</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.wordLimit}</label>
             <input
               type="number"
               min={0}
@@ -634,10 +634,10 @@ export default function EssayDetailPage() {
 
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setEditModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleEditSave} disabled={!editForm.title.trim()}>
-              Save Changes
+              {t.common.save}
             </Button>
           </div>
         </div>
@@ -647,19 +647,18 @@ export default function EssayDetailPage() {
       <Modal
         isOpen={confirmDelete}
         onClose={() => setConfirmDelete(false)}
-        title="Delete Essay"
+        title={t.essays.deleteEssay}
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
-          Are you sure you want to delete <strong>{essay.title}</strong>? This will also delete all
-          saved versions. This action cannot be undone.
+          {t.essays.deleteEssayConfirm}
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>
-            Cancel
+            {t.common.cancel}
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete
+            {t.common.delete}
           </Button>
         </div>
       </Modal>

@@ -232,6 +232,25 @@ export interface Translations {
       national: string
       international: string
     }
+    searchPlaceholder: string
+    noMatchFilter: string
+    gradeWhenReceived: string
+    honorDetails: string
+    howToAssessTitle: string
+    honorNotFound: string
+    backToHonors: string
+    levelOfRecognition: string
+    honorIsInfo: string
+    deleteHonor: string
+    deleteConfirm: string
+    levelNote: string
+    levelDescriptions: {
+      school: string
+      regional: string
+      state: string
+      national: string
+      international: string
+    }
   }
 
   // Essays
@@ -280,6 +299,24 @@ export interface Translations {
       polishing: string
       final: string
     }
+    tips: {
+      personal_statement: string[]
+      why_us: string[]
+      community: string[]
+      challenge: string[]
+      supplemental: string[]
+      intellectual_interest: string[]
+      diversity: string[]
+      activity: string[]
+      other: string[]
+    }
+    guidanceTips: string[]
+    tipsLabel: string
+    essayNotFound: string
+    editEssayDetails: string
+    deleteEssay: string
+    deleteEssayConfirm: string
+    updatedAt: string
   }
 
   // Deadlines
@@ -346,6 +383,12 @@ export interface Translations {
       financial: string
       other: string
     }
+    tipsTitle: string
+    tips: string[]
+    linkedTo: string
+    added: string
+    none: string
+    noMatchFilter: string
   }
 
   // Research
@@ -376,6 +419,24 @@ export interface Translations {
       completed: string
       published: string
     }
+    infoTitle: string
+    infoTips: string[]
+    modalTipsTitle: string
+    modalTips: string[]
+    overviewLabel: string
+    researchNotFound: string
+    researchTipsTitle: string
+    describeRoleTitle: string
+    describeRoleText: string
+    highlightMethodTitle: string
+    highlightMethodText: string
+    quantifyTitle: string
+    quantifyText: string
+    connectGoalsTitle: string
+    connectGoalsText: string
+    researchNote: string
+    separateSkills: string
+    noMatchFilter: string
   }
 
   // Notes
@@ -450,12 +511,69 @@ export interface Translations {
   guides: {
     title: string
     subtitle: string
+    searchPlaceholder: string
+    expandAll: string
+    collapseAll: string
+    noMatch: string
+    clearSearch: string
+    footer: string
+    titles: {
+      activityVsHonor: string
+      writingDescriptions: string
+      honorLevels: string
+      organizingDocuments: string
+      writingEssays: string
+      whyUsEssay: string
+      managingDeadlines: string
+      buildingCollegeList: string
+      researchProjects: string
+      usingAdmittrack: string
+    }
   }
 
   // Examples
   examples: {
     title: string
     subtitle: string
+    disclaimer: string
+    tabs: {
+      activities: string
+      honors: string
+      research: string
+      essays: string
+    }
+    activityTitle: string
+    activitySubtitle: string
+    weak: string
+    strong: string
+    honorsTitle: string
+    honorsSubtitle: string
+    notHonorsTitle: string
+    notHonorsSubtitle: string
+    activityOrHonorTitle: string
+    activityOrHonorText: string
+    researchTitle: string
+    researchSubtitle: string
+    descriptionLabel: string
+    contributionLabel: string
+    mentorLabel: string
+    skillsLabel: string
+    essayTitle: string
+    essaySubtitle: string
+    essayTabs: {
+      personal: string
+      whyUs: string
+      community: string
+      challenge: string
+    }
+    topicIdeasTitle: string
+    recommendedStructure: string
+    whatCountsCommunity: string
+    howToFrameGrowth: string
+    communitySubtext: string
+    challengeSubtext: string
+    doLabel: string
+    dontLabel: string
   }
 
   // Checklist

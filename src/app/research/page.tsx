@@ -166,12 +166,11 @@ export default function ResearchPage() {
       <div className="mb-5 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800 flex gap-2.5">
         <Info size={18} className="shrink-0 mt-0.5 text-amber-500" />
         <div>
-          <p className="font-medium mb-1">Research strengthens your application</p>
+          <p className="font-medium mb-1">{t.research.infoTitle}</p>
           <ul className="text-xs text-amber-700 space-y-0.5 list-disc list-inside">
-            <li>Colleges value intellectual curiosity and self-directed learning</li>
-            <li>Document your methodology, findings, and personal contribution</li>
-            <li>Even early-stage ideas show initiative &mdash; track them here</li>
-            <li>Published or presented work is especially impactful for selective schools</li>
+            {t.research.infoTips.map((tip, i) => (
+              <li key={i}>{tip}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -230,7 +229,7 @@ export default function ResearchPage() {
       {/* Filtered empty */}
       {researchItems.length > 0 && filtered.length === 0 && (
         <div className="text-center py-12 text-sm text-gray-500">
-          No research matches your search or filter.
+          {t.research.noMatchFilter}
         </div>
       )}
 
@@ -385,7 +384,7 @@ export default function ResearchPage() {
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
               placeholder="e.g. Python, Data Analysis, Lab Techniques (comma-separated)"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate skills with commas</p>
+            <p className="mt-1 text-xs text-gray-400">{t.research.separateSkills}</p>
           </div>
 
           {/* Findings */}
@@ -438,13 +437,12 @@ export default function ResearchPage() {
           {/* Tips */}
           <div className="rounded-lg bg-amber-50 border border-amber-200 px-4 py-3">
             <h4 className="text-sm font-semibold text-amber-800 mb-2">
-              Tips for documenting research
+              {t.research.modalTipsTitle}
             </h4>
             <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
-              <li>Clearly describe your own contribution vs. team effort</li>
-              <li>Mention specific methodologies and tools you used</li>
-              <li>Quantify your results when possible</li>
-              <li>Note any mentors, labs, or institutions involved</li>
+              {t.research.modalTips.map((tip, i) => (
+                <li key={i}>{tip}</li>
+              ))}
             </ul>
           </div>
 

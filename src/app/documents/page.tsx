@@ -177,12 +177,11 @@ export default function DocumentsPage() {
         <div className="flex gap-2.5">
           <Info size={18} className="shrink-0 mt-0.5 text-amber-500" />
           <div>
-            <h4 className="text-sm font-semibold text-amber-800 mb-1.5">Document Tracking</h4>
+            <h4 className="text-sm font-semibold text-amber-800 mb-1.5">{t.documents.tipsTitle}</h4>
             <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
-              <li>File references are stored as metadata. Keep your actual files organized in a folder on your computer.</li>
-              <li>Use categories and tags to keep documents easy to find when filling out applications</li>
-              <li>Link documents to specific universities using the &ldquo;Related To&rdquo; field</li>
-              <li>Keep track of transcripts, recommendation letters, test scores, and other key documents</li>
+              {t.documents.tips.map((tip, i) => (
+                <li key={i}>{tip}</li>
+              ))}
             </ul>
           </div>
         </div>
@@ -210,7 +209,7 @@ export default function DocumentsPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                All ({documents.length})
+                {t.common.all} ({documents.length})
               </button>
               {usedCategories.map((c) => (
                 <button
@@ -245,7 +244,7 @@ export default function DocumentsPage() {
       {/* Filtered empty */}
       {documents.length > 0 && filtered.length === 0 && (
         <div className="text-center py-12 text-sm text-gray-500">
-          No documents match your search or filters.
+          {t.documents.noMatchFilter}
         </div>
       )}
 
@@ -302,12 +301,12 @@ export default function DocumentsPage() {
 
                 {uniName && (
                   <p className="text-xs text-gray-400 line-clamp-1">
-                    Linked to {uniName}
+                    {t.documents.linkedTo} {uniName}
                   </p>
                 )}
 
                 <p className="text-xs text-gray-400">
-                  Added {formatDate(doc.dateUploaded || doc.createdAt)}
+                  {t.documents.added} {formatDate(doc.dateUploaded || doc.createdAt)}
                 </p>
               </Card>
             )
@@ -363,7 +362,7 @@ export default function DocumentsPage() {
               onChange={(e) => setForm({ ...form, relatedTo: e.target.value })}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              <option value="">None</option>
+              <option value="">{t.documents.none}</option>
               {universities.map((u) => (
                 <option key={u.id} value={u.id}>
                   {u.name}

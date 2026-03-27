@@ -60,6 +60,7 @@ const emptyForm: FormData = {
 export default function HonorDetailPage() {
   const params = useParams()
   const router = useRouter()
+  const { t } = useI18n()
   const id = params.id as string
 
   const { getById, update, remove } = useHonors()
@@ -116,9 +117,9 @@ export default function HonorDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-gray-500">
         <AlertCircle size={32} className="mb-2" />
-        <p>Honor not found.</p>
+        <p>{t.honors.honorNotFound}</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/honors')}>
-          Back to Honors
+          {t.honors.backToHonors}
         </Button>
       </div>
     )
@@ -143,7 +144,7 @@ export default function HonorDetailPage() {
               icon={<Pencil size={14} />}
               onClick={() => setEditModalOpen(true)}
             >
-              Edit
+              {t.common.edit}
             </Button>
             <Button
               variant="danger"
@@ -151,7 +152,7 @@ export default function HonorDetailPage() {
               icon={<Trash2 size={14} />}
               onClick={() => setConfirmDelete(true)}
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         }
@@ -162,10 +163,10 @@ export default function HonorDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Details Card */}
           <Card className="space-y-4">
-            <h3 className="font-semibold text-gray-900">Honor Details</h3>
+            <h3 className="font-semibold text-gray-900">{t.honors.honorDetails}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-gray-500">Level</span>
+                <span className="text-gray-500">{t.honors.level}</span>
                 <div className="mt-1">
                   <Badge color={LEVEL_COLORS[honor.level] || 'bg-gray-100 text-gray-700'}>
                     {HONOR_LEVELS[honor.level] || honor.level}
@@ -174,7 +175,7 @@ export default function HonorDetailPage() {
               </div>
               {honor.issuedBy && (
                 <div>
-                  <span className="text-gray-500">Issued By</span>
+                  <span className="text-gray-500">{t.honors.issuedBy}</span>
                   <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                     <Building2 size={14} className="text-gray-400" />
                     {honor.issuedBy}
@@ -183,7 +184,7 @@ export default function HonorDetailPage() {
               )}
               {honor.date && (
                 <div>
-                  <span className="text-gray-500">Date Received</span>
+                  <span className="text-gray-500">{t.honors.dateReceived}</span>
                   <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                     <Calendar size={14} className="text-gray-400" />
                     {formatDate(honor.date)}
@@ -192,7 +193,7 @@ export default function HonorDetailPage() {
               )}
               {honor.gradeReceived.length > 0 && (
                 <div>
-                  <span className="text-gray-500">Grade(s) When Received</span>
+                  <span className="text-gray-500">{t.honors.gradeWhenReceived}</span>
                   <div className="flex gap-1.5 mt-1">
                     {honor.gradeReceived.map((g) => (
                       <Badge key={g} color="bg-gray-100 text-gray-700">{g}</Badge>
@@ -202,13 +203,13 @@ export default function HonorDetailPage() {
               )}
               {honor.placement && (
                 <div>
-                  <span className="text-gray-500">Placement / Rank</span>
+                  <span className="text-gray-500">{t.honors.placement}</span>
                   <p className="font-medium text-gray-900 mt-1">{honor.placement}</p>
                 </div>
               )}
               {honor.link && (
                 <div>
-                  <span className="text-gray-500">Link</span>
+                  <span className="text-gray-500">{t.common.link}</span>
                   <a
                     href={honor.link}
                     target="_blank"
@@ -225,7 +226,7 @@ export default function HonorDetailPage() {
           {/* Description Card */}
           {honor.description && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Description</h3>
+              <h3 className="font-semibold text-gray-900">{t.common.description}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{honor.description}</p>
             </Card>
           )}
@@ -233,7 +234,7 @@ export default function HonorDetailPage() {
           {/* Significance Card */}
           {honor.significance && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Significance</h3>
+              <h3 className="font-semibold text-gray-900">{t.honors.significance}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{honor.significance}</p>
             </Card>
           )}
@@ -241,7 +242,7 @@ export default function HonorDetailPage() {
           {/* Notes Card */}
           {honor.notes && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Notes</h3>
+              <h3 className="font-semibold text-gray-900">{t.common.notes}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{honor.notes}</p>
             </Card>
           )}
@@ -253,42 +254,32 @@ export default function HonorDetailPage() {
           <Card className="space-y-3">
             <div className="flex items-center gap-2">
               <Info size={16} className="text-blue-500" />
-              <h3 className="font-semibold text-gray-900 text-sm">How to Assess Your Honor Level</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{t.honors.howToAssessTitle}</h3>
             </div>
             <div className="space-y-3 text-xs">
               <div className="flex gap-2">
-                <Badge color={LEVEL_COLORS.school} className="shrink-0">School</Badge>
-                <p className="text-gray-600">
-                  Recognized by your school only. Examples: Honor Roll, department awards, school-level competition wins.
-                </p>
+                <Badge color={LEVEL_COLORS.school} className="shrink-0">{t.honors.levels.school}</Badge>
+                <p className="text-gray-600">{t.honors.levelDescriptions.school}</p>
               </div>
               <div className="flex gap-2">
-                <Badge color={LEVEL_COLORS.regional} className="shrink-0">Regional</Badge>
-                <p className="text-gray-600">
-                  Recognized across multiple schools or within a region/district. Examples: county science fair, regional math league.
-                </p>
+                <Badge color={LEVEL_COLORS.regional} className="shrink-0">{t.honors.levels.regional}</Badge>
+                <p className="text-gray-600">{t.honors.levelDescriptions.regional}</p>
               </div>
               <div className="flex gap-2">
-                <Badge color={LEVEL_COLORS.state} className="shrink-0">State</Badge>
-                <p className="text-gray-600">
-                  Recognized at the state level. Examples: All-State orchestra, state debate champion, Governor&apos;s Award.
-                </p>
+                <Badge color={LEVEL_COLORS.state} className="shrink-0">{t.honors.levels.state}</Badge>
+                <p className="text-gray-600">{t.honors.levelDescriptions.state}</p>
               </div>
               <div className="flex gap-2">
-                <Badge color={LEVEL_COLORS.national} className="shrink-0">National</Badge>
-                <p className="text-gray-600">
-                  Recognized nationally. Examples: National Merit, USAMO qualifier, national essay contest winner.
-                </p>
+                <Badge color={LEVEL_COLORS.national} className="shrink-0">{t.honors.levels.national}</Badge>
+                <p className="text-gray-600">{t.honors.levelDescriptions.national}</p>
               </div>
               <div className="flex gap-2">
-                <Badge color={LEVEL_COLORS.international} className="shrink-0">Int&apos;l</Badge>
-                <p className="text-gray-600">
-                  Recognized internationally. Examples: International Olympiad medalist, global competition finalist.
-                </p>
+                <Badge color={LEVEL_COLORS.international} className="shrink-0">{t.honors.levels.international}</Badge>
+                <p className="text-gray-600">{t.honors.levelDescriptions.international}</p>
               </div>
             </div>
             <p className="text-xs text-gray-400 pt-2 border-t border-gray-100">
-              Colleges value higher-level honors more, but school-level honors still matter when they show consistent achievement.
+              {t.honors.levelNote}
             </p>
           </Card>
         </div>
@@ -298,13 +289,13 @@ export default function HonorDetailPage() {
       <Modal
         isOpen={editModalOpen}
         onClose={() => setEditModalOpen(false)}
-        title="Edit Honor"
+        title={t.honors.editHonor}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Honor / Award Title <span className="text-red-500">*</span>
+              {t.honors.honorTitle} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -315,7 +306,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Level of Recognition</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.levelOfRecognition}</label>
             <select
               value={form.level}
               onChange={(e) => setForm({ ...form, level: e.target.value as HonorLevel })}
@@ -331,7 +322,7 @@ export default function HonorDetailPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Issued By</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.issuedBy}</label>
               <input
                 type="text"
                 value={form.issuedBy}
@@ -340,7 +331,7 @@ export default function HonorDetailPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Date Received</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.dateReceived}</label>
               <input
                 type="date"
                 value={form.date}
@@ -351,7 +342,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Grade(s) When Received</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.gradeWhenReceived}</label>
             <div className="flex gap-2">
               {GRADE_OPTIONS.map((grade) => (
                 <button
@@ -372,7 +363,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Placement / Rank</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.placement}</label>
             <input
               type="text"
               value={form.placement}
@@ -382,7 +373,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -392,7 +383,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Significance</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.significance}</label>
             <textarea
               value={form.significance}
               onChange={(e) => setForm({ ...form, significance: e.target.value })}
@@ -402,7 +393,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.link}</label>
             <input
               type="url"
               value={form.link}
@@ -413,7 +404,7 @@ export default function HonorDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -424,10 +415,10 @@ export default function HonorDetailPage() {
 
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setEditModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.title.trim()}>
-              Save Changes
+              {t.common.save}
             </Button>
           </div>
         </div>
@@ -437,18 +428,18 @@ export default function HonorDetailPage() {
       <Modal
         isOpen={confirmDelete}
         onClose={() => setConfirmDelete(false)}
-        title="Delete Honor"
+        title={t.honors.deleteHonor}
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
-          Are you sure you want to delete <strong>{honor.title}</strong>? This action cannot be undone.
+          {t.common.confirmDelete} <strong>{honor.title}</strong>? {t.honors.deleteConfirm}
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>
-            Cancel
+            {t.common.cancel}
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete
+            {t.common.delete}
           </Button>
         </div>
       </Modal>
