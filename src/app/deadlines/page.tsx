@@ -22,6 +22,7 @@ import EmptyState from '@/components/ui/EmptyState'
 import Tabs from '@/components/ui/Tabs'
 import { useDeadlines } from '@/lib/hooks/useDeadlines'
 import { useUniversities } from '@/lib/hooks/useUniversities'
+import { useI18n } from '@/lib/i18n'
 import { Deadline, DeadlineType, DeadlinePriority } from '@/lib/types'
 import {
   cn,
@@ -70,21 +71,22 @@ const emptyForm: FormData = {
   notes: '',
 }
 
-const VIEW_TABS = [
-  { id: 'list', label: 'List View' },
-  { id: 'calendar', label: 'Calendar View' },
-]
-
-const FILTER_TABS = [
-  { id: 'all', label: 'All' },
-  { id: 'upcoming', label: 'Upcoming' },
-  { id: 'completed', label: 'Completed' },
-  { id: 'overdue', label: 'Overdue' },
-]
-
 export default function DeadlinesPage() {
   const { items: deadlines, loading, create, update, remove } = useDeadlines()
   const { items: universities } = useUniversities()
+  const { t } = useI18n()
+
+  const VIEW_TABS = [
+    { id: 'list', label: t.deadlines.listView },
+    { id: 'calendar', label: t.deadlines.calendarView },
+  ]
+
+  const FILTER_TABS = [
+    { id: 'all', label: t.common.all },
+    { id: 'upcoming', label: t.deadlines.upcoming },
+    { id: 'completed', label: t.deadlines.completed },
+    { id: 'overdue', label: t.deadlines.overdue },
+  ]
 
   const [view, setView] = useState('list')
   const [statusFilter, setStatusFilter] = useState('all')
@@ -249,11 +251,11 @@ export default function DeadlinesPage() {
   return (
     <div>
       <PageHeader
-        title="Deadlines"
-        description="Track your application deadlines — all dates are entered by you"
+        title={t.deadlines.title}
+        description={t.deadlines.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            Add Deadline
+            {t.deadlines.addDeadline}
           </Button>
         }
       />
@@ -265,7 +267,7 @@ export default function DeadlinesPage() {
             <AlertTriangle size={18} className="shrink-0 mt-0.5 text-red-500" />
             <div>
               <h4 className="text-sm font-semibold text-red-800">
-                {overdueDeadlines.length} Overdue Deadline{overdueDeadlines.length !== 1 ? 's' : ''}
+                {overdueDeadlines.length} {t.deadlines.overdue} {overdueDeadlines.length !== 1 ? 'Deadlines' : 'Deadline'}
               </h4>
               <div className="mt-1.5 space-y-1">
                 {overdueDeadlines.slice(0, 3).map((d) => (
@@ -317,10 +319,10 @@ export default function DeadlinesPage() {
                 onChange={(e) => setTypeFilter(e.target.value as DeadlineType | 'all')}
                 className="px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
               >
-                <option value="all">All Types</option>
+                <option value="all">{t.deadlines.allTypes}</option>
                 {Object.entries(DEADLINE_TYPES).map(([val, label]) => (
                   <option key={val} value={val}>
-                    {label}
+                    {t.deadlines.types[val as DeadlineType] || label}
                   </option>
                 ))}
               </select>
@@ -330,7 +332,7 @@ export default function DeadlinesPage() {
                   onChange={(e) => setUniFilter(e.target.value)}
                   className="px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                 >
-                  <option value="all">All Universities</option>
+                  <option value="all">{t.deadlines.allUniversities}</option>
                   {universities.map((u) => (
                     <option key={u.id} value={u.id}>
                       {u.name}
@@ -347,9 +349,9 @@ export default function DeadlinesPage() {
       {deadlines.length === 0 && (
         <EmptyState
           icon={Calendar}
-          title="No deadlines yet"
-          description="Add your application deadlines, financial aid dates, and other important dates to stay on track."
-          actionLabel="Add Your First Deadline"
+          title={t.deadlines.noDeadlines}
+          description={t.deadlines.noDeadlinesDesc}
+          actionLabel={t.deadlines.firstDeadline}
           onAction={openAdd}
         />
       )}
@@ -429,7 +431,7 @@ export default function DeadlinesPage() {
                     {/* Badges */}
                     <div className="flex items-center gap-2 shrink-0">
                       <Badge color="bg-gray-100 text-gray-600">
-                        {DEADLINE_TYPES[d.type] || d.type}
+                        {t.deadlines.types[d.type] || DEADLINE_TYPES[d.type] || d.type}
                       </Badge>
                       {d.status !== 'completed' && (
                         <span
@@ -442,7 +444,7 @@ export default function DeadlinesPage() {
                         </span>
                       )}
                       {d.status === 'completed' && (
-                        <Badge color="bg-green-100 text-green-700">Done</Badge>
+                        <Badge color="bg-green-100 text-green-700">{t.common.done}</Badge>
                       )}
                     </div>
 
@@ -602,7 +604,7 @@ export default function DeadlinesPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Badge color={PRIORITY_COLORS[d.priority]}>
-                          {statusLabel(d.priority)}
+                          {t.deadlines.priorities[d.priority]}
                         </Badge>
                         <button
                           onClick={() => toggleComplete(d)}
@@ -631,13 +633,13 @@ export default function DeadlinesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingId ? 'Edit Deadline' : 'Add Deadline'}
+        title={editingId ? t.deadlines.editDeadline : t.deadlines.addDeadline}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
+              {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -651,7 +653,7 @@ export default function DeadlinesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Date <span className="text-red-500">*</span>
+                {t.common.date} <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
@@ -661,7 +663,7 @@ export default function DeadlinesPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Time</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.deadlines.time}</label>
               <input
                 type="time"
                 value={form.time}
@@ -672,13 +674,13 @@ export default function DeadlinesPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">University</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.deadlines.university}</label>
             <select
               value={form.universityId}
               onChange={(e) => handleUniChange(e.target.value)}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              <option value="">No university</option>
+              <option value="">{t.deadlines.noUniversity}</option>
               {universities.map((u) => (
                 <option key={u.id} value={u.id}>
                   {u.name}
@@ -689,7 +691,7 @@ export default function DeadlinesPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as DeadlineType })}
@@ -697,13 +699,13 @@ export default function DeadlinesPage() {
               >
                 {Object.entries(DEADLINE_TYPES).map(([val, label]) => (
                   <option key={val} value={val}>
-                    {label}
+                    {t.deadlines.types[val as DeadlineType] || label}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.deadlines.priority}</label>
               <select
                 value={form.priority}
                 onChange={(e) =>
@@ -713,7 +715,7 @@ export default function DeadlinesPage() {
               >
                 {DEADLINE_PRIORITIES.map((p) => (
                   <option key={p} value={p}>
-                    {statusLabel(p)}
+                    {t.deadlines.priorities[p]}
                   </option>
                 ))}
               </select>
@@ -721,7 +723,7 @@ export default function DeadlinesPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -741,14 +743,14 @@ export default function DeadlinesPage() {
                   setModalOpen(false)
                 }}
               >
-                Delete Deadline
+                {t.deadlines.deleteDeadline}
               </Button>
               <div className="flex gap-2">
                 <Button variant="secondary" onClick={() => setModalOpen(false)}>
-                  Cancel
+                  {t.common.cancel}
                 </Button>
                 <Button onClick={handleSave} disabled={!form.title.trim() || !form.date}>
-                  Save Changes
+                  {t.common.save}
                 </Button>
               </div>
             </div>
@@ -757,10 +759,10 @@ export default function DeadlinesPage() {
           {!editingId && (
             <div className="flex justify-end gap-2 pt-2">
               <Button variant="secondary" onClick={() => setModalOpen(false)}>
-                Cancel
+                {t.common.cancel}
               </Button>
               <Button onClick={handleSave} disabled={!form.title.trim() || !form.date}>
-                Add Deadline
+                {t.deadlines.addDeadline}
               </Button>
             </div>
           )}

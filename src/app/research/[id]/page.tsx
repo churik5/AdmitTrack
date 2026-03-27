@@ -11,6 +11,7 @@ import {
   Info,
   Tag,
 } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
@@ -77,6 +78,7 @@ const emptyForm: FormData = {
 }
 
 export default function ResearchDetailPage() {
+  const { t } = useI18n()
   const params = useParams()
   const router = useRouter()
   const id = params.id as string
@@ -136,7 +138,7 @@ export default function ResearchDetailPage() {
         <AlertCircle size={32} className="mb-2" />
         <p>Research not found.</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/research')}>
-          Back to Research
+          {t.common.back}
         </Button>
       </div>
     )
@@ -153,13 +155,13 @@ export default function ResearchDetailPage() {
               color={TYPE_COLORS[research.type] || 'bg-gray-100 text-gray-700'}
               className="text-sm px-3 py-1"
             >
-              {RESEARCH_TYPES[research.type] || research.type}
+              {t.research.types[research.type] || research.type}
             </Badge>
             <Badge
               color={getStatusColor(research.status)}
               className="text-sm px-3 py-1"
             >
-              {statusLabel(research.status)}
+              {t.research.statuses[research.status]}
             </Badge>
             <Button
               variant="secondary"
@@ -167,7 +169,7 @@ export default function ResearchDetailPage() {
               icon={<Pencil size={14} />}
               onClick={() => setEditModalOpen(true)}
             >
-              Edit
+              {t.common.edit}
             </Button>
             <Button
               variant="danger"
@@ -175,7 +177,7 @@ export default function ResearchDetailPage() {
               icon={<Trash2 size={14} />}
               onClick={() => setConfirmDelete(true)}
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         }
@@ -189,24 +191,24 @@ export default function ResearchDetailPage() {
             <h3 className="font-semibold text-gray-900">Overview</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-gray-500">Type</span>
+                <span className="text-gray-500">{t.common.type}</span>
                 <div className="mt-1">
                   <Badge color={TYPE_COLORS[research.type] || 'bg-gray-100 text-gray-700'}>
-                    {RESEARCH_TYPES[research.type] || research.type}
+                    {t.research.types[research.type] || research.type}
                   </Badge>
                 </div>
               </div>
               <div>
-                <span className="text-gray-500">Status</span>
+                <span className="text-gray-500">{t.common.status}</span>
                 <div className="mt-1">
                   <Badge color={getStatusColor(research.status)}>
-                    {statusLabel(research.status)}
+                    {t.research.statuses[research.status]}
                   </Badge>
                 </div>
               </div>
               {research.topic && (
                 <div>
-                  <span className="text-gray-500">Topic / Field</span>
+                  <span className="text-gray-500">{t.research.topic}</span>
                   <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                     <Tag size={14} className="text-gray-400" />
                     {research.topic}
@@ -215,7 +217,7 @@ export default function ResearchDetailPage() {
               )}
               {research.publishedAt && (
                 <div>
-                  <span className="text-gray-500">Published Date</span>
+                  <span className="text-gray-500">{t.research.publishedAt}</span>
                   <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                     <Calendar size={14} className="text-gray-400" />
                     {formatDate(research.publishedAt)}
@@ -224,7 +226,7 @@ export default function ResearchDetailPage() {
               )}
               {research.link && (
                 <div>
-                  <span className="text-gray-500">Link</span>
+                  <span className="text-gray-500">{t.common.link}</span>
                   <a
                     href={research.link}
                     target="_blank"
@@ -241,7 +243,7 @@ export default function ResearchDetailPage() {
           {/* Description Card */}
           {research.description && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Description</h3>
+              <h3 className="font-semibold text-gray-900">{t.common.description}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{research.description}</p>
             </Card>
           )}
@@ -249,7 +251,7 @@ export default function ResearchDetailPage() {
           {/* Own Contribution Card */}
           {research.ownContribution && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Your Contribution</h3>
+              <h3 className="font-semibold text-gray-900">{t.research.ownContribution}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{research.ownContribution}</p>
             </Card>
           )}
@@ -257,7 +259,7 @@ export default function ResearchDetailPage() {
           {/* Skills Card */}
           {research.skills.length > 0 && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Skills Used</h3>
+              <h3 className="font-semibold text-gray-900">{t.research.skills}</h3>
               <div className="flex flex-wrap gap-2">
                 {research.skills.map((skill) => (
                   <Badge key={skill} color="bg-indigo-100 text-indigo-700">
@@ -271,7 +273,7 @@ export default function ResearchDetailPage() {
           {/* Findings Card */}
           {research.findings && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Findings / Results</h3>
+              <h3 className="font-semibold text-gray-900">{t.research.findings}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{research.findings}</p>
             </Card>
           )}
@@ -279,7 +281,7 @@ export default function ResearchDetailPage() {
           {/* Notes Card */}
           {research.notes && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Notes</h3>
+              <h3 className="font-semibold text-gray-900">{t.common.notes}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{research.notes}</p>
             </Card>
           )}
@@ -330,13 +332,13 @@ export default function ResearchDetailPage() {
       <Modal
         isOpen={editModalOpen}
         onClose={() => setEditModalOpen(false)}
-        title="Edit Research"
+        title={`${t.common.edit} ${t.research.title}`}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
+              {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -348,21 +350,21 @@ export default function ResearchDetailPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as ResearchType })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {Object.entries(RESEARCH_TYPES).map(([val, label]) => (
+                {Object.entries(RESEARCH_TYPES).map(([val]) => (
                   <option key={val} value={val}>
-                    {label}
+                    {t.research.types[val as ResearchType]}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as ResearchStatus })}
@@ -370,7 +372,7 @@ export default function ResearchDetailPage() {
               >
                 {STATUS_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                    {t.research.statuses[opt.value]}
                   </option>
                 ))}
               </select>
@@ -378,7 +380,7 @@ export default function ResearchDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Topic / Field</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.topic}</label>
             <input
               type="text"
               value={form.topic}
@@ -388,7 +390,7 @@ export default function ResearchDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -398,7 +400,7 @@ export default function ResearchDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Your Contribution</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.ownContribution}</label>
             <textarea
               value={form.ownContribution}
               onChange={(e) => setForm({ ...form, ownContribution: e.target.value })}
@@ -408,7 +410,7 @@ export default function ResearchDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Skills Used</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.skills}</label>
             <input
               type="text"
               value={skillsInput}
@@ -420,7 +422,7 @@ export default function ResearchDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Findings / Results</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.findings}</label>
             <textarea
               value={form.findings}
               onChange={(e) => setForm({ ...form, findings: e.target.value })}
@@ -431,7 +433,7 @@ export default function ResearchDetailPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Published Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.publishedAt}</label>
               <input
                 type="date"
                 value={form.publishedAt}
@@ -440,7 +442,7 @@ export default function ResearchDetailPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.link}</label>
               <input
                 type="url"
                 value={form.link}
@@ -452,7 +454,7 @@ export default function ResearchDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -463,10 +465,10 @@ export default function ResearchDetailPage() {
 
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setEditModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.title.trim()}>
-              Save Changes
+              {t.common.save}
             </Button>
           </div>
         </div>
@@ -476,7 +478,7 @@ export default function ResearchDetailPage() {
       <Modal
         isOpen={confirmDelete}
         onClose={() => setConfirmDelete(false)}
-        title="Delete Research"
+        title={`${t.common.delete} ${t.research.title}`}
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
@@ -484,10 +486,10 @@ export default function ResearchDetailPage() {
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>
-            Cancel
+            {t.common.cancel}
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete
+            {t.common.delete}
           </Button>
         </div>
       </Modal>

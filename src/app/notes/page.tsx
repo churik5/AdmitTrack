@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { StickyNote, Plus, Tag } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 import PageHeader from '@/components/layout/PageHeader'
 import SearchInput from '@/components/ui/SearchInput'
 import Card from '@/components/ui/Card'
@@ -52,6 +53,7 @@ const emptyForm: FormData = {
 }
 
 export default function NotesPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const { items: notes, loading, create } = useNotes()
 
@@ -109,11 +111,11 @@ export default function NotesPage() {
   return (
     <div>
       <PageHeader
-        title="Notes & Knowledge Base"
-        description="Capture ideas, research, and advice for your applications"
+        title={t.notes.title}
+        description={t.notes.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            New Note
+            {t.notes.addNote}
           </Button>
         }
       />
@@ -124,7 +126,7 @@ export default function NotesPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search notes..."
+            placeholder={`${t.common.search}...`}
             className="sm:w-72"
           />
           {usedCategories.length > 0 && (
@@ -138,7 +140,7 @@ export default function NotesPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                All
+                {t.common.all}
               </button>
               {usedCategories.map((c) => (
                 <button
@@ -151,7 +153,7 @@ export default function NotesPage() {
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   )}
                 >
-                  {NOTE_CATEGORIES[c]}
+                  {t.notes.categories[c]}
                 </button>
               ))}
             </div>
@@ -163,9 +165,9 @@ export default function NotesPage() {
       {notes.length === 0 && (
         <EmptyState
           icon={StickyNote}
-          title="No notes yet"
-          description="Jot down thoughts, research findings, advice from counselors, or ideas for your applications."
-          actionLabel="Create Your First Note"
+          title={t.notes.noNotes}
+          description={t.notes.noNotesDesc}
+          actionLabel={t.notes.firstNote}
           onAction={openAdd}
         />
       )}
@@ -193,7 +195,7 @@ export default function NotesPage() {
               </div>
 
               <Badge color={CATEGORY_COLORS[note.category]}>
-                {NOTE_CATEGORIES[note.category]}
+                {t.notes.categories[note.category]}
               </Badge>
 
               {note.content && (
@@ -228,13 +230,13 @@ export default function NotesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="New Note"
+        title={t.notes.addNote}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
+              {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -246,15 +248,15 @@ export default function NotesPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.category}</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value as NoteCategory })}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              {Object.entries(NOTE_CATEGORIES).map(([val, label]) => (
+              {Object.entries(NOTE_CATEGORIES).map(([val]) => (
                 <option key={val} value={val}>
-                  {label}
+                  {t.notes.categories[val as NoteCategory]}
                 </option>
               ))}
             </select>
@@ -262,7 +264,7 @@ export default function NotesPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Tags <span className="text-xs text-gray-400">(comma-separated)</span>
+              {t.common.tags}
             </label>
             <input
               type="text"
@@ -274,7 +276,7 @@ export default function NotesPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.notes.content}</label>
             <textarea
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
@@ -286,10 +288,10 @@ export default function NotesPage() {
 
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.title.trim()}>
-              Create Note
+              {t.notes.addNote}
             </Button>
           </div>
         </div>

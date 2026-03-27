@@ -13,6 +13,7 @@ import {
   Link2,
   X,
 } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
@@ -52,6 +53,7 @@ interface LinkedEntity {
 }
 
 export default function NoteDetailPage() {
+  const { t } = useI18n()
   const params = useParams()
   const router = useRouter()
   const id = params.id as string
@@ -146,7 +148,7 @@ export default function NoteDetailPage() {
         <AlertCircle size={32} className="mb-2" />
         <p>Note not found.</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/notes')}>
-          Back to Notes
+          {t.common.back}
         </Button>
       </div>
     )
@@ -186,7 +188,7 @@ export default function NoteDetailPage() {
               icon={<Save size={14} />}
               onClick={handleManualSave}
             >
-              Save
+              {t.common.save}
             </Button>
             <Button
               variant="danger"
@@ -194,7 +196,7 @@ export default function NoteDetailPage() {
               icon={<Trash2 size={14} />}
               onClick={() => setConfirmDelete(true)}
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         }
@@ -205,7 +207,7 @@ export default function NoteDetailPage() {
         <div className="lg:col-span-2 space-y-4">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.title}</label>
             <input
               type="text"
               value={title}
@@ -217,7 +219,7 @@ export default function NoteDetailPage() {
 
           {/* Content */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Content</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.notes.content}</label>
             <textarea
               value={content}
               onChange={(e) => handleContentChange(e.target.value)}
@@ -235,15 +237,15 @@ export default function NoteDetailPage() {
             <h3 className="font-semibold text-gray-900 text-sm">Note Details</h3>
             <div className="space-y-2.5 text-sm">
               <div className="flex justify-between items-center">
-                <span className="text-gray-500">Category</span>
+                <span className="text-gray-500">{t.common.category}</span>
                 <select
                   value={category}
                   onChange={(e) => handleCategoryChange(e.target.value as NoteCategory)}
                   className="px-2 py-1 text-xs border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
-                  {Object.entries(NOTE_CATEGORIES).map(([val, label]) => (
+                  {Object.entries(NOTE_CATEGORIES).map(([val]) => (
                     <option key={val} value={val}>
-                      {label}
+                      {t.notes.categories[val as NoteCategory]}
                     </option>
                   ))}
                 </select>
@@ -263,7 +265,7 @@ export default function NoteDetailPage() {
           <Card className="space-y-3">
             <div className="flex items-center gap-2">
               <Tag size={14} className="text-gray-500" />
-              <h3 className="font-semibold text-gray-900 text-sm">Tags</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{t.common.tags}</h3>
             </div>
             <input
               type="text"
@@ -326,7 +328,7 @@ export default function NoteDetailPage() {
       <Modal
         isOpen={confirmDelete}
         onClose={() => setConfirmDelete(false)}
-        title="Delete Note"
+        title={`${t.common.delete} ${t.notes.title}`}
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
@@ -335,10 +337,10 @@ export default function NoteDetailPage() {
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>
-            Cancel
+            {t.common.cancel}
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete
+            {t.common.delete}
           </Button>
         </div>
       </Modal>

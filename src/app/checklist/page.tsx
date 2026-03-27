@@ -5,6 +5,7 @@ import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import ProgressBar from '@/components/ui/ProgressBar'
 import { useChecklist } from '@/lib/hooks/useChecklist'
+import { useI18n } from '@/lib/i18n'
 import { CHECKLIST_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { CheckSquare, Square, ChevronDown, ChevronRight } from 'lucide-react'
@@ -33,6 +34,7 @@ const CATEGORY_COLORS: Record<string, { bar: string; bg: string; text: string }>
 }
 
 export default function ChecklistPage() {
+  const { t } = useI18n()
   const { items, loading, initChecklist, updateChecklistItem } = useChecklist()
   const [collapsedCategories, setCollapsedCategories] = useState<Set<string>>(new Set())
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set())
@@ -97,8 +99,8 @@ export default function ChecklistPage() {
   return (
     <div>
       <PageHeader
-        title="Application Checklist"
-        description="Track your progress through the college application process"
+        title={t.checklist.title}
+        description={t.checklist.subtitle}
       />
 
       {/* Overall Progress */}

@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { FlaskConical, Plus, Info } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 import PageHeader from '@/components/layout/PageHeader'
 import SearchInput from '@/components/ui/SearchInput'
 import Card from '@/components/ui/Card'
@@ -72,6 +73,7 @@ const emptyForm: FormData = {
 }
 
 export default function ResearchPage() {
+  const { t } = useI18n()
   const router = useRouter()
   const { items: researchItems, loading, create, update } = useResearch()
 
@@ -151,11 +153,11 @@ export default function ResearchPage() {
   return (
     <div>
       <PageHeader
-        title="Research & Projects"
-        description="Track your intellectual work, research papers, and independent projects"
+        title={t.research.title}
+        description={t.research.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            Add Research
+            {t.research.addResearch}
           </Button>
         }
       />
@@ -180,7 +182,7 @@ export default function ResearchPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search research..."
+            placeholder={`${t.common.search}...`}
             className="sm:w-72"
           />
           <div className="flex gap-1.5 overflow-x-auto pb-1">
@@ -195,7 +197,7 @@ export default function ResearchPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                {opt.label}
+                {opt.value === 'all' ? t.common.all : t.research.statuses[opt.value]}
               </button>
             ))}
           </div>
@@ -204,10 +206,10 @@ export default function ResearchPage() {
             onChange={(e) => setTypeFilter(e.target.value as ResearchType | 'all')}
             className="px-3 py-1.5 text-xs font-medium border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
           >
-            <option value="all">All Types</option>
-            {Object.entries(RESEARCH_TYPES).map(([val, label]) => (
+            <option value="all">{t.common.all} {t.common.type}</option>
+            {Object.entries(RESEARCH_TYPES).map(([val]) => (
               <option key={val} value={val}>
-                {label}
+                {t.research.types[val as ResearchType]}
               </option>
             ))}
           </select>
@@ -218,9 +220,9 @@ export default function ResearchPage() {
       {researchItems.length === 0 && (
         <EmptyState
           icon={FlaskConical}
-          title="No research yet"
-          description="Start tracking your research projects, papers, and independent studies. Document your intellectual journey from idea to publication."
-          actionLabel="Add Your First Research"
+          title={t.research.noResearch}
+          description={t.research.noResearchDesc}
+          actionLabel={t.research.firstResearch}
           onAction={openAdd}
         />
       )}
@@ -244,7 +246,7 @@ export default function ResearchPage() {
               <div className="flex items-start justify-between gap-2">
                 <h3 className="font-semibold text-gray-900 leading-tight">{research.title}</h3>
                 <Badge color={TYPE_COLORS[research.type] || 'bg-gray-100 text-gray-700'}>
-                  {RESEARCH_TYPES[research.type] || research.type}
+                  {t.research.types[research.type] || research.type}
                 </Badge>
               </div>
 
@@ -287,14 +289,14 @@ export default function ResearchPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingId ? 'Edit Research' : 'Add Research'}
+        title={editingId ? `${t.common.edit} ${t.research.title}` : t.research.addResearch}
         size="lg"
       >
         <div className="space-y-4">
           {/* Title */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
+              {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -308,21 +310,21 @@ export default function ResearchPage() {
           {/* Type & Status */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as ResearchType })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {Object.entries(RESEARCH_TYPES).map(([val, label]) => (
+                {Object.entries(RESEARCH_TYPES).map(([val]) => (
                   <option key={val} value={val}>
-                    {label}
+                    {t.research.types[val as ResearchType]}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as ResearchStatus })}
@@ -330,7 +332,7 @@ export default function ResearchPage() {
               >
                 {STATUS_OPTIONS.filter((o) => o.value !== 'all').map((opt) => (
                   <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                    {t.research.statuses[opt.value as ResearchStatus]}
                   </option>
                 ))}
               </select>
@@ -339,7 +341,7 @@ export default function ResearchPage() {
 
           {/* Topic */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Topic / Field</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.topic}</label>
             <input
               type="text"
               value={form.topic}
@@ -351,7 +353,7 @@ export default function ResearchPage() {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -363,7 +365,7 @@ export default function ResearchPage() {
 
           {/* Own Contribution */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Your Contribution</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.ownContribution}</label>
             <textarea
               value={form.ownContribution}
               onChange={(e) => setForm({ ...form, ownContribution: e.target.value })}
@@ -375,7 +377,7 @@ export default function ResearchPage() {
 
           {/* Skills */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Skills Used</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.skills}</label>
             <input
               type="text"
               value={skillsInput}
@@ -388,7 +390,7 @@ export default function ResearchPage() {
 
           {/* Findings */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Findings / Results</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.findings}</label>
             <textarea
               value={form.findings}
               onChange={(e) => setForm({ ...form, findings: e.target.value })}
@@ -401,7 +403,7 @@ export default function ResearchPage() {
           {/* Published At & Link */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Published Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.publishedAt}</label>
               <input
                 type="date"
                 value={form.publishedAt}
@@ -410,7 +412,7 @@ export default function ResearchPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Link</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.link}</label>
               <input
                 type="url"
                 value={form.link}
@@ -423,7 +425,7 @@ export default function ResearchPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -449,10 +451,10 @@ export default function ResearchPage() {
           {/* Actions */}
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.title.trim()}>
-              {editingId ? 'Save Changes' : 'Add Research'}
+              {editingId ? t.common.save : t.research.addResearch}
             </Button>
           </div>
         </div>

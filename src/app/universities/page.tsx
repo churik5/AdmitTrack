@@ -12,6 +12,7 @@ import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
 import { useUniversities } from '@/lib/hooks/useUniversities'
 import { useDeadlines } from '@/lib/hooks/useDeadlines'
+import { useI18n } from '@/lib/i18n'
 import {
   University,
   UniversityStatus,
@@ -19,38 +20,19 @@ import {
 } from '@/lib/types'
 import {
   cn,
-  statusLabel,
   truncate,
-  APPLICATION_TYPES,
   US_STATES,
 } from '@/lib/utils'
 
-const STATUS_OPTIONS: { value: UniversityStatus | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'researching', label: 'Researching' },
-  { value: 'planning', label: 'Planning' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'submitted', label: 'Submitted' },
-  { value: 'accepted', label: 'Accepted' },
-  { value: 'rejected', label: 'Rejected' },
-  { value: 'waitlisted', label: 'Waitlisted' },
+const STATUS_FILTER_KEYS: (UniversityStatus | 'all')[] = [
+  'all', 'researching', 'planning', 'in_progress', 'submitted', 'accepted', 'rejected', 'waitlisted',
 ]
 
-const APP_TYPE_OPTIONS: { value: ApplicationType; label: string }[] = Object.entries(APPLICATION_TYPES).map(
-  ([value, label]) => ({ value: value as ApplicationType, label })
-)
-
-const STATUS_DROPDOWN: { value: UniversityStatus; label: string }[] = [
-  { value: 'researching', label: 'Researching' },
-  { value: 'planning', label: 'Planning' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'submitted', label: 'Submitted' },
-  { value: 'accepted', label: 'Accepted' },
-  { value: 'rejected', label: 'Rejected' },
-  { value: 'waitlisted', label: 'Waitlisted' },
-  { value: 'deferred', label: 'Deferred' },
-  { value: 'withdrawn', label: 'Withdrawn' },
+const STATUS_DROPDOWN_KEYS: UniversityStatus[] = [
+  'researching', 'planning', 'in_progress', 'submitted', 'accepted', 'rejected', 'waitlisted', 'deferred', 'withdrawn',
 ]
+
+const APP_TYPE_KEYS: ApplicationType[] = ['EA', 'ED', 'ED2', 'REA', 'RD', 'rolling', 'other']
 
 interface FormData {
   name: string
@@ -72,6 +54,7 @@ const emptyForm: FormData = {
 
 export default function UniversitiesPage() {
   const router = useRouter()
+  const { t } = useI18n()
   const { items: universities, loading, create, update } = useUniversities()
   const { items: deadlines } = useDeadlines()
 
@@ -146,18 +129,18 @@ export default function UniversitiesPage() {
   return (
     <div>
       <PageHeader
-        title="Universities"
-        description="Your college list — add schools, track status, and organize requirements"
+        title={t.universities.title}
+        description={t.universities.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            Add University
+            {t.universities.addUniversity}
           </Button>
         }
       />
 
       {/* Disclaimer */}
       <div className="mb-5 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800">
-        You enter all deadlines and requirements yourself. This is your personal tracker, not an official source.
+        {t.universities.disclaimer}
       </div>
 
       {/* Filters */}
@@ -166,22 +149,22 @@ export default function UniversitiesPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search universities..."
+            placeholder={`${t.common.search}...`}
             className="sm:w-72"
           />
           <div className="flex gap-1.5 overflow-x-auto pb-1">
-            {STATUS_OPTIONS.map((opt) => (
+            {STATUS_FILTER_KEYS.map((val) => (
               <button
-                key={opt.value}
-                onClick={() => setStatusFilter(opt.value)}
+                key={val}
+                onClick={() => setStatusFilter(val)}
                 className={cn(
                   'px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors',
-                  statusFilter === opt.value
+                  statusFilter === val
                     ? 'bg-brand-600 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                {opt.label}
+                {val === 'all' ? t.common.all : t.universities.statuses[val]}
               </button>
             ))}
           </div>
@@ -192,9 +175,9 @@ export default function UniversitiesPage() {
       {universities.length === 0 && (
         <EmptyState
           icon={GraduationCap}
-          title="No universities yet"
-          description="Start building your college list. Add the schools you're interested in and track your application progress."
-          actionLabel="Add Your First University"
+          title={t.universities.noUniversities}
+          description={t.universities.noUniversitiesDesc}
+          actionLabel={t.universities.firstUniversity}
           onAction={openAdd}
         />
       )}
@@ -202,7 +185,7 @@ export default function UniversitiesPage() {
       {/* Filtered empty */}
       {universities.length > 0 && filtered.length === 0 && (
         <div className="text-center py-12 text-sm text-gray-500">
-          No universities match your search or filter.
+          {t.common.noResults}
         </div>
       )}
 
@@ -223,7 +206,7 @@ export default function UniversitiesPage() {
                     openEdit(uni)
                   }}
                   className="shrink-0 p-1 text-gray-400 hover:text-gray-600 rounded hover:bg-gray-100 transition-colors"
-                  title="Edit"
+                  title={t.common.edit}
                 >
                   <StickyNote size={14} />
                 </button>
@@ -237,9 +220,9 @@ export default function UniversitiesPage() {
               )}
 
               <div className="flex flex-wrap gap-1.5">
-                <Badge variant={uni.status}>{statusLabel(uni.status)}</Badge>
+                <Badge variant={uni.status}>{t.universities.statuses[uni.status]}</Badge>
                 <Badge color="bg-indigo-100 text-indigo-700">
-                  {APPLICATION_TYPES[uni.applicationType] || uni.applicationType}
+                  {t.universities.appTypes[uni.applicationType] || uni.applicationType}
                 </Badge>
               </div>
 
@@ -253,7 +236,7 @@ export default function UniversitiesPage() {
                 {uni.website && (
                   <span className="flex items-center gap-1">
                     <Globe size={12} />
-                    Website
+                    {t.universities.website}
                   </span>
                 )}
               </div>
@@ -270,14 +253,14 @@ export default function UniversitiesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingId ? 'Edit University' : 'Add University'}
+        title={editingId ? t.universities.editUniversity : t.universities.addUniversity}
         size="lg"
       >
         <div className="space-y-4">
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              University Name <span className="text-red-500">*</span>
+              {t.universities.universityName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -290,7 +273,7 @@ export default function UniversitiesPage() {
 
           {/* State */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.state}</label>
             <select
               value={form.state}
               onChange={(e) => setForm({ ...form, state: e.target.value })}
@@ -307,7 +290,7 @@ export default function UniversitiesPage() {
 
           {/* Website */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.website}</label>
             <input
               type="url"
               value={form.website}
@@ -319,15 +302,15 @@ export default function UniversitiesPage() {
 
           {/* Application Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Application Type</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.applicationType}</label>
             <select
               value={form.applicationType}
               onChange={(e) => setForm({ ...form, applicationType: e.target.value as ApplicationType })}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              {APP_TYPE_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
+              {APP_TYPE_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {t.universities.appTypes[key]}
                 </option>
               ))}
             </select>
@@ -335,15 +318,15 @@ export default function UniversitiesPage() {
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
             <select
               value={form.status}
               onChange={(e) => setForm({ ...form, status: e.target.value as UniversityStatus })}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              {STATUS_DROPDOWN.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
+              {STATUS_DROPDOWN_KEYS.map((key) => (
+                <option key={key} value={key}>
+                  {t.universities.statuses[key]}
                 </option>
               ))}
             </select>
@@ -351,7 +334,7 @@ export default function UniversitiesPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -364,10 +347,10 @@ export default function UniversitiesPage() {
           {/* Actions */}
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.name.trim()}>
-              {editingId ? 'Save Changes' : 'Add University'}
+              {editingId ? t.common.save : t.universities.addUniversity}
             </Button>
           </div>
         </div>

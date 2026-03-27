@@ -11,6 +11,7 @@ import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
 import { useHonors } from '@/lib/hooks/useHonors'
+import { useI18n } from '@/lib/i18n'
 import { Honor, HonorLevel } from '@/lib/types'
 import { cn, truncate, formatDate, HONOR_LEVELS } from '@/lib/utils'
 

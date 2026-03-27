@@ -20,6 +20,7 @@ import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import SearchInput from '@/components/ui/SearchInput'
 import { cn } from '@/lib/utils'
+import { useI18n } from '@/lib/i18n'
 
 interface Guide {
   id: string
@@ -778,6 +779,7 @@ const guides: Guide[] = [
 ]
 
 export default function GuidesPage() {
+  const { t } = useI18n()
   const [search, setSearch] = useState('')
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
 
@@ -814,8 +816,8 @@ export default function GuidesPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <PageHeader
-        title="Guides & Instructions"
-        description="Everything you need to know about the college application process, written by experts."
+        title={t.guides.title}
+        description={t.guides.subtitle}
       />
 
       <div className="flex items-center gap-3 mb-6">

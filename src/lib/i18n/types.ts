@@ -168,6 +168,7 @@ export interface Translations {
     weeksPerYear: string
     results: string
     infoBox: string
+    infoBoxDetail: string
     noActivities: string
     noActivitiesDesc: string
     firstActivity: string
@@ -175,6 +176,35 @@ export interface Translations {
     charCount: string
     tipTitle: string
     tips: string[]
+    activityDetails: string
+    duration: string
+    timeCommitment: string
+    present: string
+    notSet: string
+    noDescription: string
+    commonAppLimit: string
+    commonAppAllows: string
+    deleteActivity: string
+    saveChanges: string
+    backToActivities: string
+    notFound: string
+    descriptionTemplate: string
+    templateFormat: string
+    writingTipsTitle: string
+    strongDescription: string
+    weakDescription: string
+    writingTipsList: string[]
+    searchPlaceholder: string
+    noMatchFilter: string
+    grades: string
+    hrsPerWeek: string
+    weeksPerYearLabel: string
+    confirmDeleteActivity: string
+    howToWrite: string
+    tipActionVerbs: string
+    tipBeSpecific: string
+    tipIncludeNumbers: string
+    tipFocusContribution: string
   }
 
   // Honors

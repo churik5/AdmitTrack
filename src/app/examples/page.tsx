@@ -6,6 +6,7 @@ import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Tabs from '@/components/ui/Tabs'
 import { cn } from '@/lib/utils'
+import { useI18n } from '@/lib/i18n'
 import { Lightbulb, ThumbsUp, ThumbsDown, ArrowRight } from 'lucide-react'
 
 const tabs = [
@@ -234,13 +235,14 @@ const essayApproaches = {
 }
 
 export default function ExamplesPage() {
+  const { t } = useI18n()
   const [activeTab, setActiveTab] = useState('activities')
 
   return (
     <div className="max-w-4xl mx-auto">
       <PageHeader
-        title="Examples & Reference"
-        description="Real examples showing what strong entries look like. Use these as inspiration when filling out your profile."
+        title={t.examples.title}
+        description={t.examples.subtitle}
       />
 
       <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg flex gap-3">

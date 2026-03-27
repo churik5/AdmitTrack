@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import { useI18n } from '@/lib/i18n'
 import { useProfile } from '@/lib/hooks/useProfile'
 import { TestScore } from '@/lib/types'
 import { generateId, US_STATES } from '@/lib/utils'
@@ -12,6 +13,7 @@ import { Save, Plus, Trash2 } from 'lucide-react'
 
 export default function ProfilePage() {
   const { profile, updateProfile, loading } = useProfile()
+  const { t } = useI18n()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -99,7 +101,7 @@ export default function ProfilePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-pulse text-gray-400 text-sm">Loading...</div>
+        <div className="animate-pulse text-gray-400 text-sm">{t.common.loading}...</div>
       </div>
     )
   }

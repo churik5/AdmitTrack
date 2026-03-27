@@ -12,6 +12,7 @@ import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
 import { useEssays } from '@/lib/hooks/useEssays'
 import { useUniversities } from '@/lib/hooks/useUniversities'
+import { useI18n } from '@/lib/i18n'
 import { EssayType, EssayStatus } from '@/lib/types'
 import { cn, formatDate, wordCount, ESSAY_TYPES, statusLabel, getStatusColor } from '@/lib/utils'
 
@@ -42,6 +43,7 @@ const ESSAY_STATUSES: EssayStatus[] = [
 
 export default function EssaysPage() {
   const router = useRouter()
+  const { t } = useI18n()
   const { items: essays, loading, create } = useEssays()
   const { items: universities } = useUniversities()
 
@@ -112,11 +114,11 @@ export default function EssaysPage() {
   return (
     <div>
       <PageHeader
-        title="Essays & Writing"
-        description="Draft, revise, and polish your application essays"
+        title={t.essays.title}
+        description={t.essays.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            New Essay
+            {t.essays.newEssay}
           </Button>
         }
       />
@@ -126,7 +128,7 @@ export default function EssaysPage() {
         <div className="flex gap-2.5">
           <Info size={18} className="shrink-0 mt-0.5 text-amber-500" />
           <div>
-            <h4 className="text-sm font-semibold text-amber-800 mb-1.5">Essay Writing Guidance</h4>
+            <h4 className="text-sm font-semibold text-amber-800 mb-1.5">{t.essays.guidanceTitle}</h4>
             <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
               <li>Start early and write multiple drafts &mdash; great essays take time to develop</li>
               <li>Show, don&apos;t tell &mdash; use specific stories and examples rather than general statements</li>
@@ -145,7 +147,7 @@ export default function EssaysPage() {
             <SearchInput
               value={search}
               onChange={setSearch}
-              placeholder="Search essays..."
+              placeholder={`${t.common.search}...`}
               className="sm:w-72"
             />
             <select
@@ -153,10 +155,10 @@ export default function EssaysPage() {
               onChange={(e) => setTypeFilter(e.target.value as EssayType | 'all')}
               className="px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
             >
-              <option value="all">All Types</option>
-              {Object.entries(ESSAY_TYPES).map(([val, label]) => (
+              <option value="all">{t.common.all} {t.common.type}</option>
+              {Object.entries(ESSAY_TYPES).map(([val]) => (
                 <option key={val} value={val}>
-                  {label}
+                  {t.essays.types[val as EssayType] || val}
                 </option>
               ))}
             </select>
@@ -172,7 +174,7 @@ export default function EssaysPage() {
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                All
+                {t.common.all}
               </button>
               {usedStatuses.map((s) => (
                 <button
@@ -185,7 +187,7 @@ export default function EssaysPage() {
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   )}
                 >
-                  {statusLabel(s)}
+                  {t.essays.statuses[s]}
                 </button>
               ))}
             </div>
@@ -197,9 +199,9 @@ export default function EssaysPage() {
       {essays.length === 0 && (
         <EmptyState
           icon={FileText}
-          title="No essays yet"
-          description="Start working on your application essays. Track drafts, versions, and progress for each essay."
-          actionLabel="Create Your First Essay"
+          title={t.essays.noEssays}
+          description={t.essays.noEssaysDesc}
+          actionLabel={t.essays.firstEssay}
           onAction={openAdd}
         />
       )}
@@ -207,7 +209,7 @@ export default function EssaysPage() {
       {/* Filtered empty */}
       {essays.length > 0 && filtered.length === 0 && (
         <div className="text-center py-12 text-sm text-gray-500">
-          No essays match your search or filters.
+          {t.common.noResults}
         </div>
       )}
 
@@ -231,15 +233,15 @@ export default function EssaysPage() {
 
                 <div className="flex flex-wrap gap-1.5">
                   <Badge color="bg-indigo-100 text-indigo-700">
-                    {ESSAY_TYPES[essay.type] || essay.type}
+                    {t.essays.types[essay.type] || essay.type}
                   </Badge>
-                  <Badge variant={essay.status}>{statusLabel(essay.status)}</Badge>
+                  <Badge variant={essay.status}>{t.essays.statuses[essay.status]}</Badge>
                 </div>
 
                 <div className="flex items-center gap-1.5 text-sm text-gray-500">
                   <FileText size={14} />
                   <span className={cn(essay.wordLimit > 0 && wc > essay.wordLimit && 'text-red-600 font-medium')}>
-                    {wc} {essay.wordLimit > 0 ? `/ ${essay.wordLimit}` : ''} words
+                    {wc} {essay.wordLimit > 0 ? `/ ${essay.wordLimit}` : ''} {t.essays.words}
                   </span>
                 </div>
 
@@ -262,13 +264,13 @@ export default function EssaysPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="New Essay"
+        title={t.essays.newEssay}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Title <span className="text-red-500">*</span>
+              {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -281,21 +283,21 @@ export default function EssaysPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as EssayType })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {Object.entries(ESSAY_TYPES).map(([val, label]) => (
+                {Object.entries(ESSAY_TYPES).map(([val]) => (
                   <option key={val} value={val}>
-                    {label}
+                    {t.essays.types[val as EssayType] || val}
                   </option>
                 ))}
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as EssayStatus })}
@@ -303,7 +305,7 @@ export default function EssaysPage() {
               >
                 {ESSAY_STATUSES.map((s) => (
                   <option key={s} value={s}>
-                    {statusLabel(s)}
+                    {t.essays.statuses[s]}
                   </option>
                 ))}
               </select>
@@ -311,7 +313,7 @@ export default function EssaysPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Prompt</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.prompt}</label>
             <textarea
               value={form.prompt}
               onChange={(e) => setForm({ ...form, prompt: e.target.value })}
@@ -322,7 +324,7 @@ export default function EssaysPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Word Limit</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.wordLimit}</label>
             <input
               type="number"
               min={0}
@@ -335,10 +337,10 @@ export default function EssaysPage() {
 
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.title.trim()}>
-              Create Essay
+              {t.essays.newEssay}
             </Button>
           </div>
         </div>

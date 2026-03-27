@@ -17,6 +17,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import { useHonors } from '@/lib/hooks/useHonors'
+import { useI18n } from '@/lib/i18n'
 import { Honor, HonorLevel } from '@/lib/types'
 import { cn, formatDate, HONOR_LEVELS } from '@/lib/utils'
 

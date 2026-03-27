@@ -18,6 +18,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import { useActivities } from '@/lib/hooks/useActivities'
+import { useI18n } from '@/lib/i18n'
 import { Activity, ActivityCategory } from '@/lib/types'
 import { cn, formatDate, ACTIVITY_CATEGORIES } from '@/lib/utils'
 
@@ -59,6 +60,7 @@ export default function ActivityDetailPage() {
   const params = useParams()
   const router = useRouter()
   const id = params.id as string
+  const { t } = useI18n()
 
   const { getById, update, remove } = useActivities()
 
@@ -117,9 +119,9 @@ export default function ActivityDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-gray-500">
         <AlertCircle size={32} className="mb-2" />
-        <p>Activity not found.</p>
+        <p>{t.activities.notFound}</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/activities')}>
-          Back to Activities
+          {t.activities.backToActivities}
         </Button>
       </div>
     )
@@ -139,7 +141,7 @@ export default function ActivityDetailPage() {
               icon={<Pencil size={14} />}
               onClick={() => setEditModalOpen(true)}
             >
-              Edit
+              {t.common.edit}
             </Button>
             <Button
               variant="danger"
@@ -147,7 +149,7 @@ export default function ActivityDetailPage() {
               icon={<Trash2 size={14} />}
               onClick={() => setConfirmDelete(true)}
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         }
@@ -158,10 +160,10 @@ export default function ActivityDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Details Card */}
           <Card className="space-y-4">
-            <h3 className="font-semibold text-gray-900">Activity Details</h3>
+            <h3 className="font-semibold text-gray-900">{t.activities.activityDetails}</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-gray-500">Category</span>
+                <span className="text-gray-500">{t.common.category}</span>
                 <div className="mt-1">
                   <Badge color="bg-indigo-100 text-indigo-700">
                     {ACTIVITY_CATEGORIES[activity.category] || activity.category}
@@ -170,7 +172,7 @@ export default function ActivityDetailPage() {
               </div>
               {activity.organization && (
                 <div>
-                  <span className="text-gray-500">Organization</span>
+                  <span className="text-gray-500">{t.activities.organization}</span>
                   <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                     <Building2 size={14} className="text-gray-400" />
                     {activity.organization}
@@ -179,7 +181,7 @@ export default function ActivityDetailPage() {
               )}
               {activity.role && (
                 <div>
-                  <span className="text-gray-500">Role / Position</span>
+                  <span className="text-gray-500">{t.activities.role}</span>
                   <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                     <Users size={14} className="text-gray-400" />
                     {activity.role}
@@ -187,17 +189,17 @@ export default function ActivityDetailPage() {
                 </div>
               )}
               <div>
-                <span className="text-gray-500">Duration</span>
+                <span className="text-gray-500">{t.activities.duration}</span>
                 <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                   <Calendar size={14} className="text-gray-400" />
-                  {activity.startDate ? formatDate(activity.startDate) : 'Not set'}
+                  {activity.startDate ? formatDate(activity.startDate) : t.activities.notSet}
                   {' — '}
-                  {activity.ongoing ? 'Present' : activity.endDate ? formatDate(activity.endDate) : 'Not set'}
+                  {activity.ongoing ? t.activities.present : activity.endDate ? formatDate(activity.endDate) : t.activities.notSet}
                 </p>
               </div>
               {activity.grades.length > 0 && (
                 <div>
-                  <span className="text-gray-500">Grades</span>
+                  <span className="text-gray-500">{t.activities.grades}</span>
                   <div className="flex gap-1.5 mt-1">
                     {activity.grades.map((g) => (
                       <Badge key={g} color="bg-gray-100 text-gray-700">{g}</Badge>
@@ -206,10 +208,10 @@ export default function ActivityDetailPage() {
                 </div>
               )}
               <div>
-                <span className="text-gray-500">Time Commitment</span>
+                <span className="text-gray-500">{t.activities.timeCommitment}</span>
                 <p className="font-medium text-gray-900 flex items-center gap-1.5 mt-1">
                   <Clock size={14} className="text-gray-400" />
-                  {activity.hoursPerWeek} hrs/week &times; {activity.weeksPerYear} weeks/year
+                  {activity.hoursPerWeek} {t.activities.hrsPerWeek} &times; {activity.weeksPerYear} {t.activities.weeksPerYearLabel}
                 </p>
               </div>
             </div>
@@ -217,28 +219,28 @@ export default function ActivityDetailPage() {
 
           {/* Description Card */}
           <Card className="space-y-3">
-            <h3 className="font-semibold text-gray-900">Description</h3>
+            <h3 className="font-semibold text-gray-900">{t.common.description}</h3>
             {activity.description ? (
               <div>
                 <p className="text-sm text-gray-700 whitespace-pre-wrap">{activity.description}</p>
                 <p className="mt-2 text-xs text-gray-400">
-                  {activity.description.length} characters
+                  {activity.description.length} {t.activities.charCount}
                   {activity.description.length > 150 && (
                     <span className="text-amber-500 ml-1">
-                      (Common App limit is 150)
+                      {t.activities.commonAppLimit}
                     </span>
                   )}
                 </p>
               </div>
             ) : (
-              <p className="text-sm text-gray-400 italic">No description added yet.</p>
+              <p className="text-sm text-gray-400 italic">{t.activities.noDescription}</p>
             )}
           </Card>
 
           {/* Results Card */}
           {activity.results && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Results / Impact</h3>
+              <h3 className="font-semibold text-gray-900">{t.activities.results}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{activity.results}</p>
             </Card>
           )}
@@ -246,7 +248,7 @@ export default function ActivityDetailPage() {
           {/* Notes Card */}
           {activity.notes && (
             <Card className="space-y-3">
-              <h3 className="font-semibold text-gray-900">Notes</h3>
+              <h3 className="font-semibold text-gray-900">{t.common.notes}</h3>
               <p className="text-sm text-gray-700 whitespace-pre-wrap">{activity.notes}</p>
             </Card>
           )}
@@ -258,10 +260,10 @@ export default function ActivityDetailPage() {
           <Card className="space-y-3">
             <div className="flex items-center gap-2">
               <Lightbulb size={16} className="text-amber-500" />
-              <h3 className="font-semibold text-gray-900 text-sm">Description Template</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{t.activities.descriptionTemplate}</h3>
             </div>
             <div className="rounded-lg bg-gray-50 px-3 py-2.5 text-xs text-gray-600 font-mono">
-              [Action verb] + [What you did] + [Impact/Result]
+              {t.activities.templateFormat}
             </div>
             <p className="text-xs text-gray-500">
               Example: &ldquo;Led weekly meetings of 30+ members, organized 5 community service events, and raised $3,000 for local charities.&rdquo;
@@ -270,38 +272,28 @@ export default function ActivityDetailPage() {
 
           {/* Writing Tips */}
           <Card className="space-y-3">
-            <h3 className="font-semibold text-gray-900 text-sm">Writing Tips</h3>
+            <h3 className="font-semibold text-gray-900 text-sm">{t.activities.writingTipsTitle}</h3>
             <div className="space-y-3">
               <div>
-                <p className="text-xs font-medium text-green-700 mb-1">Strong description:</p>
+                <p className="text-xs font-medium text-green-700 mb-1">{t.activities.strongDescription}</p>
                 <p className="text-xs text-gray-600 bg-green-50 rounded-lg px-3 py-2">
                   &ldquo;Founded coding club; taught 25 students Python weekly; 8 students placed in state hackathon&rdquo;
                 </p>
               </div>
               <div>
-                <p className="text-xs font-medium text-red-700 mb-1">Weak description:</p>
+                <p className="text-xs font-medium text-red-700 mb-1">{t.activities.weakDescription}</p>
                 <p className="text-xs text-gray-600 bg-red-50 rounded-lg px-3 py-2">
                   &ldquo;Member of coding club at school. We meet every week and do coding stuff.&rdquo;
                 </p>
               </div>
             </div>
             <ul className="text-xs text-gray-500 space-y-1.5 mt-2">
-              <li className="flex gap-1.5">
-                <span className="text-brand-600 font-bold">&bull;</span>
-                Use active voice and action verbs
-              </li>
-              <li className="flex gap-1.5">
-                <span className="text-brand-600 font-bold">&bull;</span>
-                Quantify your impact with numbers
-              </li>
-              <li className="flex gap-1.5">
-                <span className="text-brand-600 font-bold">&bull;</span>
-                Focus on leadership and initiative
-              </li>
-              <li className="flex gap-1.5">
-                <span className="text-brand-600 font-bold">&bull;</span>
-                Show growth and progression over time
-              </li>
+              {t.activities.writingTipsList.map((tip, i) => (
+                <li key={i} className="flex gap-1.5">
+                  <span className="text-brand-600 font-bold">&bull;</span>
+                  {tip}
+                </li>
+              ))}
             </ul>
           </Card>
         </div>
@@ -311,13 +303,13 @@ export default function ActivityDetailPage() {
       <Modal
         isOpen={editModalOpen}
         onClose={() => setEditModalOpen(false)}
-        title="Edit Activity"
+        title={t.activities.editActivity}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Activity Name <span className="text-red-500">*</span>
+              {t.activities.activityName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -328,7 +320,7 @@ export default function ActivityDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.category}</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value as ActivityCategory })}
@@ -344,7 +336,7 @@ export default function ActivityDetailPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Organization</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.organization}</label>
               <input
                 type="text"
                 value={form.organization}
@@ -353,7 +345,7 @@ export default function ActivityDetailPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Role / Position</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.role}</label>
               <input
                 type="text"
                 value={form.role}
@@ -365,7 +357,7 @@ export default function ActivityDetailPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.startDate}</label>
               <input
                 type="date"
                 value={form.startDate}
@@ -374,7 +366,7 @@ export default function ActivityDetailPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.endDate}</label>
               <input
                 type="date"
                 value={form.endDate}
@@ -391,13 +383,13 @@ export default function ActivityDetailPage() {
                   onChange={(e) => setForm({ ...form, ongoing: e.target.checked, endDate: e.target.checked ? '' : form.endDate })}
                   className="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
                 />
-                <span className="text-sm text-gray-700">Ongoing</span>
+                <span className="text-sm text-gray-700">{t.activities.ongoing}</span>
               </label>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Grades Participated</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.gradesParticipated}</label>
             <div className="flex gap-2">
               {GRADE_OPTIONS.map((grade) => (
                 <button
@@ -419,7 +411,7 @@ export default function ActivityDetailPage() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Hours per Week</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.hoursPerWeek}</label>
               <input
                 type="number"
                 min={0}
@@ -429,7 +421,7 @@ export default function ActivityDetailPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Weeks per Year</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.weeksPerYear}</label>
               <input
                 type="number"
                 min={0}
@@ -442,7 +434,7 @@ export default function ActivityDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -450,12 +442,12 @@ export default function ActivityDetailPage() {
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
             />
             <p className="mt-1 text-xs text-gray-400">
-              Common App allows 150 characters. Current: {form.description.length} characters.
+              {t.activities.commonAppAllows} {form.description.length} {t.activities.charCount}.
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Results / Impact</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.results}</label>
             <textarea
               value={form.results}
               onChange={(e) => setForm({ ...form, results: e.target.value })}
@@ -465,7 +457,7 @@ export default function ActivityDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -476,10 +468,10 @@ export default function ActivityDetailPage() {
 
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setEditModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.name.trim()}>
-              Save Changes
+              {t.activities.saveChanges}
             </Button>
           </div>
         </div>
@@ -489,18 +481,18 @@ export default function ActivityDetailPage() {
       <Modal
         isOpen={confirmDelete}
         onClose={() => setConfirmDelete(false)}
-        title="Delete Activity"
+        title={t.activities.deleteActivity}
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
-          Are you sure you want to delete <strong>{activity.name}</strong>? This action cannot be undone.
+          {t.activities.confirmDeleteActivity} <strong>{activity.name}</strong>?
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>
-            Cancel
+            {t.common.cancel}
           </Button>
           <Button variant="danger" onClick={handleDelete}>
-            Delete
+            {t.common.delete}
           </Button>
         </div>
       </Modal>

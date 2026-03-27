@@ -11,6 +11,7 @@ import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
 import { useActivities } from '@/lib/hooks/useActivities'
+import { useI18n } from '@/lib/i18n'
 import { Activity, ActivityCategory } from '@/lib/types'
 import { cn, truncate, ACTIVITY_CATEGORIES } from '@/lib/utils'
 
@@ -51,6 +52,7 @@ const emptyForm: FormData = {
 export default function ActivitiesPage() {
   const router = useRouter()
   const { items: activities, loading, create, update } = useActivities()
+  const { t } = useI18n()
 
   const [search, setSearch] = useState('')
   const [categoryFilter, setCategoryFilter] = useState<ActivityCategory | 'all'>('all')
@@ -135,11 +137,11 @@ export default function ActivitiesPage() {
   return (
     <div>
       <PageHeader
-        title="Extracurricular Activities"
-        description="Track your activities, roles, and involvement"
+        title={t.activities.title}
+        description={t.activities.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            Add Activity
+            {t.activities.addActivity}
           </Button>
         }
       />
@@ -148,8 +150,7 @@ export default function ActivitiesPage() {
       <div className="mb-5 rounded-lg bg-blue-50 border border-blue-200 px-4 py-3 text-sm text-blue-800 flex gap-2.5">
         <Info size={18} className="shrink-0 mt-0.5 text-blue-500" />
         <p>
-          An activity is something you do regularly &mdash; clubs, sports, jobs, hobbies, projects.
-          This is different from an honor or award, which is a recognition or result.
+          {t.activities.infoBoxDetail}
         </p>
       </div>
 
@@ -159,7 +160,7 @@ export default function ActivitiesPage() {
           <SearchInput
             value={search}
             onChange={setSearch}
-            placeholder="Search activities..."
+            placeholder={t.activities.searchPlaceholder}
             className="sm:w-72"
           />
           <div className="flex gap-1.5 overflow-x-auto pb-1">
@@ -172,7 +173,7 @@ export default function ActivitiesPage() {
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               )}
             >
-              All
+              {t.common.all}
             </button>
             {usedCategories.map(([key, label]) => (
               <button
@@ -196,9 +197,9 @@ export default function ActivitiesPage() {
       {activities.length === 0 && (
         <EmptyState
           icon={ActivityIcon}
-          title="No activities yet"
-          description="Start tracking your extracurricular activities. Add clubs, sports, jobs, volunteering, and anything else you're involved in."
-          actionLabel="Add Your First Activity"
+          title={t.activities.noActivities}
+          description={t.activities.noActivitiesDesc}
+          actionLabel={t.activities.firstActivity}
           onAction={openAdd}
         />
       )}
@@ -206,7 +207,7 @@ export default function ActivitiesPage() {
       {/* Filtered empty */}
       {activities.length > 0 && filtered.length === 0 && (
         <div className="text-center py-12 text-sm text-gray-500">
-          No activities match your search or filter.
+          {t.activities.noMatchFilter}
         </div>
       )}
 
@@ -243,7 +244,7 @@ export default function ActivitiesPage() {
               <div className="flex flex-wrap gap-1.5">
                 {activity.grades.length > 0 && (
                   <Badge color="bg-gray-100 text-gray-600">
-                    Grades {activity.grades.join(', ')}
+                    {t.activities.grades} {activity.grades.join(', ')}
                   </Badge>
                 )}
               </div>
@@ -252,7 +253,7 @@ export default function ActivitiesPage() {
                 <div className="flex items-center gap-1.5 text-xs text-gray-500">
                   <Clock size={12} />
                   <span>
-                    {activity.hoursPerWeek} hrs/week &times; {activity.weeksPerYear} weeks/year
+                    {activity.hoursPerWeek} {t.activities.hrsPerWeek} &times; {activity.weeksPerYear} {t.activities.weeksPerYearLabel}
                   </span>
                 </div>
               )}
@@ -271,14 +272,14 @@ export default function ActivitiesPage() {
       <Modal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editingId ? 'Edit Activity' : 'Add Activity'}
+        title={editingId ? t.activities.editActivity : t.activities.addActivity}
         size="lg"
       >
         <div className="space-y-4">
           {/* Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Activity Name <span className="text-red-500">*</span>
+              {t.activities.activityName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -291,7 +292,7 @@ export default function ActivitiesPage() {
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.category}</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value as ActivityCategory })}
@@ -308,7 +309,7 @@ export default function ActivitiesPage() {
           {/* Organization & Role */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Organization</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.organization}</label>
               <input
                 type="text"
                 value={form.organization}
@@ -318,7 +319,7 @@ export default function ActivitiesPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Role / Position</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.role}</label>
               <input
                 type="text"
                 value={form.role}
@@ -332,7 +333,7 @@ export default function ActivitiesPage() {
           {/* Dates & Ongoing */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.startDate}</label>
               <input
                 type="date"
                 value={form.startDate}
@@ -341,7 +342,7 @@ export default function ActivitiesPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.endDate}</label>
               <input
                 type="date"
                 value={form.endDate}
@@ -358,7 +359,7 @@ export default function ActivitiesPage() {
                   onChange={(e) => setForm({ ...form, ongoing: e.target.checked, endDate: e.target.checked ? '' : form.endDate })}
                   className="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
                 />
-                <span className="text-sm text-gray-700">Ongoing</span>
+                <span className="text-sm text-gray-700">{t.activities.ongoing}</span>
               </label>
             </div>
           </div>
@@ -366,7 +367,7 @@ export default function ActivitiesPage() {
           {/* Grades */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Grades Participated
+              {t.activities.gradesParticipated}
             </label>
             <div className="flex gap-2">
               {GRADE_OPTIONS.map((grade) => (
@@ -390,7 +391,7 @@ export default function ActivitiesPage() {
           {/* Hours */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Hours per Week</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.hoursPerWeek}</label>
               <input
                 type="number"
                 min={0}
@@ -401,7 +402,7 @@ export default function ActivitiesPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Weeks per Year</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.weeksPerYear}</label>
               <input
                 type="number"
                 min={0}
@@ -416,7 +417,7 @@ export default function ActivitiesPage() {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -425,13 +426,13 @@ export default function ActivitiesPage() {
               placeholder="Describe your involvement and contributions..."
             />
             <p className="mt-1 text-xs text-gray-400">
-              Common App allows 150 characters. Current: {form.description.length} characters.
+              {t.activities.commonAppAllows} {form.description.length} {t.activities.charCount}.
             </p>
           </div>
 
           {/* Results */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Results / Impact</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.results}</label>
             <textarea
               value={form.results}
               onChange={(e) => setForm({ ...form, results: e.target.value })}
@@ -443,7 +444,7 @@ export default function ActivitiesPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -456,23 +457,23 @@ export default function ActivitiesPage() {
           {/* Tips */}
           <div className="rounded-lg bg-amber-50 border border-amber-200 px-4 py-3">
             <h4 className="text-sm font-semibold text-amber-800 mb-2">
-              How to write a strong activity description
+              {t.activities.howToWrite}
             </h4>
             <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
-              <li>Start with an action verb (Led, Founded, Organized, Developed)</li>
-              <li>Be specific about what you did, not just the group name</li>
-              <li>Include numbers when possible (members, hours, dollars raised)</li>
-              <li>Focus on your unique contribution and leadership role</li>
+              <li>{t.activities.tipActionVerbs}</li>
+              <li>{t.activities.tipBeSpecific}</li>
+              <li>{t.activities.tipIncludeNumbers}</li>
+              <li>{t.activities.tipFocusContribution}</li>
             </ul>
           </div>
 
           {/* Actions */}
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setModalOpen(false)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.name.trim()}>
-              {editingId ? 'Save Changes' : 'Add Activity'}
+              {editingId ? t.activities.saveChanges : t.activities.addActivity}
             </Button>
           </div>
         </div>

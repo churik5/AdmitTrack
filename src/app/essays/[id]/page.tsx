@@ -22,6 +22,7 @@ import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import { useEssays } from '@/lib/hooks/useEssays'
 import { useUniversities } from '@/lib/hooks/useUniversities'
+import { useI18n } from '@/lib/i18n'
 import { Essay, EssayType, EssayStatus, EssayVersion } from '@/lib/types'
 import {
   cn,
@@ -104,6 +105,7 @@ interface EditFormData {
 export default function EssayDetailPage() {
   const params = useParams()
   const router = useRouter()
+  const { t } = useI18n()
   const id = params.id as string
 
   const { getById, update, remove } = useEssays()
@@ -220,7 +222,7 @@ export default function EssayDetailPage() {
         <AlertCircle size={32} className="mb-2" />
         <p>Essay not found.</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/essays')}>
-          Back to Essays
+          {t.common.back}
         </Button>
       </div>
     )
@@ -238,14 +240,14 @@ export default function EssayDetailPage() {
         backHref="/essays"
         action={
           <div className="flex items-center gap-2">
-            <Badge variant={essay.status}>{statusLabel(essay.status)}</Badge>
+            <Badge variant={essay.status}>{t.essays.statuses[essay.status]}</Badge>
             <Button
               variant="secondary"
               size="sm"
               icon={<Pencil size={14} />}
               onClick={() => setEditModalOpen(true)}
             >
-              Edit Details
+              {t.essays.editDetails}
             </Button>
             <Button
               variant="danger"
@@ -253,7 +255,7 @@ export default function EssayDetailPage() {
               icon={<Trash2 size={14} />}
               onClick={() => setConfirmDelete(true)}
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         }
@@ -265,7 +267,7 @@ export default function EssayDetailPage() {
           {/* Prompt */}
           {essay.prompt && (
             <Card className="space-y-2">
-              <h3 className="text-sm font-semibold text-gray-700">Prompt</h3>
+              <h3 className="text-sm font-semibold text-gray-700">{t.essays.prompt}</h3>
               <p className="text-sm text-gray-600 whitespace-pre-wrap">{essay.prompt}</p>
             </Card>
           )}
@@ -289,11 +291,11 @@ export default function EssayDetailPage() {
                     overLimit ? 'text-red-600' : 'text-gray-500'
                   )}
                 >
-                  {wc} {essay.wordLimit > 0 ? `/ ${essay.wordLimit}` : ''} words
+                  {wc} {essay.wordLimit > 0 ? `/ ${essay.wordLimit}` : ''} {t.essays.words}
                 </span>
                 {overLimit && (
                   <span className="text-xs text-red-500">
-                    ({wc - essay.wordLimit} over limit)
+                    ({wc - essay.wordLimit} {t.essays.overLimit})
                   </span>
                 )}
               </div>
@@ -301,19 +303,19 @@ export default function EssayDetailPage() {
                 {saveStatus === 'saved' && (
                   <>
                     <Check size={12} className="text-green-500" />
-                    <span>Saved</span>
+                    <span>{t.essays.saved}</span>
                   </>
                 )}
                 {saveStatus === 'saving' && (
                   <>
                     <div className="animate-spin rounded-full h-3 w-3 border-b border-gray-400" />
-                    <span>Saving...</span>
+                    <span>{t.essays.saving}</span>
                   </>
                 )}
                 {saveStatus === 'unsaved' && (
                   <>
                     <Clock size={12} />
-                    <span>Unsaved changes</span>
+                    <span>{t.essays.unsavedChanges}</span>
                   </>
                 )}
               </div>
@@ -335,7 +337,7 @@ export default function EssayDetailPage() {
               onClick={handleSaveVersion}
               disabled={!content.trim()}
             >
-              Save Version
+              {t.essays.saveVersion}
             </Button>
           </div>
         </div>
@@ -344,16 +346,16 @@ export default function EssayDetailPage() {
         <div className="space-y-5">
           {/* Essay details */}
           <Card className="space-y-3">
-            <h3 className="font-semibold text-gray-900 text-sm">Essay Details</h3>
+            <h3 className="font-semibold text-gray-900 text-sm">{t.essays.editDetails}</h3>
             <div className="space-y-2.5 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-500">Type</span>
+                <span className="text-gray-500">{t.common.type}</span>
                 <Badge color="bg-indigo-100 text-indigo-700">
-                  {ESSAY_TYPES[essay.type] || essay.type}
+                  {t.essays.types[essay.type] || essay.type}
                 </Badge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-500">Status</span>
+                <span className="text-gray-500">{t.common.status}</span>
                 <select
                   value={essay.status}
                   onChange={(e) => handleStatusChange(e.target.value as EssayStatus)}
@@ -361,14 +363,14 @@ export default function EssayDetailPage() {
                 >
                   {ESSAY_STATUSES.map((s) => (
                     <option key={s} value={s}>
-                      {statusLabel(s)}
+                      {t.essays.statuses[s]}
                     </option>
                   ))}
                 </select>
               </div>
               {essay.wordLimit > 0 && (
                 <div className="flex justify-between">
-                  <span className="text-gray-500">Word Limit</span>
+                  <span className="text-gray-500">{t.essays.wordLimit}</span>
                   <span className="font-medium text-gray-700">{essay.wordLimit}</span>
                 </div>
               )}
@@ -378,12 +380,12 @@ export default function EssayDetailPage() {
           {/* Linked Universities */}
           <Card className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="font-semibold text-gray-900 text-sm">Universities</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{t.essays.linkedUniversities}</h3>
               <button
                 onClick={() => setLinkModalOpen(true)}
                 className="text-xs text-brand-600 hover:text-brand-700 font-medium"
               >
-                + Link
+                + {t.common.link}
               </button>
             </div>
             {linkedUnis.length > 0 ? (
@@ -405,7 +407,7 @@ export default function EssayDetailPage() {
               </div>
             ) : (
               <p className="text-xs text-gray-400 italic">
-                No universities linked yet.
+                {t.essays.noLinkedUnis}
               </p>
             )}
           </Card>
@@ -414,7 +416,7 @@ export default function EssayDetailPage() {
           <Card className="space-y-3">
             <div className="flex items-center gap-2">
               <History size={14} className="text-gray-500" />
-              <h3 className="font-semibold text-gray-900 text-sm">Version History</h3>
+              <h3 className="font-semibold text-gray-900 text-sm">{t.essays.versionHistory}</h3>
             </div>
             {essay.versions.length > 0 ? (
               <div className="space-y-2 max-h-60 overflow-y-auto">
@@ -426,7 +428,7 @@ export default function EssayDetailPage() {
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium text-gray-700">{v.label}</span>
-                      <span className="text-xs text-gray-400">{v.wordCount} words</span>
+                      <span className="text-xs text-gray-400">{v.wordCount} {t.essays.words}</span>
                     </div>
                     <p className="text-xs text-gray-400 mt-0.5">{formatDate(v.savedAt)}</p>
                   </button>
@@ -434,14 +436,14 @@ export default function EssayDetailPage() {
               </div>
             ) : (
               <p className="text-xs text-gray-400 italic">
-                No versions saved yet. Click &ldquo;Save Version&rdquo; to create a snapshot.
+                {t.essays.noVersions}
               </p>
             )}
           </Card>
 
           {/* Improvement notes */}
           <Card className="space-y-3">
-            <h3 className="font-semibold text-gray-900 text-sm">Improvement Notes</h3>
+            <h3 className="font-semibold text-gray-900 text-sm">{t.essays.improvementNotes}</h3>
             <textarea
               value={improvementNotes}
               onChange={(e) => setImprovementNotes(e.target.value)}
@@ -455,7 +457,7 @@ export default function EssayDetailPage() {
               onClick={handleSaveNotes}
               className="w-full"
             >
-              Save Notes
+              {t.essays.saveNotes}
             </Button>
           </Card>
 
@@ -464,7 +466,7 @@ export default function EssayDetailPage() {
             <div className="flex items-center gap-2">
               <Lightbulb size={14} className="text-amber-500" />
               <h3 className="font-semibold text-gray-900 text-sm">
-                Tips: {ESSAY_TYPES[essay.type] || 'Essay'}
+                Tips: {t.essays.types[essay.type] || essay.type}
               </h3>
             </div>
             <ul className="text-xs text-gray-600 space-y-1.5">
@@ -489,7 +491,7 @@ export default function EssayDetailPage() {
         {viewingVersion && (
           <div className="space-y-3">
             <div className="flex items-center gap-3 text-sm text-gray-500">
-              <span>{viewingVersion.wordCount} words</span>
+              <span>{viewingVersion.wordCount} {t.essays.words}</span>
               <span>&middot;</span>
               <span>{formatDate(viewingVersion.savedAt)}</span>
             </div>
@@ -498,7 +500,7 @@ export default function EssayDetailPage() {
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <Button variant="secondary" onClick={() => setViewingVersion(null)}>
-                Close
+                {t.common.close}
               </Button>
               <Button
                 onClick={() => {
@@ -507,7 +509,7 @@ export default function EssayDetailPage() {
                   setViewingVersion(null)
                 }}
               >
-                Restore This Version
+                {t.essays.restoreVersion}
               </Button>
             </div>
           </div>
@@ -518,7 +520,7 @@ export default function EssayDetailPage() {
       <Modal
         isOpen={linkModalOpen}
         onClose={() => setLinkModalOpen(false)}
-        title="Link Universities"
+        title={t.essays.linkedUniversities}
         size="md"
       >
         <div className="space-y-2 max-h-80 overflow-y-auto">
@@ -543,7 +545,7 @@ export default function EssayDetailPage() {
             })
           ) : (
             <p className="text-sm text-gray-500 text-center py-4">
-              No universities added yet. Add universities first to link them here.
+              {t.essays.noLinkedUnis}
             </p>
           )}
         </div>

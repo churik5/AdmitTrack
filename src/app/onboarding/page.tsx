@@ -3,24 +3,26 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useProfile } from '@/lib/hooks/useProfile'
+import { useI18n } from '@/lib/i18n'
 import Button from '@/components/ui/Button'
 import { GraduationCap, ArrowRight, ArrowLeft, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const GRADUATION_YEARS = [2025, 2026, 2027, 2028, 2029, 2030]
 
-const FOCUS_OPTIONS = [
-  { id: 'universities', label: 'Research & track universities', emoji: '🏛' },
-  { id: 'activities', label: 'Organize extracurricular activities', emoji: '⚡' },
-  { id: 'essays', label: 'Draft and refine essays', emoji: '✍️' },
-  { id: 'deadlines', label: 'Track application deadlines', emoji: '📅' },
-  { id: 'documents', label: 'Store important documents', emoji: '📁' },
-  { id: 'honors', label: 'Record honors & awards', emoji: '🏆' },
-]
-
 export default function OnboardingPage() {
   const router = useRouter()
   const { updateProfile } = useProfile()
+  const { t } = useI18n()
+
+  const FOCUS_OPTIONS = [
+    { id: 'universities', label: t.onboarding.focusOptions.universities, emoji: '🏛' },
+    { id: 'activities', label: t.onboarding.focusOptions.activities, emoji: '⚡' },
+    { id: 'essays', label: t.onboarding.focusOptions.essays, emoji: '✍️' },
+    { id: 'deadlines', label: t.onboarding.focusOptions.deadlines, emoji: '📅' },
+    { id: 'documents', label: t.onboarding.focusOptions.documents, emoji: '📁' },
+    { id: 'honors', label: t.onboarding.focusOptions.honors, emoji: '🏆' },
+  ]
   const [step, setStep] = useState(0)
 
   const [name, setName] = useState('')

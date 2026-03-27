@@ -52,34 +52,15 @@ import {
   US_STATES,
 } from '@/lib/utils'
 import { getLinksFor, createLink, removeLink } from '@/lib/storage'
+import { useI18n } from '@/lib/i18n'
 
-const DETAIL_TABS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'deadlines', label: 'Deadlines' },
-  { id: 'requirements', label: 'Requirements' },
-  { id: 'essays', label: 'Essays' },
-  { id: 'documents', label: 'Documents' },
-  { id: 'notes', label: 'Notes' },
+const DETAIL_TAB_KEYS = ['overview', 'deadlines', 'requirements', 'essays', 'documents', 'notes'] as const
+
+const STATUS_OPTION_KEYS: UniversityStatus[] = [
+  'researching', 'planning', 'in_progress', 'submitted', 'accepted', 'rejected', 'waitlisted', 'deferred', 'withdrawn',
 ]
 
-const STATUS_OPTIONS: { value: UniversityStatus; label: string }[] = [
-  { value: 'researching', label: 'Researching' },
-  { value: 'planning', label: 'Planning' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'submitted', label: 'Submitted' },
-  { value: 'accepted', label: 'Accepted' },
-  { value: 'rejected', label: 'Rejected' },
-  { value: 'waitlisted', label: 'Waitlisted' },
-  { value: 'deferred', label: 'Deferred' },
-  { value: 'withdrawn', label: 'Withdrawn' },
-]
-
-const PRIORITY_OPTIONS: { value: DeadlinePriority; label: string }[] = [
-  { value: 'critical', label: 'Critical' },
-  { value: 'high', label: 'High' },
-  { value: 'medium', label: 'Medium' },
-  { value: 'low', label: 'Low' },
-]
+const PRIORITY_OPTION_KEYS: DeadlinePriority[] = ['critical', 'high', 'medium', 'low']
 
 interface DeadlineForm {
   title: string
@@ -102,6 +83,7 @@ const emptyDeadlineForm: DeadlineForm = {
 export default function UniversityDetailPage() {
   const params = useParams()
   const router = useRouter()
+  const { t } = useI18n()
   const id = params.id as string
 
   const { getById, update: updateUniversity, remove: removeUniversity } = useUniversities()
@@ -336,9 +318,9 @@ export default function UniversityDetailPage() {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-gray-500">
         <AlertCircle size={32} className="mb-2" />
-        <p>University not found.</p>
+        <p>{t.common.noResults}</p>
         <Button variant="ghost" className="mt-4" onClick={() => router.push('/universities')}>
-          Back to Universities
+          {t.common.back}
         </Button>
       </div>
     )
@@ -353,7 +335,7 @@ export default function UniversityDetailPage() {
         action={
           <div className="flex items-center gap-2">
             <Badge variant={university.status} className="text-sm px-3 py-1">
-              {statusLabel(university.status)}
+              {t.universities.statuses[university.status]}
             </Badge>
             <Button
               variant="secondary"
@@ -361,7 +343,7 @@ export default function UniversityDetailPage() {
               icon={<Pencil size={14} />}
               onClick={() => setEditModalOpen(true)}
             >
-              Edit
+              {t.common.edit}
             </Button>
             <Button
               variant="danger"
@@ -369,13 +351,13 @@ export default function UniversityDetailPage() {
               icon={<Trash2 size={14} />}
               onClick={() => setConfirmDelete(true)}
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         }
       />
 
-      <Tabs tabs={DETAIL_TABS} activeTab={activeTab} onTabChange={setActiveTab} />
+      <Tabs tabs={DETAIL_TAB_KEYS.map((key) => ({ id: key, label: t.universities.tabs[key] }))} activeTab={activeTab} onTabChange={setActiveTab} />
 
       <div className="mt-6">
         {/* ==================== OVERVIEW TAB ==================== */}
@@ -383,24 +365,24 @@ export default function UniversityDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Info Card */}
             <Card className="lg:col-span-2 space-y-4">
-              <h3 className="font-semibold text-gray-900">University Info</h3>
+              <h3 className="font-semibold text-gray-900">{t.universities.tabs.overview}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-gray-500">Name</span>
+                  <span className="text-gray-500">{t.common.name}</span>
                   <p className="font-medium text-gray-900">{university.name}</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">State</span>
-                  <p className="font-medium text-gray-900">{university.state || 'Not set'}</p>
+                  <span className="text-gray-500">{t.universities.state}</span>
+                  <p className="font-medium text-gray-900">{university.state || '-'}</p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Application Type</span>
+                  <span className="text-gray-500">{t.universities.applicationType}</span>
                   <p className="font-medium text-gray-900">
-                    {APPLICATION_TYPES[university.applicationType] || university.applicationType}
+                    {t.universities.appTypes[university.applicationType] || university.applicationType}
                   </p>
                 </div>
                 <div>
-                  <span className="text-gray-500">Website</span>
+                  <span className="text-gray-500">{t.universities.website}</span>
                   {university.website ? (
                     <a
                       href={university.website}
@@ -408,10 +390,10 @@ export default function UniversityDetailPage() {
                       rel="noopener noreferrer"
                       className="font-medium text-brand-600 hover:underline flex items-center gap-1"
                     >
-                      Visit <ExternalLink size={12} />
+                      {t.universities.website} <ExternalLink size={12} />
                     </a>
                   ) : (
-                    <p className="text-gray-400">Not set</p>
+                    <p className="text-gray-400">-</p>
                   )}
                 </div>
               </div>
@@ -419,16 +401,16 @@ export default function UniversityDetailPage() {
               {/* Status update */}
               <div className="pt-4 border-t border-gray-100">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Update Status
+                  {t.common.status}
                 </label>
                 <select
                   value={university.status}
                   onChange={(e) => handleStatusChange(e.target.value as UniversityStatus)}
                   className="px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
                 >
-                  {STATUS_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
+                  {STATUS_OPTION_KEYS.map((key) => (
+                    <option key={key} value={key}>
+                      {t.universities.statuses[key]}
                     </option>
                   ))}
                 </select>
@@ -440,14 +422,14 @@ export default function UniversityDetailPage() {
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <Calendar size={18} className="text-blue-500" />
-                  <span className="text-sm font-medium text-gray-700">Deadlines</span>
+                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.deadlines}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">{uniDeadlines.length}</p>
               </Card>
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <CheckSquare size={18} className="text-green-500" />
-                  <span className="text-sm font-medium text-gray-700">Requirements</span>
+                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.requirements}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">
                   {reqCompleted}/{reqTotal}
@@ -456,14 +438,14 @@ export default function UniversityDetailPage() {
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <FileText size={18} className="text-purple-500" />
-                  <span className="text-sm font-medium text-gray-700">Linked Essays</span>
+                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.essays}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">{linkedEssays.length}</p>
               </Card>
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <FolderOpen size={18} className="text-orange-500" />
-                  <span className="text-sm font-medium text-gray-700">Linked Documents</span>
+                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.documents}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">{linkedDocuments.length}</p>
               </Card>
@@ -475,9 +457,9 @@ export default function UniversityDetailPage() {
         {activeTab === 'deadlines' && (
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-gray-900">Deadlines</h3>
+              <h3 className="font-semibold text-gray-900">{t.universities.tabs.deadlines}</h3>
               <Button size="sm" icon={<Plus size={16} />} onClick={openAddDeadline}>
-                Add Deadline
+                {t.deadlines.addDeadline}
               </Button>
             </div>
 

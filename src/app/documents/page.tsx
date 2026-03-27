@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { FolderOpen, Plus, Info, Pencil, Trash2 } from 'lucide-react'
+import { useI18n } from '@/lib/i18n'
 import PageHeader from '@/components/layout/PageHeader'
 import SearchInput from '@/components/ui/SearchInput'
 import Card from '@/components/ui/Card'
@@ -59,6 +60,7 @@ const CATEGORY_COLORS: Record<DocumentCategory, string> = {
 }
 
 export default function DocumentsPage() {
+  const { t } = useI18n()
   const { items: documents, loading, create, update, remove } = useDocuments()
   const { items: universities } = useUniversities()
 
@@ -161,11 +163,11 @@ export default function DocumentsPage() {
   return (
     <div>
       <PageHeader
-        title="Documents"
-        description="Track and organize your application documents and files"
+        title={t.documents.title}
+        description={t.documents.subtitle}
         action={
           <Button onClick={openAdd} icon={<Plus size={18} />}>
-            Add Document
+            {t.documents.addDocument}
           </Button>
         }
       />
@@ -193,7 +195,7 @@ export default function DocumentsPage() {
             <SearchInput
               value={search}
               onChange={setSearch}
-              placeholder="Search documents..."
+              placeholder={`${t.common.search}...`}
               className="sm:w-72"
             />
           </div>
@@ -221,7 +223,7 @@ export default function DocumentsPage() {
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   )}
                 >
-                  {DOCUMENT_CATEGORIES[c]} ({categoryCounts[c]})
+                  {t.documents.categories[c]} ({categoryCounts[c]})
                 </button>
               ))}
             </div>
@@ -233,9 +235,9 @@ export default function DocumentsPage() {
       {documents.length === 0 && (
         <EmptyState
           icon={FolderOpen}
-          title="No documents yet"
-          description="Start tracking your application documents. Keep a record of transcripts, recommendation letters, test scores, certificates, and other important files."
-          actionLabel="Add Your First Document"
+          title={t.documents.noDocuments}
+          description={t.documents.noDocumentsDesc}
+          actionLabel={t.documents.firstDocument}
           onAction={openAdd}
         />
       )}
@@ -280,7 +282,7 @@ export default function DocumentsPage() {
 
                 <div className="flex flex-wrap gap-1.5">
                   <Badge color={CATEGORY_COLORS[doc.category]}>
-                    {DOCUMENT_CATEGORIES[doc.category] || doc.category}
+                    {t.documents.categories[doc.category] || doc.category}
                   </Badge>
                   {doc.tags.slice(0, 2).map((tag) => (
                     <Badge key={tag} color="bg-gray-100 text-gray-600">
@@ -320,13 +322,13 @@ export default function DocumentsPage() {
           setModalOpen(false)
           setEditingId(null)
         }}
-        title={editingId ? 'Edit Document' : 'Add Document'}
+        title={editingId ? `${t.common.edit} ${t.documents.title}` : t.documents.addDocument}
         size="lg"
       >
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Document Name <span className="text-red-500">*</span>
+              {t.documents.fileName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -338,7 +340,7 @@ export default function DocumentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.category}</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value as DocumentCategory })}
@@ -346,7 +348,7 @@ export default function DocumentsPage() {
             >
               {ALL_CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>
-                  {DOCUMENT_CATEGORIES[cat]}
+                  {t.documents.categories[cat]}
                 </option>
               ))}
             </select>
@@ -354,7 +356,7 @@ export default function DocumentsPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Related To (University)
+              {t.documents.relatedTo}
             </label>
             <select
               value={form.relatedTo}
@@ -371,7 +373,7 @@ export default function DocumentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Comment</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.documents.comment}</label>
             <textarea
               value={form.comment}
               onChange={(e) => setForm({ ...form, comment: e.target.value })}
@@ -382,7 +384,7 @@ export default function DocumentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.tags}</label>
             <input
               type="text"
               value={form.tags}
@@ -401,10 +403,10 @@ export default function DocumentsPage() {
                 setEditingId(null)
               }}
             >
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button onClick={handleSave} disabled={!form.name.trim()}>
-              {editingId ? 'Save Changes' : 'Add Document'}
+              {editingId ? t.common.save : t.documents.addDocument}
             </Button>
           </div>
         </div>
@@ -414,21 +416,21 @@ export default function DocumentsPage() {
       <Modal
         isOpen={!!deleteConfirmId}
         onClose={() => setDeleteConfirmId(null)}
-        title="Delete Document"
+        title={`${t.common.delete} ${t.documents.title}`}
       >
         <div className="space-y-4">
           <p className="text-sm text-gray-600">
-            Are you sure you want to delete this document record? This action cannot be undone.
+            {t.common.confirmDelete}
           </p>
           <div className="flex justify-end gap-2 pt-2">
             <Button variant="secondary" onClick={() => setDeleteConfirmId(null)}>
-              Cancel
+              {t.common.cancel}
             </Button>
             <Button
               onClick={() => deleteConfirmId && handleDelete(deleteConfirmId)}
               className="bg-red-600 hover:bg-red-700 text-white"
             >
-              Delete
+              {t.common.delete}
             </Button>
           </div>
         </div>
