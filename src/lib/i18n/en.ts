@@ -449,6 +449,14 @@ export const en: Translations = {
     added: 'Added',
     none: 'None',
     noMatchFilter: 'No documents match your search or filters.',
+    uploadFile: 'Upload File',
+    chooseFile: 'Choose file',
+    dragOrClick: 'Drag & drop a file here or click to browse',
+    maxFileSize: 'Max file size: 10 MB',
+    fileTooLarge: 'File is too large. Maximum size is 10 MB.',
+    fileAttached: 'File attached',
+    download: 'Download',
+    removeFile: 'Remove file',
   },
 
   // Research

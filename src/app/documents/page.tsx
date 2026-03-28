@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { FolderOpen, Plus, Info, Pencil, Trash2 } from 'lucide-react'
+import { useState, useMemo, useRef, useCallback } from 'react'
+import { FolderOpen, Plus, Info, Pencil, Trash2, Upload, Download, File, X, Paperclip } from 'lucide-react'
 import { useI18n } from '@/lib/i18n'
 import PageHeader from '@/components/layout/PageHeader'
 import SearchInput from '@/components/ui/SearchInput'
@@ -14,6 +14,15 @@ import { useDocuments } from '@/lib/hooks/useDocuments'
 import { useUniversities } from '@/lib/hooks/useUniversities'
 import { DocumentCategory } from '@/lib/types'
 import { cn, formatDate, DOCUMENT_CATEGORIES } from '@/lib/utils'
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10 MB
+
+function formatFileSize(bytes: number): string {
+  if (bytes === 0) return '0 B'
+  const units = ['B', 'KB', 'MB', 'GB']
+  const i = Math.floor(Math.log(bytes) / Math.log(1024))
+  return `${(bytes / Math.pow(1024, i)).toFixed(i > 0 ? 1 : 0)} ${units[i]}`
+}
 
 interface FormData {
   name: string
@@ -70,6 +79,10 @@ export default function DocumentsPage() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>(emptyForm)
+  const [selectedFile, setSelectedFile] = useState<{ name: string; size: number; mimeType: string; data: string } | null>(null)
+  const [fileError, setFileError] = useState<string | null>(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const filtered = useMemo(() => {
     return documents.filter((d) => {
@@ -95,9 +108,57 @@ export default function DocumentsPage() {
     return ALL_CATEGORIES.filter((c) => categoryCounts[c])
   }, [categoryCounts])
 
+  const processFile = useCallback((file: globalThis.File) => {
+    setFileError(null)
+    if (file.size > MAX_FILE_SIZE) {
+      setFileError(t.documents.fileTooLarge)
+      return
+    }
+    const reader = new FileReader()
+    reader.onload = () => {
+      const base64 = (reader.result as string).split(',')[1]
+      setSelectedFile({
+        name: file.name,
+        size: file.size,
+        mimeType: file.type || 'application/octet-stream',
+        data: base64,
+      })
+      // Auto-fill document name if empty
+      if (!form.name.trim()) {
+        setForm(prev => ({ ...prev, name: file.name.replace(/\.[^/.]+$/, '') }))
+      }
+    }
+    reader.readAsDataURL(file)
+  }, [form.name, t.documents.fileTooLarge])
+
+  function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (file) processFile(file)
+    if (fileInputRef.current) fileInputRef.current.value = ''
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault()
+    setIsDragging(false)
+    const file = e.dataTransfer.files?.[0]
+    if (file) processFile(file)
+  }
+
+  function downloadFile(doc: typeof documents[0]) {
+    if (!doc.fileData) return
+    const link = document.createElement('a')
+    link.href = `data:${doc.mimeType};base64,${doc.fileData}`
+    link.download = doc.fileName || doc.name
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   function openAdd() {
     setEditingId(null)
     setForm(emptyForm)
+    setSelectedFile(null)
+    setFileError(null)
     setModalOpen(true)
   }
 
@@ -112,6 +173,8 @@ export default function DocumentsPage() {
       tags: doc.tags.join(', '),
       relatedTo: doc.relatedTo,
     })
+    setSelectedFile(doc.fileData ? { name: doc.fileName, size: doc.fileSize, mimeType: doc.mimeType, data: doc.fileData } : null)
+    setFileError(null)
     setModalOpen(true)
   }
 
@@ -122,6 +185,20 @@ export default function DocumentsPage() {
       .map((t) => t.trim())
       .filter(Boolean)
 
+    const fileFields = selectedFile
+      ? {
+          fileName: selectedFile.name,
+          fileSize: selectedFile.size,
+          mimeType: selectedFile.mimeType,
+          fileData: selectedFile.data,
+        }
+      : {
+          fileName: '',
+          fileSize: 0,
+          mimeType: '',
+          fileData: undefined,
+        }
+
     if (editingId) {
       await update(editingId, {
         name: form.name,
@@ -129,22 +206,22 @@ export default function DocumentsPage() {
         comment: form.comment,
         tags,
         relatedTo: form.relatedTo,
+        ...fileFields,
       })
     } else {
       await create({
         name: form.name,
         category: form.category,
-        fileName: '',
-        fileSize: 0,
-        mimeType: '',
         dateUploaded: new Date().toISOString(),
         tags,
         relatedTo: form.relatedTo,
         comment: form.comment,
+        ...fileFields,
       })
     }
     setModalOpen(false)
     setEditingId(null)
+    setSelectedFile(null)
   }
 
   async function handleDelete(id: string) {
@@ -295,6 +372,26 @@ export default function DocumentsPage() {
                   )}
                 </div>
 
+                {/* File indicator */}
+                {doc.fileName && doc.fileData && (
+                  <div className="flex items-center justify-between gap-2 px-3 py-2 bg-gray-50 rounded-lg">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <Paperclip size={14} className="text-gray-400 shrink-0" />
+                      <span className="text-xs text-gray-600 truncate">{doc.fileName}</span>
+                      {doc.fileSize > 0 && (
+                        <span className="text-xs text-gray-400 shrink-0">({formatFileSize(doc.fileSize)})</span>
+                      )}
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); downloadFile(doc) }}
+                      className="p-1 text-brand-600 hover:text-brand-700 transition-colors shrink-0"
+                      title={t.documents.download}
+                    >
+                      <Download size={14} />
+                    </button>
+                  </div>
+                )}
+
                 {doc.comment && (
                   <p className="text-sm text-gray-600 line-clamp-2">{doc.comment}</p>
                 )}
@@ -325,6 +422,58 @@ export default function DocumentsPage() {
         size="lg"
       >
         <div className="space-y-4">
+          {/* File Upload Zone */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              {t.documents.uploadFile}
+            </label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+            {selectedFile ? (
+              <div className="flex items-center gap-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <File size={18} className="text-green-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{selectedFile.name}</p>
+                  <p className="text-xs text-gray-500">{formatFileSize(selectedFile.size)}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedFile(null)}
+                  className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                  title={t.documents.removeFile}
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            ) : (
+              <div
+                onDragOver={(e) => { e.preventDefault(); setIsDragging(true) }}
+                onDragLeave={() => setIsDragging(false)}
+                onDrop={handleDrop}
+                onClick={() => fileInputRef.current?.click()}
+                className={cn(
+                  'flex flex-col items-center justify-center gap-2 p-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors',
+                  isDragging
+                    ? 'border-brand-400 bg-brand-50'
+                    : 'border-gray-300 hover:border-brand-400 hover:bg-gray-50'
+                )}
+              >
+                <Upload size={24} className={isDragging ? 'text-brand-500' : 'text-gray-400'} />
+                <p className="text-sm text-gray-500">{t.documents.dragOrClick}</p>
+                <p className="text-xs text-gray-400">{t.documents.maxFileSize}</p>
+              </div>
+            )}
+            {fileError && (
+              <p className="text-xs text-red-500 mt-1">{fileError}</p>
+            )}
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               {t.documents.fileName} <span className="text-red-500">*</span>

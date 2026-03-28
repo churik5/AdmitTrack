@@ -448,6 +448,14 @@ export const ru: Translations = {
     added: 'Добавлено',
     none: 'Нет',
     noMatchFilter: 'Нет документов по вашему запросу.',
+    uploadFile: 'Загрузить файл',
+    chooseFile: 'Выбрать файл',
+    dragOrClick: 'Перетащите файл сюда или нажмите для выбора',
+    maxFileSize: 'Макс. размер файла: 10 МБ',
+    fileTooLarge: 'Файл слишком большой. Максимальный размер — 10 МБ.',
+    fileAttached: 'Файл прикреплён',
+    download: 'Скачать',
+    removeFile: 'Удалить файл',
   },
 
   // Research

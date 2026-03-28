@@ -389,6 +389,14 @@ export interface Translations {
     added: string
     none: string
     noMatchFilter: string
+    uploadFile: string
+    chooseFile: string
+    dragOrClick: string
+    maxFileSize: string
+    fileTooLarge: string
+    fileAttached: string
+    download: string
+    removeFile: string
   }
 
   // Research
