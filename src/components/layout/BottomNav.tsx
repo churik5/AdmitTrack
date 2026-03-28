@@ -94,9 +94,9 @@ export default function BottomNav() {
               ))}
             </div>
             <div className="px-5 py-3 border-t border-surface-100 flex justify-center gap-3 text-[11px] text-surface-300">
-              <Link href="/privacy" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Privacy</Link>
-              <Link href="/terms" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Terms</Link>
-              <Link href="/support" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Support</Link>
+              <Link href="/privacy" target="_blank" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Privacy</Link>
+              <Link href="/terms" target="_blank" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Terms</Link>
+              <Link href="/support" target="_blank" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Support</Link>
             </div>
           </div>
         </div>

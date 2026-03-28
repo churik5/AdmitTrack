@@ -189,11 +189,11 @@ export default function SignUpPage() {
 
         <p className="text-center text-xs text-surface-400 mt-4">
           {locale === 'ru' ? 'Регистрируясь, вы соглашаетесь с' : 'By signing up, you agree to our'}{' '}
-          <Link href="/terms" className="underline hover:text-surface-600">
+          <Link href="/terms" target="_blank" className="underline hover:text-surface-600">
             {locale === 'ru' ? 'Условиями использования' : 'Terms of Use'}
           </Link>
           {' '}{locale === 'ru' ? 'и' : 'and'}{' '}
-          <Link href="/privacy" className="underline hover:text-surface-600">
+          <Link href="/privacy" target="_blank" className="underline hover:text-surface-600">
             {locale === 'ru' ? 'Политикой конфиденциальности' : 'Privacy Policy'}
           </Link>
         </p>
