@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             <p>By using the Service, you acknowledge that your information will be handled as described in this Privacy Policy.</p>
 
             <h2>1. Who operates the Service</h2>
-            <p>Service name: AdmitTrack<br />Operator: Churilov Aleksandr Alekseevich<br />Contact email: <a href="mailto:aleksandrcurilov933@gmail.com">aleksandrcurilov933@gmail.com</a></p>
+            <p>Service name: AdmitTrack<br />Operator: Churilov Aleksandr Alekseevich<br />Contact email: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
 
             <h2>2. Scope of this Privacy Policy</h2>
             <p>This Privacy Policy applies to information processed through:</p>
@@ -239,7 +239,7 @@ export default function PrivacyPage() {
               <li>request a copy of certain information;</li>
               <li>withdraw consent where processing is based on consent.</li>
             </ul>
-            <p>To exercise privacy-related requests, contact: <a href="mailto:aleksandrcurilov933@gmail.com">aleksandrcurilov933@gmail.com</a></p>
+            <p>To exercise privacy-related requests, contact: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
             <p>We may need to verify your identity before fulfilling certain requests.</p>
 
             <h2>14. Third-party links and content</h2>
@@ -251,7 +251,7 @@ export default function PrivacyPage() {
 
             <h2>16. Contact</h2>
             <p>If you have questions about this Privacy Policy or our privacy practices, contact:</p>
-            <p>Churilov Aleksandr Alekseevich<br />Email: <a href="mailto:aleksandrcurilov933@gmail.com">aleksandrcurilov933@gmail.com</a></p>
+            <p>Churilov Aleksandr Alekseevich<br />Email: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
           </div>
         </div>
 

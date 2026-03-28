@@ -25,7 +25,7 @@ export default function SupportPage() {
             <p>If you need help with your account, experience a bug, or have a question about the Service, contact:</p>
 
             <a
-              href="mailto:aleksandrcurilov933@gmail.com"
+              href="mailto:appbuilddesk@gmail.com"
               className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-brand-300 hover:bg-brand-50/30 transition-colors no-underline my-6"
             >
               <div className="p-2 bg-brand-100 rounded-lg">
@@ -33,7 +33,7 @@ export default function SupportPage() {
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-900 m-0">Email</p>
-                <p className="text-xs text-gray-500 m-0">aleksandrcurilov933@gmail.com</p>
+                <p className="text-xs text-gray-500 m-0">appbuilddesk@gmail.com</p>
               </div>
             </a>
 
@@ -49,7 +49,7 @@ export default function SupportPage() {
 
             <h2>Privacy-related requests</h2>
             <p>For privacy or account deletion questions, contact:<br />
-              <a href="mailto:aleksandrcurilov933@gmail.com">aleksandrcurilov933@gmail.com</a>
+              <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a>
             </p>
           </div>
         </div>

@@ -26,7 +26,7 @@ export default function TermsPage() {
 
             <h2>1. About the Service</h2>
             <p>AdmitTrack is a platform for organizing admissions-related information, including user profiles, universities, deadlines, activities, honors, essays, documents, research records, notes, and checklists.</p>
-            <p>Operator: Churilov Aleksandr Alekseevich<br />Contact email: <a href="mailto:aleksandrcurilov933@gmail.com">aleksandrcurilov933@gmail.com</a></p>
+            <p>Operator: Churilov Aleksandr Alekseevich<br />Contact email: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
 
             <h2>2. Eligibility</h2>
             <p>You may use the Service only if:</p>
@@ -135,7 +135,7 @@ export default function TermsPage() {
 
             <h2>16. Contact</h2>
             <p>If you have questions about these Terms, contact:</p>
-            <p>Churilov Aleksandr Alekseevich<br />Email: <a href="mailto:aleksandrcurilov933@gmail.com">aleksandrcurilov933@gmail.com</a></p>
+            <p>Churilov Aleksandr Alekseevich<br />Email: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
           </div>
         </div>
 
