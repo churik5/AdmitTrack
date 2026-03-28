@@ -32,11 +32,11 @@ export default function ResetPasswordPage() {
     const params = new URLSearchParams(window.location.search)
     const code = params.get('code')
     if (code) {
-      supabase.auth.exchangeCodeForSession(code).then(({ error: err }) => {
-        if (!err) {
+      supabase.auth.exchangeCodeForSession(code).then((result) => {
+        if (!result.error) {
           setSessionReady(true)
         } else {
-          setError(err.message)
+          setError(result.error.message)
         }
       })
     }
