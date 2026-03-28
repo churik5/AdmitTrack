@@ -19,9 +19,11 @@ import {
   CheckSquare,
   User,
   X,
+  LogOut,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/lib/i18n'
+import { useAuth } from '@/lib/supabase/auth-context'
 
 interface NavItem {
   labelKey: keyof import('@/lib/i18n/types').Translations['nav']
@@ -52,6 +54,7 @@ export default function BottomNav() {
   const pathname = usePathname()
   const [showMore, setShowMore] = useState(false)
   const { t } = useI18n()
+  const { signOut } = useAuth()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
@@ -93,7 +96,16 @@ export default function BottomNav() {
                 </Link>
               ))}
             </div>
-            <div className="px-5 py-3 border-t border-surface-100 flex justify-center gap-3 text-[11px] text-surface-300">
+            <div className="px-4 py-3 border-t border-surface-100">
+              <button
+                onClick={() => { setShowMore(false); signOut(); }}
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
+              >
+                <LogOut size={16} />
+                {t.common.signOut}
+              </button>
+            </div>
+            <div className="px-5 py-2 border-t border-surface-100 flex justify-center gap-3 text-[11px] text-surface-300">
               <Link href="/privacy" target="_blank" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Privacy</Link>
               <Link href="/terms" target="_blank" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Terms</Link>
               <Link href="/support" target="_blank" onClick={() => setShowMore(false)} className="hover:text-surface-500 transition-colors">Support</Link>
