@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import {
   Globe,
@@ -109,6 +109,8 @@ export default function UniversityDetailPage() {
   const [linkEssayModalOpen, setLinkEssayModalOpen] = useState(false)
   const [linkDocModalOpen, setLinkDocModalOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState(false)
+  const [localNotes, setLocalNotes] = useState('')
+  const notesTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   // Load university
   useEffect(() => {
@@ -116,6 +118,7 @@ export default function UniversityDetailPage() {
       const uni = await getById(id)
       setUniversity(uni)
       if (uni) {
+        setLocalNotes(uni.notes)
         setEditForm({
           name: uni.name,
           state: uni.state,
@@ -270,11 +273,15 @@ export default function UniversityDetailPage() {
     setUniversity({ ...university, requirements: updated })
   }
 
-  // Notes handler
-  async function handleNotesChange(notes: string) {
+  // Notes handler with debounce
+  function handleNotesChange(notes: string) {
     if (!university) return
-    await updateUniversity(id, { notes })
-    setUniversity({ ...university, notes })
+    setLocalNotes(notes)
+    if (notesTimerRef.current) clearTimeout(notesTimerRef.current)
+    notesTimerRef.current = setTimeout(async () => {
+      await updateUniversity(id, { notes })
+      setUniversity((prev) => prev ? { ...prev, notes } : prev)
+    }, 500)
   }
 
   // Essay linking (update essay's universityIds array)
@@ -761,7 +768,7 @@ export default function UniversityDetailPage() {
             <h3 className="font-semibold text-gray-900 mb-4">Notes</h3>
             <Card>
               <textarea
-                value={university.notes}
+                value={localNotes}
                 onChange={(e) => handleNotesChange(e.target.value)}
                 rows={12}
                 className="w-full text-sm text-gray-700 bg-transparent border-0 p-0 resize-none focus:outline-none focus:ring-0 placeholder:text-gray-400"
