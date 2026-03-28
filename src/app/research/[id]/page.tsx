@@ -21,14 +21,7 @@ import { useResearch } from '@/lib/hooks/useResearch'
 import { Research, ResearchType, ResearchStatus } from '@/lib/types'
 import { cn, formatDate, getStatusColor, statusLabel } from '@/lib/utils'
 
-const RESEARCH_TYPES: Record<ResearchType, string> = {
-  research_paper: 'Research Paper',
-  article: 'Article',
-  project: 'Project',
-  independent_study: 'Independent Study',
-  competition_work: 'Competition Work',
-  idea: 'Idea / Concept',
-}
+const RESEARCH_TYPE_KEYS: ResearchType[] = ['research_paper', 'article', 'project', 'independent_study', 'competition_work', 'idea']
 
 const TYPE_COLORS: Record<ResearchType, string> = {
   research_paper: 'bg-purple-100 text-purple-700',
@@ -39,13 +32,7 @@ const TYPE_COLORS: Record<ResearchType, string> = {
   idea: 'bg-gray-100 text-gray-700',
 }
 
-const STATUS_OPTIONS: { value: ResearchStatus; label: string }[] = [
-  { value: 'idea', label: 'Idea' },
-  { value: 'planning', label: 'Planning' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'published', label: 'Published' },
-]
+const STATUS_KEYS: ResearchStatus[] = ['idea', 'planning', 'in_progress', 'completed', 'published']
 
 interface FormData {
   title: string
@@ -348,9 +335,9 @@ export default function ResearchDetailPage() {
                 onChange={(e) => setForm({ ...form, type: e.target.value as ResearchType })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {Object.entries(RESEARCH_TYPES).map(([val]) => (
+                {RESEARCH_TYPE_KEYS.map((val) => (
                   <option key={val} value={val}>
-                    {t.research.types[val as ResearchType]}
+                    {t.research.types[val]}
                   </option>
                 ))}
               </select>
@@ -362,9 +349,9 @@ export default function ResearchDetailPage() {
                 onChange={(e) => setForm({ ...form, status: e.target.value as ResearchStatus })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {STATUS_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {t.research.statuses[opt.value]}
+                {STATUS_KEYS.map((val) => (
+                  <option key={val} value={val}>
+                    {t.research.statuses[val]}
                   </option>
                 ))}
               </select>

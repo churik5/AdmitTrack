@@ -25,14 +25,7 @@ const LEVEL_COLORS: Record<string, string> = {
   international: 'bg-emerald-100 text-emerald-700',
 }
 
-const LEVEL_FILTER_OPTIONS: { value: HonorLevel | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'school', label: 'School' },
-  { value: 'regional', label: 'Regional' },
-  { value: 'state', label: 'State' },
-  { value: 'national', label: 'National' },
-  { value: 'international', label: 'International' },
-]
+const LEVEL_KEYS: (HonorLevel | 'all')[] = ['all', 'school', 'regional', 'state', 'national', 'international']
 
 interface FormData {
   title: string
@@ -163,18 +156,18 @@ export default function HonorsPage() {
             className="sm:w-72"
           />
           <div className="flex gap-1.5 overflow-x-auto pb-1">
-            {LEVEL_FILTER_OPTIONS.map((opt) => (
+            {LEVEL_KEYS.map((val) => (
               <button
-                key={opt.value}
-                onClick={() => setLevelFilter(opt.value)}
+                key={val}
+                onClick={() => setLevelFilter(val)}
                 className={cn(
                   'px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors',
-                  levelFilter === opt.value
+                  levelFilter === val
                     ? 'bg-brand-600 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                {opt.value === 'all' ? t.common.all : t.honors.levels[opt.value]}
+                {val === 'all' ? t.common.all : t.honors.levels[val]}
               </button>
             ))}
           </div>

@@ -16,16 +16,7 @@ import { cn, formatDate, truncate } from '@/lib/utils'
 
 type NoteCategory = 'general' | 'university' | 'essay' | 'strategy' | 'advice' | 'idea' | 'requirement' | 'plan'
 
-const NOTE_CATEGORIES: Record<NoteCategory, string> = {
-  general: 'General',
-  university: 'University',
-  essay: 'Essay',
-  strategy: 'Strategy',
-  advice: 'Advice',
-  idea: 'Idea',
-  requirement: 'Requirement',
-  plan: 'Plan',
-}
+const NOTE_CATEGORY_KEYS: NoteCategory[] = ['general', 'university', 'essay', 'strategy', 'advice', 'idea', 'requirement', 'plan']
 
 const CATEGORY_COLORS: Record<NoteCategory, string> = {
   general: 'bg-gray-100 text-gray-700',
@@ -76,7 +67,7 @@ export default function NotesPage() {
 
   const usedCategories = useMemo(() => {
     const set = new Set(notes.map((n) => n.category))
-    return (Object.keys(NOTE_CATEGORIES) as NoteCategory[]).filter((c) => set.has(c))
+    return NOTE_CATEGORY_KEYS.filter((c) => set.has(c))
   }, [notes])
 
   function openAdd() {
@@ -254,9 +245,9 @@ export default function NotesPage() {
               onChange={(e) => setForm({ ...form, category: e.target.value as NoteCategory })}
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              {Object.entries(NOTE_CATEGORIES).map(([val]) => (
+              {NOTE_CATEGORY_KEYS.map((val) => (
                 <option key={val} value={val}>
-                  {t.notes.categories[val as NoteCategory]}
+                  {t.notes.categories[val]}
                 </option>
               ))}
             </select>

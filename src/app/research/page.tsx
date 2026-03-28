@@ -15,23 +15,9 @@ import { useResearch } from '@/lib/hooks/useResearch'
 import { Research, ResearchType, ResearchStatus } from '@/lib/types'
 import { cn, truncate, getStatusColor, statusLabel } from '@/lib/utils'
 
-const RESEARCH_TYPES: Record<ResearchType, string> = {
-  research_paper: 'Research Paper',
-  article: 'Article',
-  project: 'Project',
-  independent_study: 'Independent Study',
-  competition_work: 'Competition Work',
-  idea: 'Idea / Concept',
-}
+const STATUS_KEYS: (ResearchStatus | 'all')[] = ['all', 'idea', 'planning', 'in_progress', 'completed', 'published']
 
-const STATUS_OPTIONS: { value: ResearchStatus | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'idea', label: 'Idea' },
-  { value: 'planning', label: 'Planning' },
-  { value: 'in_progress', label: 'In Progress' },
-  { value: 'completed', label: 'Completed' },
-  { value: 'published', label: 'Published' },
-]
+const RESEARCH_TYPE_KEYS: ResearchType[] = ['research_paper', 'article', 'project', 'independent_study', 'competition_work', 'idea']
 
 const TYPE_COLORS: Record<ResearchType, string> = {
   research_paper: 'bg-purple-100 text-purple-700',
@@ -185,18 +171,18 @@ export default function ResearchPage() {
             className="sm:w-72"
           />
           <div className="flex gap-1.5 overflow-x-auto pb-1">
-            {STATUS_OPTIONS.map((opt) => (
+            {STATUS_KEYS.map((val) => (
               <button
-                key={opt.value}
-                onClick={() => setStatusFilter(opt.value)}
+                key={val}
+                onClick={() => setStatusFilter(val)}
                 className={cn(
                   'px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors',
-                  statusFilter === opt.value
+                  statusFilter === val
                     ? 'bg-brand-600 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 )}
               >
-                {opt.value === 'all' ? t.common.all : t.research.statuses[opt.value]}
+                {val === 'all' ? t.common.all : t.research.statuses[val]}
               </button>
             ))}
           </div>
@@ -206,9 +192,9 @@ export default function ResearchPage() {
             className="px-3 py-1.5 text-xs font-medium border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
           >
             <option value="all">{t.common.all} {t.common.type}</option>
-            {Object.entries(RESEARCH_TYPES).map(([val]) => (
+            {RESEARCH_TYPE_KEYS.map((val) => (
               <option key={val} value={val}>
-                {t.research.types[val as ResearchType]}
+                {t.research.types[val]}
               </option>
             ))}
           </select>
@@ -315,9 +301,9 @@ export default function ResearchPage() {
                 onChange={(e) => setForm({ ...form, type: e.target.value as ResearchType })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {Object.entries(RESEARCH_TYPES).map(([val]) => (
+                {RESEARCH_TYPE_KEYS.map((val) => (
                   <option key={val} value={val}>
-                    {t.research.types[val as ResearchType]}
+                    {t.research.types[val]}
                   </option>
                 ))}
               </select>
@@ -329,9 +315,9 @@ export default function ResearchPage() {
                 onChange={(e) => setForm({ ...form, status: e.target.value as ResearchStatus })}
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {STATUS_OPTIONS.filter((o) => o.value !== 'all').map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {t.research.statuses[opt.value as ResearchStatus]}
+                {STATUS_KEYS.filter((v) => v !== 'all').map((val) => (
+                  <option key={val} value={val}>
+                    {t.research.statuses[val as ResearchStatus]}
                   </option>
                 ))}
               </select>

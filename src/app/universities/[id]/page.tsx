@@ -837,9 +837,9 @@ export default function UniversityDetailPage() {
               }
               className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
             >
-              {STATUS_OPTIONS.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
+              {STATUS_OPTION_KEYS.map((val) => (
+                <option key={val} value={val}>
+                  {t.universities.statuses[val]}
                 </option>
               ))}
             </select>
@@ -932,9 +932,9 @@ export default function UniversityDetailPage() {
                 }
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
               >
-                {PRIORITY_OPTIONS.map((opt) => (
-                  <option key={opt.value} value={opt.value}>
-                    {opt.label}
+                {PRIORITY_OPTION_KEYS.map((val) => (
+                  <option key={val} value={val}>
+                    {t.deadlines.priorities[val]}
                   </option>
                 ))}
               </select>
