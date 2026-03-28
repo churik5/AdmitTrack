@@ -29,16 +29,19 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const isAuthPage =
-    request.nextUrl.pathname === '/login' ||
-    request.nextUrl.pathname === '/signup'
+  const publicPages = ['/login', '/signup', '/privacy', '/terms', '/support']
+  const isPublicPage = publicPages.includes(request.nextUrl.pathname)
 
-  // If not logged in and not on auth page, redirect to login
-  if (!user && !isAuthPage) {
+  // If not logged in and not on public page, redirect to login
+  if (!user && !isPublicPage) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
+
+  const isAuthPage =
+    request.nextUrl.pathname === '/login' ||
+    request.nextUrl.pathname === '/signup'
 
   // If logged in and on auth page, redirect to dashboard
   if (user && isAuthPage) {
