@@ -32,13 +32,15 @@ export default function ResetPasswordPage() {
     const params = new URLSearchParams(window.location.search)
     const code = params.get('code')
     if (code) {
-      supabase.auth.exchangeCodeForSession(code).then((result) => {
-        if (!result.error) {
+      const exchange = async () => {
+        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
+        if (!exchangeError) {
           setSessionReady(true)
         } else {
-          setError(result.error.message)
+          setError(exchangeError.message)
         }
-      })
+      }
+      exchange()
     }
 
     // Handle hash tokens (implicit flow)
