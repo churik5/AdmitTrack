@@ -59,6 +59,18 @@ export interface Translations {
     backToSignIn: string
     minPassword: string
     passwordsDontMatch: string
+    forgotPassword: string
+    resetPassword: string
+    resetPasswordSubtitle: string
+    sendResetLink: string
+    sending: string
+    resetLinkSent: string
+    resetLinkSentDesc: string
+    newPassword: string
+    updatePassword: string
+    updating: string
+    passwordUpdated: string
+    passwordUpdatedDesc: string
   }
 
   // Navigation

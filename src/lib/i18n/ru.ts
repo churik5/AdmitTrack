@@ -59,6 +59,18 @@ export const ru: Translations = {
     backToSignIn: 'Вернуться ко входу',
     minPassword: 'Минимум 6 символов',
     passwordsDontMatch: 'Пароли не совпадают',
+    forgotPassword: 'Забыли пароль?',
+    resetPassword: 'Сброс пароля',
+    resetPasswordSubtitle: 'Введите email и мы отправим ссылку для сброса',
+    sendResetLink: 'Отправить ссылку',
+    sending: 'Отправка...',
+    resetLinkSent: 'Проверьте почту',
+    resetLinkSentDesc: 'Мы отправили ссылку для сброса пароля на вашу почту.',
+    newPassword: 'Новый пароль',
+    updatePassword: 'Обновить пароль',
+    updating: 'Обновление...',
+    passwordUpdated: 'Пароль обновлён!',
+    passwordUpdatedDesc: 'Ваш пароль успешно изменён. Теперь вы можете войти.',
   },
 
   // Navigation

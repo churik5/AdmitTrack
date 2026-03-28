@@ -59,6 +59,18 @@ export const en: Translations = {
     backToSignIn: 'Back to Sign In',
     minPassword: 'Password must be at least 6 characters',
     passwordsDontMatch: 'Passwords do not match',
+    forgotPassword: 'Forgot password?',
+    resetPassword: 'Reset Password',
+    resetPasswordSubtitle: 'Enter your email and we\'ll send you a reset link',
+    sendResetLink: 'Send reset link',
+    sending: 'Sending...',
+    resetLinkSent: 'Check your email',
+    resetLinkSentDesc: 'We\'ve sent a password reset link to your email address.',
+    newPassword: 'New password',
+    updatePassword: 'Update password',
+    updating: 'Updating...',
+    passwordUpdated: 'Password updated!',
+    passwordUpdatedDesc: 'Your password has been successfully changed. You can now sign in.',
   },
 
   // Navigation

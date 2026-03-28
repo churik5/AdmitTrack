@@ -9,7 +9,7 @@ interface AppShellProps {
   children: ReactNode
 }
 
-const AUTH_PAGES = ['/login', '/signup', '/privacy', '/terms', '/support', '/confirmed']
+const AUTH_PAGES = ['/login', '/signup', '/privacy', '/terms', '/support', '/confirmed', '/forgot-password', '/reset-password']
 
 export default function AppShell({ children }: AppShellProps) {
   const pathname = usePathname()

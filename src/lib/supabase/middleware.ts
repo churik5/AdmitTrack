@@ -29,7 +29,7 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const publicPages = ['/login', '/signup', '/privacy', '/terms', '/support', '/confirmed', '/auth/confirm', '/auth/callback']
+  const publicPages = ['/login', '/signup', '/privacy', '/terms', '/support', '/confirmed', '/auth/confirm', '/auth/callback', '/forgot-password', '/reset-password']
   const isPublicPage = publicPages.includes(request.nextUrl.pathname)
 
   // If not logged in and not on public page, redirect to login
