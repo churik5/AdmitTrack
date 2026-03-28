@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { AuthChangeEvent, Session } from '@supabase/supabase-js'
+import { AuthChangeEvent } from '@supabase/supabase-js'
 import { useI18n } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase/client'
 import Button from '@/components/ui/Button'
-import { GraduationCap, CheckCircle, Eye, EyeOff, KeyRound, Loader2 } from 'lucide-react'
+import { GraduationCap, CheckCircle, Eye, EyeOff, KeyRound } from 'lucide-react'
 
 export default function ResetPasswordPage() {
   const { t, locale, setLocale, availableLocales } = useI18n()
@@ -14,46 +14,25 @@ export default function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [sessionReady, setSessionReady] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState('')
 
   useEffect(() => {
     const supabase = createClient()
 
-    // Listen for PASSWORD_RECOVERY event from Supabase
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
-      if (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN') {
-        setSessionReady(true)
-      }
-    })
-
-    // Handle code from URL (PKCE flow)
+    // Try to establish session from URL params/hash
     const params = new URLSearchParams(window.location.search)
     const code = params.get('code')
     if (code) {
       const exchange = async () => {
-        const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code)
-        if (!exchangeError) {
-          setSessionReady(true)
-        } else {
-          setError(exchangeError.message)
-        }
+        await supabase.auth.exchangeCodeForSession(code)
       }
       exchange()
     }
 
-    // Handle hash tokens (implicit flow)
-    const hash = window.location.hash
-    if (hash && hash.includes('access_token')) {
-      // Supabase client auto-detects hash tokens, just wait for auth state change
-    }
-
-    // Check existing session
-    supabase.auth.getSession().then(({ data: { session } }: { data: { session: Session | null } }) => {
-      if (session) {
-        setSessionReady(true)
-      }
+    // Listen for auth events
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
+      // Session established, ready to update password
     })
 
     return () => subscription.unsubscribe()
@@ -76,10 +55,10 @@ export default function ResetPasswordPage() {
     setError('')
 
     const supabase = createClient()
-    const { error } = await supabase.auth.updateUser({ password })
+    const { error: updateError } = await supabase.auth.updateUser({ password })
 
-    if (error) {
-      setError(error.message)
+    if (updateError) {
+      setError(updateError.message)
       setLoading(false)
     } else {
       await supabase.auth.signOut()
@@ -105,18 +84,6 @@ export default function ResetPasswordPage() {
       ))}
     </div>
   )
-
-  if (!sessionReady) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <LanguageSwitcher />
-        <div className="w-full max-w-sm text-center animate-fade-in">
-          <Loader2 size={32} className="text-brand-600 animate-spin mx-auto mb-4" />
-          <p className="text-sm text-surface-500">Loading...</p>
-        </div>
-      </div>
-    )
-  }
 
   if (done) {
     return (
