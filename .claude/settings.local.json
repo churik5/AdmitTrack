@@ -4,7 +4,15 @@
       "Bash(for dir:*)",
       "Bash(do echo:*)",
       "Read(//Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(find /Users/aleksandrchurilov/Desktop/AdmitTrack/src -type f \\\\\\(-name *.ts -o -name *.tsx -o -name *.json \\\\\\))",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git remote:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(npx cap:*)",
+      "Bash(gem list:*)"
     ]
   }
 }
