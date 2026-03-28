@@ -7,6 +7,18 @@ import AppShell from '@/components/layout/AppShell'
 export const metadata: Metadata = {
   title: 'AdmitTrack — College Admissions Workspace',
   description: 'Your personal workspace for US college admissions preparation',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: 'cover',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'AdmitTrack',
+  },
 }
 
 export default function RootLayout({
