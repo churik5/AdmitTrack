@@ -1,8 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { AuthChangeEvent } from '@supabase/supabase-js'
 import { useI18n } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase/client'
 import Button from '@/components/ui/Button'
@@ -16,27 +15,6 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState('')
-
-  useEffect(() => {
-    const supabase = createClient()
-
-    // Try to establish session from URL params/hash
-    const params = new URLSearchParams(window.location.search)
-    const code = params.get('code')
-    if (code) {
-      const exchange = async () => {
-        await supabase.auth.exchangeCodeForSession(code)
-      }
-      exchange()
-    }
-
-    // Listen for auth events
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
-      // Session established, ready to update password
-    })
-
-    return () => subscription.unsubscribe()
-  }, [])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
