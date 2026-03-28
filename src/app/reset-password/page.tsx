@@ -23,12 +23,31 @@ export default function ResetPasswordPage() {
 
     // Listen for PASSWORD_RECOVERY event from Supabase
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
-      if (event === 'PASSWORD_RECOVERY') {
+      if (event === 'PASSWORD_RECOVERY' || event === 'SIGNED_IN') {
         setSessionReady(true)
       }
     })
 
-    // Also check if there's already a session (user came back to page)
+    // Handle code from URL (PKCE flow)
+    const params = new URLSearchParams(window.location.search)
+    const code = params.get('code')
+    if (code) {
+      supabase.auth.exchangeCodeForSession(code).then(({ error: err }) => {
+        if (!err) {
+          setSessionReady(true)
+        } else {
+          setError(err.message)
+        }
+      })
+    }
+
+    // Handle hash tokens (implicit flow)
+    const hash = window.location.hash
+    if (hash && hash.includes('access_token')) {
+      // Supabase client auto-detects hash tokens, just wait for auth state change
+    }
+
+    // Check existing session
     supabase.auth.getSession().then(({ data: { session } }: { data: { session: Session | null } }) => {
       if (session) {
         setSessionReady(true)
