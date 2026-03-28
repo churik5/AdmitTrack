@@ -488,6 +488,13 @@ export interface Translations {
     selectYear: string
     saveProfile: string
     saved: string
+    dangerZone: string
+    deleteAccount: string
+    deleteAccountDesc: string
+    deleteAccountConfirmTitle: string
+    deleteAccountConfirmDesc: string
+    deleteAccountConfirmBtn: string
+    deleting: string
   }
 
   // Onboarding

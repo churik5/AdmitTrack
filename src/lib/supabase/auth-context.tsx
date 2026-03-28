@@ -11,6 +11,7 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<{ error: string | null }>
   signIn: (email: string, password: string) => Promise<{ error: string | null }>
   signOut: () => Promise<void>
+  deleteAccount: () => Promise<{ error: string | null }>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -53,8 +54,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut()
   }, [supabase.auth])
 
+  const deleteAccount = useCallback(async () => {
+    const res = await fetch('/api/delete-account', { method: 'DELETE' })
+    if (!res.ok) {
+      const data = await res.json()
+      return { error: data.error || 'Failed to delete account' }
+    }
+    await supabase.auth.signOut()
+    return { error: null }
+  }, [supabase.auth])
+
   return (
-    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signUp, signIn, signOut, deleteAccount }}>
       {children}
     </AuthContext.Provider>
   )

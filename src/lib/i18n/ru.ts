@@ -557,6 +557,13 @@ export const ru: Translations = {
     selectYear: 'Выберите год',
     saveProfile: 'Сохранить профиль',
     saved: 'Профиль сохранён',
+    dangerZone: 'Опасная зона',
+    deleteAccount: 'Удалить аккаунт',
+    deleteAccountDesc: 'Безвозвратно удалить аккаунт и все связанные данные. Это действие нельзя отменить.',
+    deleteAccountConfirmTitle: 'Вы уверены?',
+    deleteAccountConfirmDesc: 'Это действие навсегда удалит ваш аккаунт, включая все университеты, эссе, документы и данные о поступлении. Отменить это невозможно.',
+    deleteAccountConfirmBtn: 'Да, удалить мой аккаунт',
+    deleting: 'Удаление...',
   },
 
   // Onboarding

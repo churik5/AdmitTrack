@@ -558,6 +558,13 @@ export const en: Translations = {
     selectYear: 'Select year',
     saveProfile: 'Save Profile',
     saved: 'Profile saved',
+    dangerZone: 'Danger Zone',
+    deleteAccount: 'Delete Account',
+    deleteAccountDesc: 'Permanently delete your account and all associated data. This action cannot be undone.',
+    deleteAccountConfirmTitle: 'Are you sure?',
+    deleteAccountConfirmDesc: 'This will permanently delete your account, including all universities, essays, documents, and application data. This cannot be reversed.',
+    deleteAccountConfirmBtn: 'Yes, delete my account',
+    deleting: 'Deleting...',
   },
 
   // Onboarding

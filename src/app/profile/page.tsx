@@ -9,12 +9,16 @@ import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import ProgressBar from '@/components/ui/ProgressBar'
-import { Save, Plus, Trash2 } from 'lucide-react'
+import { Save, Plus, Trash2, AlertTriangle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/lib/supabase/auth-context'
+import { useRouter } from 'next/navigation'
 
 export default function ProfilePage() {
   const { profile, updateProfile, loading } = useProfile()
   const { t, locale, setLocale, availableLocales } = useI18n()
+  const { deleteAccount } = useAuth()
+  const router = useRouter()
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -31,6 +35,9 @@ export default function ProfilePage() {
   const [weaknesses, setWeaknesses] = useState('')
   const [notes, setNotes] = useState('')
   const [saved, setSaved] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!profile) return
@@ -73,6 +80,18 @@ export default function ProfilePage() {
     setTestScores(prev =>
       prev.map(t => (t.id === id ? { ...t, [field]: value } : t))
     )
+  }
+
+  async function handleDeleteAccount() {
+    setDeleting(true)
+    setDeleteError(null)
+    const { error } = await deleteAccount()
+    if (error) {
+      setDeleteError(error)
+      setDeleting(false)
+    } else {
+      router.push('/auth')
+    }
   }
 
   async function handleSave() {
@@ -292,7 +311,7 @@ export default function ProfilePage() {
       </Card>
 
       {/* Save Button */}
-      <div className="flex items-center gap-3 justify-end">
+      <div className="flex items-center gap-3 justify-end mb-8">
         {saved && (
           <span className="text-sm text-green-600 font-medium">{t.profile.saved}</span>
         )}
@@ -300,6 +319,59 @@ export default function ProfilePage() {
           {t.profile.saveProfile}
         </Button>
       </div>
+
+      {/* Danger Zone */}
+      <Card className="border border-red-200 bg-red-50/30">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h2 className="text-base font-semibold text-red-700 flex items-center gap-2">
+              <AlertTriangle size={16} className="shrink-0" />
+              {t.profile.dangerZone}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">{t.profile.deleteAccountDesc}</p>
+          </div>
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            className="shrink-0 px-4 py-2 text-sm font-medium text-red-600 border border-red-300 rounded-lg hover:bg-red-50 transition-colors"
+          >
+            {t.profile.deleteAccount}
+          </button>
+        </div>
+      </Card>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="p-2 bg-red-100 rounded-full">
+                <AlertTriangle size={20} className="text-red-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-900">{t.profile.deleteAccountConfirmTitle}</h3>
+            </div>
+            <p className="text-sm text-gray-500 mb-5">{t.profile.deleteAccountConfirmDesc}</p>
+            {deleteError && (
+              <p className="text-sm text-red-600 mb-4">{deleteError}</p>
+            )}
+            <div className="flex gap-3 justify-end">
+              <button
+                onClick={() => { setShowDeleteConfirm(false); setDeleteError(null) }}
+                disabled={deleting}
+                className="px-4 py-2 text-sm font-medium text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50"
+              >
+                {t.common.cancel}
+              </button>
+              <button
+                onClick={handleDeleteAccount}
+                disabled={deleting}
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+              >
+                {deleting ? t.profile.deleting : t.profile.deleteAccountConfirmBtn}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
