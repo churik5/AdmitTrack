@@ -16,126 +16,88 @@ export default function TermsPage() {
         </Link>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 sm:p-12">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms of Use &mdash; AdmitTrack</h1>
-          <p className="text-sm text-gray-400 mb-1">Effective date: March 28, 2026</p>
-          <p className="text-sm text-gray-400 mb-8">Last updated: March 28, 2026</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms of Use</h1>
+          <p className="text-sm text-gray-400 mb-8">Effective date: March 28, 2026</p>
 
           <div className="prose prose-gray prose-sm max-w-none">
-            <p>These Terms of Use (&quot;Terms&quot;) govern your access to and use of AdmitTrack through the website, web application, and iOS application (collectively, the &quot;Service&quot;).</p>
-            <p>By accessing or using the Service, you agree to these Terms.</p>
+            <p>These Terms of Use (&quot;Terms&quot;) govern your access to and use of <strong>https://admittrack.app/</strong> (the &quot;Website&quot;), operated by <strong>Churilov Aleksandr Alekseevich</strong>, self-employed individual.</p>
+            <p>By accessing or using the Website, you agree to these Terms.</p>
 
-            <h2>1. About the Service</h2>
-            <p>AdmitTrack is a platform for organizing admissions-related information, including user profiles, universities, deadlines, activities, honors, essays, documents, research records, notes, and checklists.</p>
-            <p>Operator: Churilov Aleksandr Alekseevich<br />Contact email: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
+            <h2>1. Eligibility and Acceptance</h2>
+            <p>By using the Website, you confirm that you are legally able to agree to these Terms under applicable law. If you use the Website on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p>
 
-            <h2>2. Eligibility</h2>
-            <p>You may use the Service only if:</p>
+            <h2>2. Use of the Website</h2>
+            <p>You may use the Website only in compliance with applicable laws and these Terms. You agree not to:</p>
             <ul>
-              <li>you are at least 13 years old;</li>
-              <li>you are legally capable of entering into binding agreements under applicable law;</li>
-              <li>you use the Service on your own behalf and do not impersonate another person.</li>
+              <li>use the Website for unlawful, fraudulent, deceptive, or misleading purposes;</li>
+              <li>interfere with or disrupt the operation, availability, or security of the Website;</li>
+              <li>attempt to gain unauthorized access to the Website, accounts, systems, servers, or databases;</li>
+              <li>upload, transmit, or distribute malware, malicious code, spam, or harmful material;</li>
+              <li>scrape, crawl, harvest, extract, copy, or monitor Website content or data by automated means without our prior written permission, except where such restriction is not allowed by law;</li>
+              <li>infringe the intellectual property, privacy, or other rights of any person;</li>
+              <li>use the Website in a way that could damage, disable, overburden, or impair our services or infrastructure.</li>
             </ul>
 
-            <h2>3. Account</h2>
-            <p>Some features of the Service require an account.</p>
-            <p>You agree to:</p>
+            <h2>3. Account Features</h2>
+            <p>If the Website offers sign-in, authentication, or account-based features, you are responsible for:</p>
             <ul>
-              <li>provide a valid email address;</li>
-              <li>keep your login credentials secure;</li>
-              <li>not share your account with others;</li>
-              <li>notify us if you become aware of unauthorized access to your account.</li>
+              <li>providing accurate information;</li>
+              <li>maintaining the confidentiality of your login credentials;</li>
+              <li>all activity that occurs under your account, to the extent permitted by law.</li>
             </ul>
-            <p>You are responsible for activity that occurs under your account.</p>
+            <p>We may suspend or disable access if we reasonably believe your account is being used unlawfully, insecurely, or in violation of these Terms.</p>
 
-            <h2>4. User Content</h2>
-            <p>You may create, upload, store, edit, and manage content in the Service, including text, notes, deadlines, descriptions, links, document metadata, and other materials.</p>
-            <p>You retain ownership of your content.</p>
-            <p>By using the Service, you grant us a limited right to host, store, process, transmit, and display your content solely as necessary to:</p>
+            <h2>4. Website Content</h2>
+            <p>The Website and its content, including text, design, graphics, branding, interface elements, layout, logos, and other materials, are owned by or licensed to us and are protected by applicable intellectual property laws.</p>
+            <p>Except as permitted by law or expressly authorized by us in writing, you may not reproduce, distribute, modify, publish, display, create derivative works from, or otherwise exploit any part of the Website.</p>
+
+            <h2>5. User Submissions</h2>
+            <p>If you send us messages, feedback, forms, applications, requests, or other content, you represent that:</p>
             <ul>
-              <li>operate the Service;</li>
-              <li>synchronize data across devices and platforms;</li>
-              <li>maintain technical functionality;</li>
-              <li>protect security and integrity;</li>
-              <li>provide support.</li>
+              <li>you have the right to provide that content;</li>
+              <li>the content is accurate to the best of your knowledge;</li>
+              <li>the content does not violate any law or third-party rights;</li>
+              <li>the content does not contain malicious code or harmful material.</li>
             </ul>
+            <p>To the extent necessary for us to operate the Website and respond to you, you grant us a non-exclusive, limited right to store, process, and use such submissions for those purposes.</p>
 
-            <h2>5. Prohibited Use</h2>
-            <p>You may not:</p>
+            <h2>6. Availability of the Website</h2>
+            <p>We may change, update, suspend, or discontinue any part of the Website at any time, with or without notice. We do not guarantee that the Website will always be available, uninterrupted, timely, secure, or error-free.</p>
+
+            <h2>7. No Professional, Admissions, or Legal Guarantee</h2>
+            <p>Unless expressly stated otherwise, the Website is provided for general informational and service-related purposes only. Nothing on the Website constitutes legal advice, official admissions advice from a university, or a guarantee of any educational, application, or admissions outcome.</p>
+            <p>You remain solely responsible for verifying deadlines, requirements, policies, and decisions with the relevant institutions or official sources.</p>
+
+            <h2>8. Disclaimer of Warranties</h2>
+            <p>To the maximum extent permitted by law, the Website is provided on an <strong>&quot;as is&quot;</strong> and <strong>&quot;as available&quot;</strong> basis, without warranties of any kind, whether express, implied, or statutory, including implied warranties of accuracy, availability, non-infringement, merchantability, or fitness for a particular purpose.</p>
+
+            <h2>9. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, we are not liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of data, revenue, profits, goodwill, or business opportunity, arising out of or related to your use of, or inability to use, the Website.</p>
+            <p>Nothing in these Terms excludes or limits liability that cannot be excluded or limited under applicable law.</p>
+
+            <h2>10. Third-Party Services and Links</h2>
+            <p>The Website may integrate with or contain links to third-party services, websites, or platforms, including infrastructure, database, authentication, hosting, or email providers. We are not responsible for the availability, content, privacy practices, or terms of any third-party services.</p>
+
+            <h2>11. Suspension or Termination</h2>
+            <p>We may suspend, restrict, or terminate your access to the Website at any time, with or without notice, if we reasonably believe that:</p>
             <ul>
-              <li>use the Service in violation of applicable law;</li>
-              <li>upload malware, malicious code, or harmful material;</li>
-              <li>attempt to gain unauthorized access to the Service, other accounts, databases, or infrastructure;</li>
-              <li>interfere with or disrupt the operation of the Service;</li>
-              <li>use the Service to store or distribute content you do not have the right to use;</li>
-              <li>use the Service for fraud, spam, abuse, or circumvention of technical restrictions.</li>
-            </ul>
-
-            <h2>6. Availability and Changes</h2>
-            <p>We aim to keep the Service available and functional, but we do not guarantee uninterrupted availability, error-free operation, or permanent access.</p>
-            <p>We may:</p>
-            <ul>
-              <li>modify features;</li>
-              <li>change the interface or data structure;</li>
-              <li>suspend or limit access temporarily for maintenance, security, or technical reasons.</li>
-            </ul>
-
-            <h2>7. Account Deletion</h2>
-            <p>You may delete your account from within the Service where that functionality is available.</p>
-            <p>When you delete your account, your account and associated user data are deleted from the active systems of the Service without a waiting period, except where temporary retention may occur in logs, caches, or infrastructure systems until ordinary cleanup occurs, or where retention is required by law.</p>
-
-            <h2>8. Intellectual Property</h2>
-            <p>All rights in and to the Service, excluding user content, including its design, structure, code, interface logic, branding, and materials, belong to the operator of the Service or are used lawfully.</p>
-            <p>These Terms do not transfer ownership of the Service to you. You receive only a limited right to use the Service in accordance with these Terms.</p>
-
-            <h2>9. Disclaimer of Warranties</h2>
-            <p>The Service is provided on an &quot;as is&quot; and &quot;as available&quot; basis.</p>
-            <p>To the maximum extent permitted by law, we disclaim warranties of any kind, whether express or implied, including warranties regarding:</p>
-            <ul>
-              <li>uninterrupted availability;</li>
-              <li>error-free operation;</li>
-              <li>fitness for a particular purpose;</li>
-              <li>absence of data loss;</li>
-              <li>satisfaction of your expectations.</li>
+              <li>you have violated these Terms;</li>
+              <li>you are using the Website unlawfully or abusively;</li>
+              <li>your use creates security, legal, or operational risk for us or others.</li>
             </ul>
 
-            <h2>10. Limitation of Liability</h2>
-            <p>To the maximum extent permitted by law, we are not liable for:</p>
-            <ul>
-              <li>indirect, incidental, special, consequential, or punitive damages;</li>
-              <li>loss of profits;</li>
-              <li>loss of data;</li>
-              <li>loss of opportunities;</li>
-              <li>interruption of business or educational planning;</li>
-              <li>damages resulting from unauthorized access, technical failures, or third-party services.</li>
-            </ul>
-            <p>If liability cannot be excluded entirely under applicable law, it will be limited to the minimum extent permitted.</p>
+            <h2>12. Indemnity</h2>
+            <p>To the extent permitted by law, you agree to indemnify and hold harmless Churilov Aleksandr Alekseevich from claims, liabilities, damages, losses, and expenses arising from your violation of these Terms or your misuse of the Website.</p>
 
-            <h2>11. Third-Party Services</h2>
-            <p>The Service may rely on third-party providers for infrastructure and technical functionality, including authentication, hosting, storage, database, and email delivery services.</p>
-            <p>We are not responsible for the independent practices or failures of third-party services beyond our control.</p>
-
-            <h2>12. Privacy</h2>
-            <p>Your use of the Service is also governed by the Privacy Policy available at <a href="https://admittrack.app/privacy" target="_blank" rel="noopener noreferrer">https://admittrack.app/privacy</a>, which explains how personal information is collected, used, stored, and deleted.</p>
-
-            <h2>13. Termination</h2>
-            <p>We may suspend or terminate access to the Service if:</p>
-            <ul>
-              <li>you violate these Terms;</li>
-              <li>we reasonably believe your use presents a security, legal, or operational risk;</li>
-              <li>continued access is not technically or legally feasible.</li>
-            </ul>
-            <p>You may stop using the Service at any time and may delete your account if that functionality is available.</p>
+            <h2>13. Changes to the Terms</h2>
+            <p>We may revise these Terms from time to time. The updated version will be posted on this page with a revised effective date. Your continued use of the Website after the effective date of updated Terms constitutes acceptance of the revised Terms, to the extent permitted by law.</p>
 
             <h2>14. Governing Law</h2>
-            <p>These Terms are governed by the laws of the Russian Federation, unless mandatory law in your jurisdiction requires otherwise.</p>
+            <p>These Terms are governed by the laws of <strong>Russia</strong>, unless mandatory law requires otherwise.</p>
 
-            <h2>15. Changes to These Terms</h2>
-            <p>We may update these Terms from time to time.</p>
-            <p>If we make material changes, we may notify users through the Service, by email, or by updating the &quot;Last updated&quot; date above. Continued use of the Service after updated Terms become effective means the updated Terms apply.</p>
-
-            <h2>16. Contact</h2>
-            <p>If you have questions about these Terms, contact:</p>
-            <p>Churilov Aleksandr Alekseevich<br />Email: <a href="mailto:appbuilddesk@gmail.com">appbuilddesk@gmail.com</a></p>
+            <h2>15. Contact</h2>
+            <p>For questions regarding these Terms, contact:</p>
+            <p><strong>Churilov Aleksandr Alekseevich</strong><br />Email: <a href="mailto:appbuilddesk@gmail.com"><strong>appbuilddesk@gmail.com</strong></a></p>
           </div>
         </div>
 
