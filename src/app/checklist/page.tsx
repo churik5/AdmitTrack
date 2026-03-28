@@ -106,9 +106,9 @@ export default function ChecklistPage() {
       {/* Overall Progress */}
       <Card className="mb-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-gray-900">Overall Progress</h2>
+          <h2 className="text-lg font-semibold text-gray-900">{t.checklist.overallProgress}</h2>
           <span className="text-sm font-medium text-gray-600">
-            {totalCompleted} of {totalItems} tasks completed
+            {totalCompleted} {t.checklist.of} {totalItems} {t.checklist.tasksCompleted}
           </span>
         </div>
         <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden">
@@ -150,10 +150,10 @@ export default function ChecklistPage() {
                   </div>
                   <div className="text-left">
                     <h3 className="text-base font-semibold text-gray-900">
-                      {category}
+                      {t.checklist.categories[category] ?? category}
                     </h3>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      {completedCount} of {categoryItems.length} completed
+                      {completedCount} {t.checklist.of} {categoryItems.length} {t.checklist.tasksCompleted}
                     </p>
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export default function ChecklistPage() {
                                     : 'text-gray-800 font-medium'
                                 )}
                               >
-                                {item.label}
+                                {t.checklist.items[item.id]?.label ?? item.label}
                               </span>
                               {item.description && (
                                 <ChevronDown
@@ -242,7 +242,7 @@ export default function ChecklistPage() {
                                 )}
                               >
                                 <p className="text-xs text-gray-500 leading-relaxed">
-                                  {item.description}
+                                  {t.checklist.items[item.id]?.description ?? item.description}
                                 </p>
                               </div>
                             )}

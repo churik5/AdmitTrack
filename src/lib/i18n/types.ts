@@ -585,5 +585,10 @@ export interface Translations {
   checklist: {
     title: string
     subtitle: string
+    overallProgress: string
+    of: string
+    tasksCompleted: string
+    categories: Record<string, string>
+    items: Record<string, { label: string; description: string }>
   }
 }
