@@ -461,7 +461,7 @@ export default function ResearchDetailPage() {
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
-          Are you sure you want to delete <strong>{research.title}</strong>? This action cannot be undone.
+          {t.common.confirmDelete} <strong>{research.title}</strong>
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>

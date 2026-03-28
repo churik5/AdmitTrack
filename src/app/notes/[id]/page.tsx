@@ -332,8 +332,7 @@ export default function NoteDetailPage() {
         size="sm"
       >
         <p className="text-sm text-gray-600 mb-4">
-          Are you sure you want to delete <strong>{note.title}</strong>? This action cannot be
-          undone.
+          {t.common.confirmDelete} <strong>{note.title}</strong>
         </p>
         <div className="flex justify-end gap-2">
           <Button variant="secondary" onClick={() => setConfirmDelete(false)}>
