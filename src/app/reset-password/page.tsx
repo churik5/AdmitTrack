@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useI18n } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase/client'
 import Button from '@/components/ui/Button'
-import { GraduationCap, CheckCircle, Eye, EyeOff, KeyRound } from 'lucide-react'
+import { GraduationCap, CheckCircle, Eye, EyeOff, KeyRound, Loader2 } from 'lucide-react'
 
 export default function ResetPasswordPage() {
   const { t, locale, setLocale, availableLocales } = useI18n()
@@ -13,8 +13,29 @@ export default function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [sessionReady, setSessionReady] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const supabase = createClient()
+
+    // Listen for PASSWORD_RECOVERY event from Supabase
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        setSessionReady(true)
+      }
+    })
+
+    // Also check if there's already a session (user came back to page)
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setSessionReady(true)
+      }
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -45,25 +66,40 @@ export default function ResetPasswordPage() {
     }
   }
 
+  const LanguageSwitcher = () => (
+    <div className="fixed top-4 right-4 flex gap-1">
+      {availableLocales.map((l) => (
+        <button
+          key={l.code}
+          onClick={() => setLocale(l.code)}
+          className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
+            locale === l.code
+              ? 'bg-brand-600 text-white'
+              : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+          }`}
+        >
+          {l.flag}
+        </button>
+      ))}
+    </div>
+  )
+
+  if (!sessionReady) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <LanguageSwitcher />
+        <div className="w-full max-w-sm text-center animate-fade-in">
+          <Loader2 size={32} className="text-brand-600 animate-spin mx-auto mb-4" />
+          <p className="text-sm text-surface-500">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
   if (done) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="fixed top-4 right-4 flex gap-1">
-          {availableLocales.map((l) => (
-            <button
-              key={l.code}
-              onClick={() => setLocale(l.code)}
-              className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
-                locale === l.code
-                  ? 'bg-brand-600 text-white'
-                  : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
-              }`}
-            >
-              {l.flag}
-            </button>
-          ))}
-        </div>
-
+        <LanguageSwitcher />
         <div className="w-full max-w-sm text-center animate-fade-in">
           <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-5">
             <CheckCircle size={32} className="text-green-600" />
@@ -82,22 +118,7 @@ export default function ResetPasswordPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="fixed top-4 right-4 flex gap-1">
-        {availableLocales.map((l) => (
-          <button
-            key={l.code}
-            onClick={() => setLocale(l.code)}
-            className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
-              locale === l.code
-                ? 'bg-brand-600 text-white'
-                : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
-            }`}
-          >
-            {l.flag}
-          </button>
-        ))}
-      </div>
-
+      <LanguageSwitcher />
       <div className="w-full max-w-sm animate-fade-in">
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-5 shadow-elevated">
