@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { AuthChangeEvent } from '@supabase/supabase-js'
 import { useI18n } from '@/lib/i18n'
 import { createClient } from '@/lib/supabase/client'
 import Button from '@/components/ui/Button'
@@ -21,7 +22,7 @@ export default function ResetPasswordPage() {
     const supabase = createClient()
 
     // Listen for PASSWORD_RECOVERY event from Supabase
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
       if (event === 'PASSWORD_RECOVERY') {
         setSessionReady(true)
       }
