@@ -115,7 +115,7 @@ export default function TermsPage() {
             <p>We are not responsible for the independent practices or failures of third-party services beyond our control.</p>
 
             <h2>12. Privacy</h2>
-            <p>Your use of the Service is also governed by the <Link href="/privacy" className="text-brand-600 hover:underline">Privacy Policy</Link>, which explains how personal information is collected, used, stored, and deleted.</p>
+            <p>Your use of the Service is also governed by the Privacy Policy available at <a href="https://admittrack.app/privacy" target="_blank" rel="noopener noreferrer">https://admittrack.app/privacy</a>, which explains how personal information is collected, used, stored, and deleted.</p>
 
             <h2>13. Termination</h2>
             <p>We may suspend or terminate access to the Service if:</p>
@@ -127,7 +127,7 @@ export default function TermsPage() {
             <p>You may stop using the Service at any time and may delete your account if that functionality is available.</p>
 
             <h2>14. Governing Law</h2>
-            <p>These Terms are governed by the laws applicable to the operator of the Service, unless mandatory law in your jurisdiction requires otherwise.</p>
+            <p>These Terms are governed by the laws of the Russian Federation, unless mandatory law in your jurisdiction requires otherwise.</p>
 
             <h2>15. Changes to These Terms</h2>
             <p>We may update these Terms from time to time.</p>
