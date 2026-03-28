@@ -146,6 +146,13 @@ export default function Sidebar() {
           </button>
         )}
       </div>
+
+      {/* Legal links */}
+      <div className="px-6 py-2 border-t border-surface-100 flex gap-3 text-[11px] text-surface-300">
+        <Link href="/privacy" className="hover:text-surface-500 transition-colors">Privacy</Link>
+        <Link href="/terms" className="hover:text-surface-500 transition-colors">Terms</Link>
+        <Link href="/support" className="hover:text-surface-500 transition-colors">Support</Link>
+      </div>
     </aside>
   )
 }
