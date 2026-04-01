@@ -327,48 +327,48 @@ export default function UniversitiesPage() {
         <div className="space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.universities.universityName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. MIT, Stanford, UCLA"
             />
           </div>
 
           {/* Location / Region */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.state}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.universities.state}</label>
             <input
               type="text"
               value={form.state}
               onChange={(e) => setForm({ ...form, state: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
             />
           </div>
 
           {/* Website */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.website}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.universities.website}</label>
             <input
               type="url"
               value={form.website}
               onChange={(e) => setForm({ ...form, website: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="https://..."
             />
           </div>
 
           {/* Application Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.applicationType}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.universities.applicationType}</label>
             <select
               value={form.applicationType}
               onChange={(e) => setForm({ ...form, applicationType: e.target.value as ApplicationType })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {APP_TYPE_KEYS.map((key) => (
                 <option key={key} value={key}>
@@ -380,11 +380,11 @@ export default function UniversitiesPage() {
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.status}</label>
             <select
               value={form.status}
               onChange={(e) => setForm({ ...form, status: e.target.value as UniversityStatus })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {STATUS_DROPDOWN_KEYS.map((key) => (
                 <option key={key} value={key}>
@@ -396,12 +396,12 @@ export default function UniversitiesPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any notes about this university..."
             />
           </div>
