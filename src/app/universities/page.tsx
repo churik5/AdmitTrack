@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { GraduationCap, Plus, Globe, MapPin, Calendar, StickyNote, ArrowUpDown } from 'lucide-react'
 import PageHeader from '@/components/layout/PageHeader'
@@ -65,24 +65,41 @@ export default function UniversitiesPage() {
   const [form, setForm] = useState<FormData>(emptyForm)
   const [reorderMode, setReorderMode] = useState(false)
   const [localOrder, setLocalOrder] = useState<University[]>([])
+  const [savedOrder, setSavedOrder] = useState<string[]>([])
+
+  // Load saved order from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('admittrack_uni_order')
+      if (stored) setSavedOrder(JSON.parse(stored))
+    } catch {}
+  }, [])
+
+  // Apply saved order to universities
+  const orderedUniversities = useMemo(() => {
+    if (savedOrder.length === 0) return universities
+    const orderMap = new Map(savedOrder.map((id, idx) => [id, idx]))
+    return [...universities].sort((a, b) => {
+      const aIdx = orderMap.get(a.id) ?? 999
+      const bIdx = orderMap.get(b.id) ?? 999
+      return aIdx - bIdx
+    })
+  }, [universities, savedOrder])
 
   function enterReorder() {
-    setLocalOrder([...universities])
+    setLocalOrder([...orderedUniversities])
     setReorderMode(true)
   }
 
-  async function saveReorder() {
-    // Save new order by updating each with a sortOrder
-    for (let i = 0; i < localOrder.length; i++) {
-      if (localOrder[i].id !== universities[i]?.id) {
-        await update(localOrder[i].id, { sortOrder: i } as Partial<University>)
-      }
-    }
+  function saveReorder() {
+    const newOrder = localOrder.map(u => u.id)
+    localStorage.setItem('admittrack_uni_order', JSON.stringify(newOrder))
+    setSavedOrder(newOrder)
     setReorderMode(false)
   }
 
   const filtered = useMemo(() => {
-    return universities.filter((u) => {
+    return orderedUniversities.filter((u) => {
       const matchesSearch =
         !search ||
         u.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -90,7 +107,7 @@ export default function UniversitiesPage() {
       const matchesStatus = statusFilter === 'all' || u.status === statusFilter
       return matchesSearch && matchesStatus
     })
-  }, [universities, search, statusFilter])
+  }, [orderedUniversities, search, statusFilter])
 
   const deadlineCountMap = useMemo(() => {
     const map: Record<string, number> = {}

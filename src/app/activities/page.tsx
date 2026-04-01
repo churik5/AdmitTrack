@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Activity as ActivityIcon, Plus, Clock, Building2, Users, Info, ArrowUpDown, Download } from 'lucide-react'
 import { exportActivitiesPdf } from '@/lib/pdf/exportActivities'
@@ -63,23 +63,41 @@ export default function ActivitiesPage() {
   const [form, setForm] = useState<FormData>(emptyForm)
   const [reorderMode, setReorderMode] = useState(false)
   const [localOrder, setLocalOrder] = useState<Activity[]>([])
+  const [savedOrder, setSavedOrder] = useState<string[]>([])
+
+  // Load saved order from localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('admittrack_act_order')
+      if (stored) setSavedOrder(JSON.parse(stored))
+    } catch {}
+  }, [])
+
+  // Apply saved order to activities
+  const orderedActivities = useMemo(() => {
+    if (savedOrder.length === 0) return activities
+    const orderMap = new Map(savedOrder.map((id, idx) => [id, idx]))
+    return [...activities].sort((a, b) => {
+      const aIdx = orderMap.get(a.id) ?? 999
+      const bIdx = orderMap.get(b.id) ?? 999
+      return aIdx - bIdx
+    })
+  }, [activities, savedOrder])
 
   function enterReorder() {
-    setLocalOrder([...activities])
+    setLocalOrder([...orderedActivities])
     setReorderMode(true)
   }
 
-  async function saveReorder() {
-    for (let i = 0; i < localOrder.length; i++) {
-      if (localOrder[i].id !== activities[i]?.id) {
-        await update(localOrder[i].id, { sortOrder: i } as Partial<Activity>)
-      }
-    }
+  function saveReorder() {
+    const newOrder = localOrder.map(a => a.id)
+    localStorage.setItem('admittrack_act_order', JSON.stringify(newOrder))
+    setSavedOrder(newOrder)
     setReorderMode(false)
   }
 
   const filtered = useMemo(() => {
-    return activities.filter((a) => {
+    return orderedActivities.filter((a) => {
       const matchesSearch =
         !search ||
         a.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -88,7 +106,7 @@ export default function ActivitiesPage() {
       const matchesCategory = categoryFilter === 'all' || a.category === categoryFilter
       return matchesSearch && matchesCategory
     })
-  }, [activities, search, categoryFilter])
+  }, [orderedActivities, search, categoryFilter])
 
   const usedCategories = useMemo(() => {
     const cats = new Set(activities.map((a) => a.category))
