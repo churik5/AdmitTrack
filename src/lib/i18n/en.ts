@@ -40,6 +40,12 @@ export const en: Translations = {
     password: 'Password',
     confirmPassword: 'Confirm Password',
     or: 'or',
+    darkMode: 'Dark Mode',
+    lightMode: 'Light Mode',
+    exportPdf: 'Export PDF',
+    exporting: 'Exporting...',
+    reorder: 'Reorder',
+    reorderDone: 'Done',
   },
 
   // Auth
@@ -59,6 +65,10 @@ export const en: Translations = {
     backToSignIn: 'Back to Sign In',
     minPassword: 'Password must be at least 6 characters',
     passwordsDontMatch: 'Passwords do not match',
+    passwordRequirements: 'Password does not meet requirements',
+    passwordMin8: 'At least 8 characters',
+    passwordUppercase: 'At least one uppercase letter',
+    passwordNumber: 'At least one number',
     forgotPassword: 'Forgot password?',
     resetPassword: 'Reset Password',
     resetPasswordSubtitle: 'Enter your email and we\'ll send you a reset link',
@@ -93,6 +103,7 @@ export const en: Translations = {
     application: 'Application',
     organize: 'Organize',
     help: 'Help',
+    financialAid: 'Financial Aid',
   },
 
   // Dashboard
@@ -117,6 +128,13 @@ export const en: Translations = {
     today: 'Today',
     tomorrow: 'Tomorrow',
     daysLeft: 'days left',
+    universityProgress: 'University Progress',
+    requirementsFulfilled: 'requirements fulfilled',
+    deadlineCountdown: 'Next Deadline',
+    daysUntilNext: 'days until next deadline',
+    noRequirements: 'No requirements tracked yet',
+    hours: 'hours',
+    minutes: 'minutes',
   },
 
   // Universities
@@ -160,6 +178,7 @@ export const en: Translations = {
       essays: 'Essays',
       documents: 'Documents',
       notes: 'Notes',
+      timeline: 'Timeline',
     },
   },
 
@@ -676,6 +695,62 @@ export const en: Translations = {
     challengeSubtext: 'The best challenge essays spend most of their word count on response and growth, not the problem.',
     doLabel: 'Do',
     dontLabel: 'Don\'t',
+  },
+
+  // Financial Aid
+  financialAid: {
+    title: 'Financial Aid',
+    subtitle: 'Track FAFSA, CSS Profile, scholarships, and costs per university',
+    addEntry: 'Add Entry',
+    editEntry: 'Edit Entry',
+    universityName: 'University Name',
+    fafsaStatus: 'FAFSA Status',
+    cssProfileStatus: 'CSS Profile Status',
+    scholarships: 'Scholarships',
+    addScholarship: 'Add Scholarship',
+    scholarshipName: 'Scholarship Name',
+    amount: 'Amount',
+    estimatedCost: 'Estimated Cost',
+    financialAidAmount: 'Financial Aid Amount',
+    netCost: 'Net Cost',
+    budgetNotes: 'Budget Notes',
+    totalBudget: 'Total Budget Summary',
+    noEntries: 'No financial aid entries yet',
+    noEntriesDesc: 'Track FAFSA, CSS Profile status, scholarships, and estimated costs for each university.',
+    firstEntry: 'Add Your First Entry',
+    totalEstimated: 'Total Estimated Cost',
+    totalAid: 'Total Aid',
+    totalNet: 'Total Net Cost',
+    statuses: {
+      not_started: 'Not Started',
+      in_progress: 'In Progress',
+      submitted: 'Submitted',
+      received: 'Received',
+    },
+  },
+
+  // Timeline
+  timeline: {
+    title: 'Decision Timeline',
+    addEvent: 'Add Event',
+    editEvent: 'Edit Event',
+    deleteEvent: 'Delete Event',
+    eventType: 'Event Type',
+    eventDate: 'Event Date',
+    noEvents: 'No events yet',
+    noEventsDesc: 'Track application milestones: when you applied, interviews, decisions, and more.',
+    eventTypes: {
+      applied: 'Applied',
+      interview: 'Interview',
+      response_received: 'Response Received',
+      accepted: 'Accepted',
+      rejected: 'Rejected',
+      waitlisted: 'Waitlisted',
+      deferred: 'Deferred',
+      enrolled: 'Enrolled',
+      withdrawn: 'Withdrawn',
+      other: 'Other',
+    },
   },
 
   // Checklist

@@ -44,6 +44,7 @@ export interface University extends BaseEntity {
   notes: string
   requirements: Requirement[]
   tags: string[]
+  sortOrder?: number
 }
 
 export interface Requirement {
@@ -71,6 +72,7 @@ export interface Activity extends BaseEntity {
   links: string[]
   notes: string
   tags: string[]
+  sortOrder?: number
 }
 
 export type HonorLevel = 'school' | 'regional' | 'state' | 'national' | 'international'
@@ -192,4 +194,36 @@ export interface ChecklistItem {
   label: string
   completed: boolean
   description: string
+}
+
+// Financial Aid
+export type AidFormStatus = 'not_started' | 'in_progress' | 'submitted' | 'received'
+
+export interface Scholarship {
+  id: string
+  name: string
+  amount: number
+  status: string
+  deadline: string
+}
+
+export interface FinancialAid extends BaseEntity {
+  universityId: string
+  universityName: string
+  fafsaStatus: AidFormStatus
+  cssProfileStatus: AidFormStatus
+  scholarships: Scholarship[]
+  estimatedCost: number
+  financialAidAmount: number
+  budgetNotes: string
+}
+
+// Decision Timeline
+export type UniversityEventType = 'applied' | 'interview' | 'response_received' | 'accepted' | 'rejected' | 'waitlisted' | 'deferred' | 'enrolled' | 'withdrawn' | 'other'
+
+export interface UniversityEvent extends BaseEntity {
+  universityId: string
+  eventType: UniversityEventType
+  eventDate: string
+  notes: string
 }

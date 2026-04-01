@@ -14,9 +14,9 @@ const variantStyles: Record<string, string> = {
   primary:
     'bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800 focus:ring-brand-500/30 shadow-soft hover:shadow-card',
   secondary:
-    'bg-white text-surface-700 border border-surface-200 hover:bg-surface-50 hover:border-surface-300 focus:ring-brand-500/20 shadow-soft',
+    'bg-white text-surface-700 border border-surface-200 hover:bg-surface-50 hover:border-surface-300 focus:ring-brand-500/20 shadow-soft dark:bg-surface-800 dark:text-surface-200 dark:border-surface-700 dark:hover:bg-surface-700 dark:hover:border-surface-600',
   ghost:
-    'bg-transparent text-surface-600 hover:bg-surface-100 hover:text-surface-900 focus:ring-surface-300/40',
+    'bg-transparent text-surface-600 hover:bg-surface-100 hover:text-surface-900 focus:ring-surface-300/40 dark:text-surface-400 dark:hover:bg-surface-800 dark:hover:text-surface-100',
   danger:
     'bg-accent-coral text-white hover:bg-red-700 active:bg-red-800 focus:ring-red-500/30 shadow-soft',
 }

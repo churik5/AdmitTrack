@@ -8,6 +8,9 @@ import { useChecklist } from '@/lib/hooks/useChecklist'
 import { useI18n } from '@/lib/i18n'
 import { CHECKLIST_ITEMS } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import Button from '@/components/ui/Button'
+import { Download } from 'lucide-react'
+import { exportChecklistPdf } from '@/lib/pdf/exportChecklist'
 import { CheckSquare, Square, ChevronDown, ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 
@@ -101,6 +104,13 @@ export default function ChecklistPage() {
       <PageHeader
         title={t.checklist.title}
         description={t.checklist.subtitle}
+        action={
+          items.length > 0 ? (
+            <Button variant="secondary" size="sm" icon={<Download size={15} />} onClick={() => exportChecklistPdf(items)}>
+              {t.common.exportPdf}
+            </Button>
+          ) : undefined
+        }
       />
 
       {/* Overall Progress */}

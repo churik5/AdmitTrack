@@ -20,10 +20,14 @@ import {
   User,
   X,
   LogOut,
+  DollarSign,
+  Moon,
+  Sun,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/lib/i18n'
 import { useAuth } from '@/lib/supabase/auth-context'
+import { useTheme } from '@/lib/theme'
 
 interface NavItem {
   labelKey: keyof import('@/lib/i18n/types').Translations['nav']
@@ -44,6 +48,7 @@ const moreItems: NavItem[] = [
   { labelKey: 'research', href: '/research', icon: Microscope },
   { labelKey: 'documents', href: '/documents', icon: FolderOpen },
   { labelKey: 'notes', href: '/notes', icon: StickyNote },
+  { labelKey: 'financialAid', href: '/financial-aid', icon: DollarSign },
   { labelKey: 'guides', href: '/guides', icon: BookOpen },
   { labelKey: 'examples', href: '/examples', icon: List },
   { labelKey: 'checklist', href: '/checklist', icon: CheckSquare },
@@ -55,6 +60,7 @@ export default function BottomNav() {
   const [showMore, setShowMore] = useState(false)
   const { t } = useI18n()
   const { signOut } = useAuth()
+  const { theme, toggleTheme } = useTheme()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
@@ -68,9 +74,9 @@ export default function BottomNav() {
             className="absolute inset-0 bg-surface-900/25 backdrop-blur-[2px] animate-fade-in"
             onClick={() => setShowMore(false)}
           />
-          <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-modal animate-slide-up max-h-[70vh] overflow-y-auto">
-            <div className="flex items-center justify-between px-5 py-4 border-b border-surface-100">
-              <h3 className="text-base font-display text-surface-900">{t.nav.more}</h3>
+          <div className="absolute bottom-0 left-0 right-0 bg-white dark:bg-surface-800 rounded-t-3xl shadow-modal animate-slide-up max-h-[70vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-surface-100 dark:border-surface-700">
+              <h3 className="text-base font-display text-surface-900 dark:text-surface-100">{t.nav.more}</h3>
               <button
                 onClick={() => setShowMore(false)}
                 className="p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 transition-colors"
@@ -96,10 +102,17 @@ export default function BottomNav() {
                 </Link>
               ))}
             </div>
-            <div className="px-4 py-3 border-t border-surface-100">
+            <div className="px-4 py-3 border-t border-surface-100 dark:border-surface-700 space-y-1">
+              <button
+                onClick={() => { toggleTheme(); }}
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-surface-500 hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
+              >
+                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+                {theme === 'dark' ? t.common.lightMode : t.common.darkMode}
+              </button>
               <button
                 onClick={() => { setShowMore(false); signOut(); }}
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-colors"
               >
                 <LogOut size={16} />
                 {t.common.signOut}
@@ -115,7 +128,7 @@ export default function BottomNav() {
       )}
 
       {/* Bottom bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-md border-t border-surface-200/60 md:hidden safe-area-bottom">
+      <nav className="fixed bottom-0 left-0 right-0 z-30 bg-white/80 dark:bg-surface-900/80 backdrop-blur-md border-t border-surface-200/60 dark:border-surface-700/60 md:hidden safe-area-bottom">
         <div className="flex items-center justify-around px-2 py-1.5">
           {mainItems.map((item) => (
             <Link

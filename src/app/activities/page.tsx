@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { Activity as ActivityIcon, Plus, Clock, Building2, Users, Info } from 'lucide-react'
+import { Activity as ActivityIcon, Plus, Clock, Building2, Users, Info, ArrowUpDown, Download } from 'lucide-react'
+import { exportActivitiesPdf } from '@/lib/pdf/exportActivities'
 import PageHeader from '@/components/layout/PageHeader'
 import SearchInput from '@/components/ui/SearchInput'
 import Card from '@/components/ui/Card'
@@ -10,6 +11,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
+import SortableList from '@/components/ui/SortableList'
 import { useActivities } from '@/lib/hooks/useActivities'
 import { useI18n } from '@/lib/i18n'
 import { Activity, ActivityCategory } from '@/lib/types'
@@ -59,6 +61,22 @@ export default function ActivitiesPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>(emptyForm)
+  const [reorderMode, setReorderMode] = useState(false)
+  const [localOrder, setLocalOrder] = useState<Activity[]>([])
+
+  function enterReorder() {
+    setLocalOrder([...activities])
+    setReorderMode(true)
+  }
+
+  async function saveReorder() {
+    for (let i = 0; i < localOrder.length; i++) {
+      if (localOrder[i].id !== activities[i]?.id) {
+        await update(localOrder[i].id, { sortOrder: i } as Partial<Activity>)
+      }
+    }
+    setReorderMode(false)
+  }
 
   const filtered = useMemo(() => {
     return activities.filter((a) => {
@@ -140,9 +158,28 @@ export default function ActivitiesPage() {
         title={t.activities.title}
         description={t.activities.subtitle}
         action={
-          <Button onClick={openAdd} icon={<Plus size={18} />}>
-            {t.activities.addActivity}
-          </Button>
+          <div className="flex gap-2">
+            {activities.length > 0 && !reorderMode && (
+              <Button variant="secondary" size="sm" icon={<Download size={15} />} onClick={() => exportActivitiesPdf(activities)}>
+                {t.common.exportPdf}
+              </Button>
+            )}
+            {activities.length > 1 && !reorderMode && (
+              <Button variant="secondary" onClick={enterReorder} icon={<ArrowUpDown size={16} />}>
+                {t.common.reorder}
+              </Button>
+            )}
+            {reorderMode && (
+              <Button onClick={saveReorder}>
+                {t.common.reorderDone}
+              </Button>
+            )}
+            {!reorderMode && (
+              <Button onClick={openAdd} icon={<Plus size={18} />}>
+                {t.activities.addActivity}
+              </Button>
+            )}
+          </div>
         }
       />
 
@@ -211,8 +248,26 @@ export default function ActivitiesPage() {
         </div>
       )}
 
+      {/* Reorder Mode */}
+      {reorderMode && localOrder.length > 0 && (
+        <div className="mb-6">
+          <SortableList
+            items={localOrder}
+            onReorder={setLocalOrder}
+            renderItem={(activity) => (
+              <Card className="!p-3 flex items-center gap-3">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-surface-100 text-sm truncate">{activity.name}</h3>
+                  <p className="text-xs text-gray-500">{activity.role}{activity.organization ? ` · ${activity.organization}` : ''}</p>
+                </div>
+              </Card>
+            )}
+          />
+        </div>
+      )}
+
       {/* Grid */}
-      {filtered.length > 0 && (
+      {!reorderMode && filtered.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((activity) => (
             <Card

@@ -25,6 +25,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
+import DecisionTimeline from '@/components/timeline/DecisionTimeline'
 import { useUniversities } from '@/lib/hooks/useUniversities'
 import { useDeadlines } from '@/lib/hooks/useDeadlines'
 import { useEssays } from '@/lib/hooks/useEssays'
@@ -53,7 +54,7 @@ import {
 import { getLinksFor, createLink, removeLink } from '@/lib/storage'
 import { useI18n } from '@/lib/i18n'
 
-const DETAIL_TAB_KEYS = ['overview', 'deadlines', 'requirements', 'essays', 'documents', 'notes'] as const
+const DETAIL_TAB_KEYS = ['overview', 'deadlines', 'requirements', 'essays', 'documents', 'notes', 'timeline'] as const
 
 const STATUS_OPTION_KEYS: UniversityStatus[] = [
   'researching', 'planning', 'in_progress', 'submitted', 'accepted', 'rejected', 'waitlisted', 'deferred', 'withdrawn',
@@ -763,6 +764,10 @@ export default function UniversityDetailPage() {
         )}
 
         {/* ==================== NOTES TAB ==================== */}
+        {activeTab === 'timeline' && university && (
+          <DecisionTimeline universityId={university.id} />
+        )}
+
         {activeTab === 'notes' && (
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">Notes</h3>

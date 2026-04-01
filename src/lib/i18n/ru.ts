@@ -40,6 +40,12 @@ export const ru: Translations = {
     password: 'Пароль',
     confirmPassword: 'Подтверди пароль',
     or: 'или',
+    darkMode: 'Тёмная тема',
+    lightMode: 'Светлая тема',
+    exportPdf: 'Экспорт PDF',
+    exporting: 'Экспорт...',
+    reorder: 'Изменить порядок',
+    reorderDone: 'Готово',
   },
 
   // Auth
@@ -59,6 +65,10 @@ export const ru: Translations = {
     backToSignIn: 'Вернуться ко входу',
     minPassword: 'Минимум 6 символов',
     passwordsDontMatch: 'Пароли не совпадают',
+    passwordRequirements: 'Пароль не соответствует требованиям',
+    passwordMin8: 'Минимум 8 символов',
+    passwordUppercase: 'Минимум одна заглавная буква',
+    passwordNumber: 'Минимум одна цифра',
     forgotPassword: 'Забыли пароль?',
     resetPassword: 'Сброс пароля',
     resetPasswordSubtitle: 'Введите email и мы отправим ссылку для сброса',
@@ -93,6 +103,7 @@ export const ru: Translations = {
     application: 'Заявка',
     organize: 'Организация',
     help: 'Помощь',
+    financialAid: 'Финансовая помощь',
   },
 
   // Dashboard
@@ -117,6 +128,13 @@ export const ru: Translations = {
     today: 'Сегодня',
     tomorrow: 'Завтра',
     daysLeft: 'дн. осталось',
+    universityProgress: 'Прогресс университетов',
+    requirementsFulfilled: 'требований выполнено',
+    deadlineCountdown: 'Ближайший дедлайн',
+    daysUntilNext: 'дней до ближайшего дедлайна',
+    noRequirements: 'Требования не отслеживаются',
+    hours: 'часов',
+    minutes: 'минут',
   },
 
   // Universities
@@ -160,6 +178,7 @@ export const ru: Translations = {
       essays: 'Эссе',
       documents: 'Документы',
       notes: 'Заметки',
+      timeline: 'Таймлайн',
     },
   },
 
@@ -675,6 +694,62 @@ export const ru: Translations = {
     challengeSubtext: 'Лучшие эссе о трудностях тратят большую часть слов на ответ и рост, а не на саму проблему.',
     doLabel: 'Делай',
     dontLabel: 'Не делай',
+  },
+
+  // Financial Aid
+  financialAid: {
+    title: 'Финансовая помощь',
+    subtitle: 'Отслеживайте FAFSA, CSS Profile, стипендии и расходы по университетам',
+    addEntry: 'Добавить запись',
+    editEntry: 'Редактировать',
+    universityName: 'Университет',
+    fafsaStatus: 'Статус FAFSA',
+    cssProfileStatus: 'Статус CSS Profile',
+    scholarships: 'Стипендии',
+    addScholarship: 'Добавить стипендию',
+    scholarshipName: 'Название стипендии',
+    amount: 'Сумма',
+    estimatedCost: 'Примерная стоимость',
+    financialAidAmount: 'Сумма помощи',
+    netCost: 'Чистая стоимость',
+    budgetNotes: 'Заметки по бюджету',
+    totalBudget: 'Общий бюджет',
+    noEntries: 'Записей пока нет',
+    noEntriesDesc: 'Отслеживайте статус FAFSA, CSS Profile, стипендии и расходы по университетам.',
+    firstEntry: 'Добавить первую запись',
+    totalEstimated: 'Общая стоимость',
+    totalAid: 'Общая помощь',
+    totalNet: 'Итого к оплате',
+    statuses: {
+      not_started: 'Не начато',
+      in_progress: 'В процессе',
+      submitted: 'Отправлено',
+      received: 'Получено',
+    },
+  },
+
+  // Timeline
+  timeline: {
+    title: 'Таймлайн решений',
+    addEvent: 'Добавить событие',
+    editEvent: 'Редактировать',
+    deleteEvent: 'Удалить событие',
+    eventType: 'Тип события',
+    eventDate: 'Дата',
+    noEvents: 'Событий пока нет',
+    noEventsDesc: 'Отслеживайте этапы: подача заявки, собеседования, решения и др.',
+    eventTypes: {
+      applied: 'Подал заявку',
+      interview: 'Собеседование',
+      response_received: 'Ответ получен',
+      accepted: 'Принят',
+      rejected: 'Отказ',
+      waitlisted: 'Лист ожидания',
+      deferred: 'Отложен',
+      enrolled: 'Зачислен',
+      withdrawn: 'Отозвал',
+      other: 'Другое',
+    },
   },
 
   // Checklist

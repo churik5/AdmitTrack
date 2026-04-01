@@ -13,6 +13,7 @@ import { useI18n } from '@/lib/i18n'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
+import ProgressBar from '@/components/ui/ProgressBar'
 import {
   GraduationCap,
   Trophy,
@@ -26,6 +27,8 @@ import {
   Sparkles,
   ArrowRight,
   ChevronRight,
+  Timer,
+  CheckCircle2,
 } from 'lucide-react'
 import { daysUntil, getDeadlineColor, formatDateShort, cn } from '@/lib/utils'
 
@@ -115,6 +118,67 @@ export default function DashboardPage() {
           </Link>
         ))}
       </div>
+
+      {/* Deadline Countdown Banner */}
+      {upcomingDeadlines.length > 0 && (() => {
+        const next = upcomingDeadlines[0]
+        const days = daysUntil(next.date)
+        return (
+          <Card className="mb-6 !p-4 border-l-4 border-l-brand-500">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-950 flex items-center justify-center shrink-0">
+                <Timer size={22} className="text-brand-600" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-surface-500 font-medium">{t.dashboard.deadlineCountdown}</p>
+                <p className="text-sm font-semibold text-surface-900 dark:text-surface-100 truncate">{next.title}</p>
+                <p className="text-xs text-surface-500">{next.universityName ? `${next.universityName} · ` : ''}{formatDateShort(next.date)}</p>
+              </div>
+              <div className="text-right shrink-0">
+                <p className="text-3xl font-bold text-brand-600">{days}</p>
+                <p className="text-xs text-surface-500">{t.dashboard.daysLeft}</p>
+              </div>
+            </div>
+          </Card>
+        )
+      })()}
+
+      {/* University Progress */}
+      {universities.length > 0 && universities.some(u => u.requirements && u.requirements.length > 0) && (
+        <Card className="mb-6">
+          <div className="flex items-center gap-2.5 mb-4">
+            <CheckCircle2 size={18} className="text-surface-400" />
+            <h2 className="text-lg font-display text-surface-900 dark:text-surface-100">{t.dashboard.universityProgress}</h2>
+          </div>
+          <div className="space-y-3">
+            {universities
+              .filter(u => u.requirements && u.requirements.length > 0)
+              .slice(0, 6)
+              .map(u => {
+                const total = u.requirements.length
+                const done = u.requirements.filter(r => r.completed).length
+                const pct = Math.round((done / total) * 100)
+                return (
+                  <Link key={u.id} href={`/universities/${u.id}`} className="block group">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm font-medium text-surface-800 dark:text-surface-200 group-hover:text-brand-600 transition-colors truncate">{u.name}</span>
+                      <span className="text-xs text-surface-500 shrink-0 ml-2">{done}/{total}</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-surface-200 dark:bg-surface-700 rounded-full overflow-hidden">
+                      <div
+                        className={cn(
+                          'h-full rounded-full transition-all duration-500',
+                          pct === 100 ? 'bg-green-500' : 'bg-gradient-to-r from-brand-500 to-brand-600'
+                        )}
+                        style={{ width: `${pct}%` }}
+                      />
+                    </div>
+                  </Link>
+                )
+              })}
+          </div>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Upcoming Deadlines */}

@@ -9,7 +9,8 @@ import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import ProgressBar from '@/components/ui/ProgressBar'
-import { Save, Plus, Trash2, AlertTriangle } from 'lucide-react'
+import { Save, Plus, Trash2, AlertTriangle, Download } from 'lucide-react'
+import { exportProfilePdf } from '@/lib/pdf/exportProfile'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/lib/supabase/auth-context'
 import { useRouter } from 'next/navigation'
@@ -131,7 +132,17 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <PageHeader title={t.profile.title} description={t.profile.subtitle} />
+      <PageHeader
+        title={t.profile.title}
+        description={t.profile.subtitle}
+        action={
+          profile ? (
+            <Button variant="secondary" size="sm" icon={<Download size={15} />} onClick={() => exportProfilePdf(profile)}>
+              {t.common.exportPdf}
+            </Button>
+          ) : undefined
+        }
+      />
 
       {/* Profile Completeness */}
       <Card className="mb-6">

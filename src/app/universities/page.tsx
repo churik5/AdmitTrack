@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { GraduationCap, Plus, Globe, MapPin, Calendar, StickyNote } from 'lucide-react'
+import { GraduationCap, Plus, Globe, MapPin, Calendar, StickyNote, ArrowUpDown } from 'lucide-react'
 import PageHeader from '@/components/layout/PageHeader'
 import SearchInput from '@/components/ui/SearchInput'
 import Card from '@/components/ui/Card'
@@ -10,6 +10,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
+import SortableList from '@/components/ui/SortableList'
 import { useUniversities } from '@/lib/hooks/useUniversities'
 import { useDeadlines } from '@/lib/hooks/useDeadlines'
 import { useI18n } from '@/lib/i18n'
@@ -62,6 +63,23 @@ export default function UniversitiesPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState<FormData>(emptyForm)
+  const [reorderMode, setReorderMode] = useState(false)
+  const [localOrder, setLocalOrder] = useState<University[]>([])
+
+  function enterReorder() {
+    setLocalOrder([...universities])
+    setReorderMode(true)
+  }
+
+  async function saveReorder() {
+    // Save new order by updating each with a sortOrder
+    for (let i = 0; i < localOrder.length; i++) {
+      if (localOrder[i].id !== universities[i]?.id) {
+        await update(localOrder[i].id, { sortOrder: i } as Partial<University>)
+      }
+    }
+    setReorderMode(false)
+  }
 
   const filtered = useMemo(() => {
     return universities.filter((u) => {
@@ -131,9 +149,23 @@ export default function UniversitiesPage() {
         title={t.universities.title}
         description={t.universities.subtitle}
         action={
-          <Button onClick={openAdd} icon={<Plus size={18} />}>
-            {t.universities.addUniversity}
-          </Button>
+          <div className="flex gap-2">
+            {universities.length > 1 && !reorderMode && (
+              <Button variant="secondary" onClick={enterReorder} icon={<ArrowUpDown size={16} />}>
+                {t.common.reorder}
+              </Button>
+            )}
+            {reorderMode && (
+              <Button onClick={saveReorder}>
+                {t.common.reorderDone}
+              </Button>
+            )}
+            {!reorderMode && (
+              <Button onClick={openAdd} icon={<Plus size={18} />}>
+                {t.universities.addUniversity}
+              </Button>
+            )}
+          </div>
         }
       />
 
@@ -188,8 +220,28 @@ export default function UniversitiesPage() {
         </div>
       )}
 
+      {/* Reorder Mode */}
+      {reorderMode && localOrder.length > 0 && (
+        <div className="mb-6">
+          <SortableList
+            items={localOrder}
+            onReorder={setLocalOrder}
+            renderItem={(uni) => (
+              <Card className="!p-3 flex items-center gap-3">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 dark:text-surface-100 text-sm truncate">{uni.name}</h3>
+                  <div className="flex gap-1.5 mt-1">
+                    <Badge variant={uni.status}>{t.universities.statuses[uni.status]}</Badge>
+                  </div>
+                </div>
+              </Card>
+            )}
+          />
+        </div>
+      )}
+
       {/* Grid */}
-      {filtered.length > 0 && (
+      {!reorderMode && filtered.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((uni) => (
             <Card

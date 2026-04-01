@@ -12,9 +12,9 @@ interface CardProps {
 
 export default function Card({ children, className, onClick, variant = 'default' }: CardProps) {
   const variantStyles = {
-    default: 'bg-white/80 backdrop-blur-sm border border-surface-200/80 shadow-card',
-    elevated: 'bg-white border border-surface-200/60 shadow-elevated',
-    outlined: 'bg-transparent border border-surface-200 shadow-none',
+    default: 'bg-white/80 backdrop-blur-sm border border-surface-200/80 shadow-card dark:bg-surface-800/80 dark:border-surface-700/80',
+    elevated: 'bg-white border border-surface-200/60 shadow-elevated dark:bg-surface-800 dark:border-surface-700/60',
+    outlined: 'bg-transparent border border-surface-200 shadow-none dark:border-surface-700',
   }
 
   return (

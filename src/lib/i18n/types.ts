@@ -40,6 +40,12 @@ export interface Translations {
     password: string
     confirmPassword: string
     or: string
+    darkMode: string
+    lightMode: string
+    exportPdf: string
+    exporting: string
+    reorder: string
+    reorderDone: string
   }
 
   // Auth
@@ -59,6 +65,10 @@ export interface Translations {
     backToSignIn: string
     minPassword: string
     passwordsDontMatch: string
+    passwordRequirements: string
+    passwordMin8: string
+    passwordUppercase: string
+    passwordNumber: string
     forgotPassword: string
     resetPassword: string
     resetPasswordSubtitle: string
@@ -93,6 +103,7 @@ export interface Translations {
     application: string
     organize: string
     help: string
+    financialAid: string
   }
 
   // Dashboard
@@ -117,6 +128,13 @@ export interface Translations {
     today: string
     tomorrow: string
     daysLeft: string
+    universityProgress: string
+    requirementsFulfilled: string
+    deadlineCountdown: string
+    daysUntilNext: string
+    noRequirements: string
+    hours: string
+    minutes: string
   }
 
   // Universities
@@ -160,6 +178,7 @@ export interface Translations {
       essays: string
       documents: string
       notes: string
+      timeline: string
     }
   }
 
@@ -606,6 +625,62 @@ export interface Translations {
     challengeSubtext: string
     doLabel: string
     dontLabel: string
+  }
+
+  // Financial Aid
+  financialAid: {
+    title: string
+    subtitle: string
+    addEntry: string
+    editEntry: string
+    universityName: string
+    fafsaStatus: string
+    cssProfileStatus: string
+    scholarships: string
+    addScholarship: string
+    scholarshipName: string
+    amount: string
+    estimatedCost: string
+    financialAidAmount: string
+    netCost: string
+    budgetNotes: string
+    totalBudget: string
+    noEntries: string
+    noEntriesDesc: string
+    firstEntry: string
+    totalEstimated: string
+    totalAid: string
+    totalNet: string
+    statuses: {
+      not_started: string
+      in_progress: string
+      submitted: string
+      received: string
+    }
+  }
+
+  // Timeline
+  timeline: {
+    title: string
+    addEvent: string
+    editEvent: string
+    deleteEvent: string
+    eventType: string
+    eventDate: string
+    noEvents: string
+    noEventsDesc: string
+    eventTypes: {
+      applied: string
+      interview: string
+      response_received: string
+      accepted: string
+      rejected: string
+      waitlisted: string
+      deferred: string
+      enrolled: string
+      withdrawn: string
+      other: string
+    }
   }
 
   // Checklist

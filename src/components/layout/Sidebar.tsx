@@ -17,10 +17,14 @@ import {
   CheckSquare,
   User,
   LogOut,
+  DollarSign,
+  Moon,
+  Sun,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/lib/supabase/auth-context'
 import { useI18n } from '@/lib/i18n'
+import { useTheme } from '@/lib/theme'
 
 interface NavItem {
   labelKey: keyof import('@/lib/i18n/types').Translations['nav']
@@ -56,6 +60,7 @@ const navGroups: NavGroup[] = [
     items: [
       { labelKey: 'documents', href: '/documents', icon: FolderOpen },
       { labelKey: 'notes', href: '/notes', icon: StickyNote },
+      { labelKey: 'financialAid', href: '/financial-aid', icon: DollarSign },
     ],
   },
   {
@@ -72,20 +77,21 @@ export default function Sidebar() {
   const pathname = usePathname()
   const { signOut, user } = useAuth()
   const { t } = useI18n()
+  const { theme, toggleTheme } = useTheme()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
 
   return (
-    <aside className="hidden md:flex flex-col w-[15rem] h-screen bg-white/70 backdrop-blur-md border-r border-surface-200/60 fixed left-0 top-0 z-30">
+    <aside className="hidden md:flex flex-col w-[15rem] h-screen bg-white/70 dark:bg-surface-900/70 backdrop-blur-md border-r border-surface-200/60 dark:border-surface-700/60 fixed left-0 top-0 z-30">
       {/* Logo */}
-      <div className="px-5 py-5 border-b border-surface-100">
+      <div className="px-5 py-5 border-b border-surface-100 dark:border-surface-800">
         <Link href="/dashboard" className="flex items-center gap-3">
           <div className="w-9 h-9 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl flex items-center justify-center shadow-soft">
             <GraduationCap size={18} className="text-white" />
           </div>
           <div>
-            <span className="text-base font-display text-surface-900 tracking-tight">AdmitTrack</span>
+            <span className="text-base font-display text-surface-900 dark:text-surface-100 tracking-tight">AdmitTrack</span>
           </div>
         </Link>
       </div>
@@ -94,7 +100,7 @@ export default function Sidebar() {
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
         {navGroups.map((group) => (
           <div key={group.titleKey}>
-            <p className="px-3 mb-1.5 text-[10px] font-semibold text-surface-400 uppercase tracking-[0.12em]">
+            <p className="px-3 mb-1.5 text-[10px] font-semibold text-surface-400 dark:text-surface-500 uppercase tracking-[0.12em]">
               {t.nav[group.titleKey]}
             </p>
             <ul className="space-y-0.5">
@@ -107,11 +113,11 @@ export default function Sidebar() {
                       className={cn(
                         'flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm transition-all duration-200',
                         active
-                          ? 'bg-brand-50 text-brand-700 font-medium shadow-soft'
-                          : 'text-surface-500 hover:bg-surface-100 hover:text-surface-800'
+                          ? 'bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-medium shadow-soft'
+                          : 'text-surface-500 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-800 dark:hover:text-surface-200'
                       )}
                     >
-                      <item.icon size={17} className={active ? 'text-brand-600' : 'text-surface-400'} />
+                      <item.icon size={17} className={active ? 'text-brand-600 dark:text-brand-400' : 'text-surface-400'} />
                       {t.nav[item.labelKey]}
                     </Link>
                   </li>
@@ -123,23 +129,30 @@ export default function Sidebar() {
       </nav>
 
       {/* Profile & Sign Out */}
-      <div className="px-3 py-3 border-t border-surface-100 space-y-0.5">
+      <div className="px-3 py-3 border-t border-surface-100 dark:border-surface-800 space-y-0.5">
         <Link
           href="/profile"
           className={cn(
             'flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm transition-all duration-200',
             isActive('/profile')
-              ? 'bg-brand-50 text-brand-700 font-medium'
-              : 'text-surface-500 hover:bg-surface-100 hover:text-surface-800'
+              ? 'bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 font-medium'
+              : 'text-surface-500 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-800 dark:hover:text-surface-200'
           )}
         >
-          <User size={17} className={isActive('/profile') ? 'text-brand-600' : 'text-surface-400'} />
+          <User size={17} className={isActive('/profile') ? 'text-brand-600 dark:text-brand-400' : 'text-surface-400'} />
           {t.nav.profile}
         </Link>
+        <button
+          onClick={toggleTheme}
+          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-surface-500 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-800 dark:hover:text-surface-200 transition-all duration-200 w-full"
+        >
+          {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+          {theme === 'dark' ? t.common.lightMode : t.common.darkMode}
+        </button>
         {user && (
           <button
             onClick={() => signOut()}
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-surface-400 hover:bg-red-50 hover:text-red-600 transition-all duration-200 w-full"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-surface-400 hover:bg-red-50 dark:hover:bg-red-950 hover:text-red-600 transition-all duration-200 w-full"
           >
             <LogOut size={17} />
             {t.common.signOut}
@@ -148,7 +161,7 @@ export default function Sidebar() {
       </div>
 
       {/* Legal links */}
-      <div className="px-6 py-2 border-t border-surface-100 flex gap-3 text-[11px] text-surface-300">
+      <div className="px-6 py-2 border-t border-surface-100 dark:border-surface-800 flex gap-3 text-[11px] text-surface-300">
         <Link href="/privacy" target="_blank" className="hover:text-surface-500 transition-colors">Privacy</Link>
         <Link href="/terms" target="_blank" className="hover:text-surface-500 transition-colors">Terms</Link>
         <Link href="/support" target="_blank" className="hover:text-surface-500 transition-colors">Support</Link>

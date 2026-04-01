@@ -19,6 +19,13 @@
     background-attachment: fixed;
   }
 
+  .dark body {
+    @apply bg-surface-900 text-surface-100;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(45, 71, 166, 0.08), transparent),
+      linear-gradient(180deg, rgba(30, 28, 26, 1) 0%, rgba(37, 34, 32, 1) 100%);
+  }
+
   /* Headings use serif display font */
   h1, h2 {
     @apply font-display;
@@ -28,6 +35,10 @@
   /* Selection color */
   ::selection {
     @apply bg-brand-200/60 text-brand-900;
+  }
+
+  .dark ::selection {
+    @apply bg-brand-700/40 text-brand-100;
   }
 
   /* Custom scrollbar */
@@ -48,10 +59,22 @@
     @apply bg-surface-400;
   }
 
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-surface-600 rounded-full;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-500;
+  }
+
   /* Firefox scrollbar */
   * {
     scrollbar-width: thin;
     scrollbar-color: theme('colors.surface.300') transparent;
+  }
+
+  .dark * {
+    scrollbar-color: theme('colors.surface.600') transparent;
   }
 }
 
@@ -64,8 +87,16 @@
       transition-all duration-200;
   }
 
+  .dark .input-base {
+    @apply bg-surface-800 border-surface-700 text-surface-100 placeholder:text-surface-500;
+  }
+
   .select-base {
     @apply input-base bg-white appearance-none cursor-pointer;
+  }
+
+  .dark .select-base {
+    @apply bg-surface-800;
   }
 
   .textarea-base {

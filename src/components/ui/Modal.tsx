@@ -50,21 +50,21 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-surface-900/30 backdrop-blur-[2px] animate-fade-in"
+        className="absolute inset-0 bg-surface-900/30 dark:bg-black/50 backdrop-blur-[2px] animate-fade-in"
         onClick={onClose}
       />
 
       {/* Modal */}
       <div
         className={cn(
-          'relative w-full bg-white rounded-2xl shadow-modal animate-scale-in border border-surface-200/50',
+          'relative w-full bg-white dark:bg-surface-800 rounded-2xl shadow-modal animate-scale-in border border-surface-200/50 dark:border-surface-700/50',
           sizeStyles[size]
         )}
       >
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-surface-100">
-            <h2 className="text-lg font-display text-surface-900">{title}</h2>
+          <div className="flex items-center justify-between px-6 py-4 border-b border-surface-100 dark:border-surface-700">
+            <h2 className="text-lg font-display text-surface-900 dark:text-surface-100">{title}</h2>
             <button
               onClick={onClose}
               className="p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 transition-all duration-200"

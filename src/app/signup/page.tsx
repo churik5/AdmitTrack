@@ -20,12 +20,20 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
+  const passwordChecks = [
+    { test: password.length >= 8, label: t.auth.passwordMin8 },
+    { test: /[A-Z]/.test(password), label: t.auth.passwordUppercase },
+    { test: /[0-9]/.test(password), label: t.auth.passwordNumber },
+  ]
+
+  const passwordValid = passwordChecks.every(c => c.test)
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email.trim() || !password) return
 
-    if (password.length < 6) {
-      setError(t.auth.minPassword)
+    if (!passwordValid) {
+      setError(t.auth.passwordRequirements)
       return
     }
 
@@ -147,7 +155,6 @@ export default function SignUpPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="input-base pr-10"
                 required
-                minLength={6}
               />
               <button
                 type="button"
@@ -157,6 +164,16 @@ export default function SignUpPage() {
                 {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
+            {password && (
+              <div className="mt-2 space-y-1">
+                {passwordChecks.map((check, i) => (
+                  <div key={i} className={`flex items-center gap-1.5 text-xs ${check.test ? 'text-green-600' : 'text-surface-400'}`}>
+                    <span>{check.test ? '\u2713' : '\u2022'}</span>
+                    <span>{check.label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           <div>
