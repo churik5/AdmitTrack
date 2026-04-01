@@ -16,10 +16,10 @@ import { cn, formatDate } from '@/lib/utils'
 import type { AidFormStatus, Scholarship } from '@/lib/types'
 
 const STATUS_COLORS: Record<AidFormStatus, string> = {
-  not_started: 'bg-gray-100 text-gray-600',
-  in_progress: 'bg-yellow-100 text-yellow-700',
-  submitted: 'bg-blue-100 text-blue-700',
-  received: 'bg-green-100 text-green-700',
+  not_started: 'bg-gray-100 text-gray-600 dark:bg-gray-900/30 dark:text-gray-400',
+  in_progress: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
+  submitted: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  received: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
 }
 
 export default function FinancialAidPage() {

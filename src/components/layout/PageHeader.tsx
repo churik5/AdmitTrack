@@ -23,7 +23,7 @@ export default function PageHeader({
         {backHref && (
           <Link
             href={backHref}
-            className="mt-1.5 p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 transition-all duration-200"
+            className="mt-1.5 p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-800 transition-all duration-200"
           >
             <ArrowLeft size={18} />
           </Link>

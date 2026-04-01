@@ -24,7 +24,7 @@ export default function ProgressBar({ value, label, className }: ProgressBarProp
           <span className="text-xs font-mono font-medium text-surface-500">{Math.round(clamped)}%</span>
         </div>
       )}
-      <div className="h-1.5 w-full bg-surface-200 rounded-full overflow-hidden">
+      <div className="h-1.5 w-full bg-surface-200 dark:bg-surface-700 rounded-full overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-brand-500 to-brand-600 rounded-full transition-all duration-500 ease-out"
           style={{ width: `${clamped}%` }}

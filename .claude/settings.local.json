@@ -12,7 +12,13 @@
       "Bash(git push:*)",
       "Bash(npm install:*)",
       "Bash(npx cap:*)",
-      "Bash(gem list:*)"
+      "Bash(gem list:*)",
+      "Bash(npx next:*)",
+      "Bash(ls -la /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/essays/[id]/)",
+      "Bash(ls -la /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/activities/[id]/)",
+      "Bash(head -30 /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/essays/[id]/page.tsx)",
+      "Bash(npm run:*)",
+      "mcp__Claude_Preview__preview_start"
     ]
   }
 }

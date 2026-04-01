@@ -13,7 +13,7 @@ function ConfirmedContent() {
   if (error) {
     return (
       <div className="w-full max-w-sm text-center animate-fade-in">
-        <div className="w-16 h-16 rounded-2xl bg-red-100 flex items-center justify-center mx-auto mb-5">
+        <div className="w-16 h-16 rounded-2xl bg-red-100 dark:bg-red-900/30 flex items-center justify-center mx-auto mb-5">
           <XCircle size={32} className="text-red-600" />
         </div>
         <h1 className="text-2xl font-display text-surface-900 mb-2">Verification failed</h1>
@@ -29,7 +29,7 @@ function ConfirmedContent() {
 
   return (
     <div className="w-full max-w-sm text-center animate-fade-in">
-      <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-5">
+      <div className="w-16 h-16 rounded-2xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-5">
         <CheckCircle size={32} className="text-green-600" />
       </div>
       <h1 className="text-2xl font-display text-surface-900 mb-2">Email confirmed!</h1>

@@ -47,7 +47,7 @@ export default function LoginPage() {
             className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
               locale === l.code
                 ? 'bg-brand-600 text-white'
-                : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+                : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-300 dark:hover:bg-surface-700'
             }`}
           >
             {l.flag}
@@ -68,7 +68,7 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            <div className="rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 px-4 py-3 text-sm text-red-700 dark:text-red-300">
               {error}
             </div>
           )}

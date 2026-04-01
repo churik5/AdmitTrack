@@ -20,12 +20,12 @@ export default function EmptyState({
 }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-20 px-4 text-center animate-fade-in">
-      <div className="w-16 h-16 rounded-2xl bg-surface-100 border border-surface-200/60 flex items-center justify-center mb-5">
-        <Icon size={28} className="text-surface-400" />
+      <div className="w-16 h-16 rounded-2xl bg-surface-100 dark:bg-surface-800 border border-surface-200/60 dark:border-surface-700 flex items-center justify-center mb-5">
+        <Icon size={28} className="text-surface-400 dark:text-surface-500" />
       </div>
-      <h3 className="text-xl font-display text-surface-900 mb-2">{title}</h3>
+      <h3 className="text-xl font-display text-surface-900 dark:text-surface-100 mb-2">{title}</h3>
       {description && (
-        <p className="text-sm text-surface-500 max-w-sm mb-8 leading-relaxed">{description}</p>
+        <p className="text-sm text-surface-500 dark:text-surface-400 max-w-sm mb-8 leading-relaxed">{description}</p>
       )}
       {actionLabel && onAction && (
         <Button onClick={onAction} size="md">

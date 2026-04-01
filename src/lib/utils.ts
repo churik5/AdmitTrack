@@ -55,28 +55,28 @@ export function getDeadlineColor(days: number): string {
 
 export function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    researching: 'bg-gray-100 text-gray-700',
-    planning: 'bg-blue-100 text-blue-700',
-    in_progress: 'bg-yellow-100 text-yellow-700',
-    submitted: 'bg-purple-100 text-purple-700',
-    accepted: 'bg-green-100 text-green-700',
-    rejected: 'bg-red-100 text-red-700',
-    waitlisted: 'bg-orange-100 text-orange-700',
-    deferred: 'bg-amber-100 text-amber-700',
-    withdrawn: 'bg-gray-100 text-gray-500',
-    brainstorming: 'bg-purple-100 text-purple-700',
-    outlining: 'bg-blue-100 text-blue-700',
-    drafting: 'bg-yellow-100 text-yellow-700',
-    revising: 'bg-orange-100 text-orange-700',
-    polishing: 'bg-teal-100 text-teal-700',
-    final: 'bg-green-100 text-green-700',
-    idea: 'bg-purple-100 text-purple-700',
-    completed: 'bg-green-100 text-green-700',
-    published: 'bg-emerald-100 text-emerald-700',
-    upcoming: 'bg-blue-100 text-blue-700',
-    overdue: 'bg-red-100 text-red-700',
+    researching: 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300',
+    planning: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+    in_progress: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
+    submitted: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+    accepted: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+    rejected: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+    waitlisted: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+    deferred: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+    withdrawn: 'bg-gray-100 text-gray-500 dark:bg-gray-900/30 dark:text-gray-400',
+    brainstorming: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+    outlining: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+    drafting: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
+    revising: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+    polishing: 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300',
+    final: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+    idea: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+    completed: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+    published: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+    upcoming: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+    overdue: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
   }
-  return colors[status] || 'bg-gray-100 text-gray-700'
+  return colors[status] || 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300'
 }
 
 export function statusLabel(status: string): string {

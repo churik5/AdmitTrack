@@ -79,7 +79,7 @@ export default function BottomNav() {
               <h3 className="text-base font-display text-surface-900 dark:text-surface-100">{t.nav.more}</h3>
               <button
                 onClick={() => setShowMore(false)}
-                className="p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 transition-colors"
+                className="p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-700 dark:hover:text-surface-300 transition-colors"
               >
                 <X size={18} />
               </button>
@@ -93,11 +93,11 @@ export default function BottomNav() {
                   className={cn(
                     'flex flex-col items-center gap-1.5 py-3.5 px-2 rounded-2xl text-xs font-medium transition-all duration-200',
                     isActive(item.href)
-                      ? 'bg-brand-50 text-brand-700'
-                      : 'text-surface-500 hover:bg-surface-50'
+                      ? 'bg-brand-50 text-brand-700 dark:bg-brand-950 dark:text-brand-300'
+                      : 'text-surface-500 hover:bg-surface-50 dark:text-surface-400 dark:hover:bg-surface-800'
                   )}
                 >
-                  <item.icon size={22} className={isActive(item.href) ? 'text-brand-600' : 'text-surface-400'} />
+                  <item.icon size={22} className={isActive(item.href) ? 'text-brand-600 dark:text-brand-400' : 'text-surface-400'} />
                   {t.nav[item.labelKey]}
                 </Link>
               ))}

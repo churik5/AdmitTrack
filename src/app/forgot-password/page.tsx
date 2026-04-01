@@ -46,7 +46,7 @@ export default function ForgotPasswordPage() {
               className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
                 locale === l.code
                   ? 'bg-brand-600 text-white'
-                  : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+                  : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-300 dark:hover:bg-surface-700'
               }`}
             >
               {l.flag}
@@ -55,7 +55,7 @@ export default function ForgotPasswordPage() {
         </div>
 
         <div className="w-full max-w-sm text-center animate-fade-in">
-          <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-5">
+          <div className="w-16 h-16 rounded-2xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-5">
             <Mail size={30} className="text-green-600" />
           </div>
           <h2 className="text-2xl font-display text-surface-900 mb-2">{t.auth.resetLinkSent}</h2>
@@ -82,7 +82,7 @@ export default function ForgotPasswordPage() {
             className={`px-2.5 py-1 text-xs font-medium rounded-lg transition-colors ${
               locale === l.code
                 ? 'bg-brand-600 text-white'
-                : 'bg-surface-100 text-surface-600 hover:bg-surface-200'
+                : 'bg-surface-100 text-surface-600 hover:bg-surface-200 dark:bg-surface-800 dark:text-surface-300 dark:hover:bg-surface-700'
             }`}
           >
             {l.flag}
@@ -101,7 +101,7 @@ export default function ForgotPasswordPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            <div className="rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 px-4 py-3 text-sm text-red-700 dark:text-red-300">
               {error}
             </div>
           )}

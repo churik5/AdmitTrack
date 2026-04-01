@@ -13,7 +13,7 @@ interface BadgeProps {
 }
 
 export default function Badge({ children, variant, color, className, size = 'sm' }: BadgeProps) {
-  const colorClasses = color || (variant ? getStatusColor(variant) : 'bg-surface-100 text-surface-700')
+  const colorClasses = color || (variant ? getStatusColor(variant) : 'bg-surface-100 text-surface-700 dark:bg-surface-800 dark:text-surface-300')
 
   const sizeClasses = size === 'sm'
     ? 'px-2 py-0.5 text-2xs'
