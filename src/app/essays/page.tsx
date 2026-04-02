@@ -124,12 +124,12 @@ export default function EssaysPage() {
       />
 
       {/* Tips panel */}
-      <div className="mb-5 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3">
+      <div className="mb-5 rounded-lg bg-blue-50 border border-blue-200 px-4 py-3">
         <div className="flex gap-2.5">
-          <Info size={18} className="shrink-0 mt-0.5 text-amber-500" />
+          <Info size={18} className="shrink-0 mt-0.5 text-blue-500" />
           <div>
-            <h4 className="text-sm font-semibold text-amber-800 mb-1.5">{t.essays.guidanceTitle}</h4>
-            <ul className="text-xs text-amber-700 space-y-1 list-disc list-inside">
+            <h4 className="text-sm font-semibold text-blue-800 mb-1.5">{t.essays.guidanceTitle}</h4>
+            <ul className="text-xs text-blue-700 space-y-1 list-disc list-inside">
               {t.essays.guidanceTips.map((tip, i) => (
                 <li key={i}>{tip}</li>
               ))}
