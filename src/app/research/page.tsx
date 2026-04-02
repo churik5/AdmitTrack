@@ -280,14 +280,14 @@ export default function ResearchPage() {
         <div className="space-y-4">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. Machine Learning in Climate Prediction"
             />
           </div>
@@ -295,11 +295,11 @@ export default function ResearchPage() {
           {/* Type & Status */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as ResearchType })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {RESEARCH_TYPE_KEYS.map((val) => (
                   <option key={val} value={val}>
@@ -309,11 +309,11 @@ export default function ResearchPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.status}</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as ResearchStatus })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {STATUS_KEYS.filter((v) => v !== 'all').map((val) => (
                   <option key={val} value={val}>
@@ -326,48 +326,48 @@ export default function ResearchPage() {
 
           {/* Topic */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.topic}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.research.topic}</label>
             <input
               type="text"
               value={form.topic}
               onChange={(e) => setForm({ ...form, topic: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. Computer Science, Environmental Biology, Economics"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Describe your research project, its goals, and methodology..."
             />
           </div>
 
           {/* Own Contribution */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.ownContribution}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.research.ownContribution}</label>
             <textarea
               value={form.ownContribution}
               onChange={(e) => setForm({ ...form, ownContribution: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="What was your specific role and contribution?"
             />
           </div>
 
           {/* Skills */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.skills}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.research.skills}</label>
             <input
               type="text"
               value={skillsInput}
               onChange={(e) => setSkillsInput(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. Python, Data Analysis, Lab Techniques (comma-separated)"
             />
             <p className="mt-1 text-xs text-gray-400">{t.research.separateSkills}</p>
@@ -375,12 +375,12 @@ export default function ResearchPage() {
 
           {/* Findings */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.findings}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.research.findings}</label>
             <textarea
               value={form.findings}
               onChange={(e) => setForm({ ...form, findings: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Key findings, outcomes, or results of your research..."
             />
           </div>
@@ -388,21 +388,21 @@ export default function ResearchPage() {
           {/* Published At & Link */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.research.publishedAt}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.research.publishedAt}</label>
               <input
                 type="date"
                 value={form.publishedAt}
                 onChange={(e) => setForm({ ...form, publishedAt: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.link}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.link}</label>
               <input
                 type="url"
                 value={form.link}
                 onChange={(e) => setForm({ ...form, link: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
                 placeholder="https://... (link to paper, project, etc.)"
               />
             </div>
@@ -410,12 +410,12 @@ export default function ResearchPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any personal notes or reminders..."
             />
           </div>

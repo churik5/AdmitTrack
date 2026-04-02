@@ -638,47 +638,47 @@ export default function DeadlinesPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. MIT Early Action Deadline"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-surface-700 mb-1">
                 {t.common.date} <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.deadlines.time}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.deadlines.time}</label>
               <input
                 type="time"
                 value={form.time}
                 onChange={(e) => setForm({ ...form, time: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.deadlines.university}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.deadlines.university}</label>
             <select
               value={form.universityId}
               onChange={(e) => handleUniChange(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               <option value="">{t.deadlines.noUniversity}</option>
               {universities.map((u) => (
@@ -691,11 +691,11 @@ export default function DeadlinesPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as DeadlineType })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {Object.entries(DEADLINE_TYPES).map(([val, label]) => (
                   <option key={val} value={val}>
@@ -705,13 +705,13 @@ export default function DeadlinesPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.deadlines.priority}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.deadlines.priority}</label>
               <select
                 value={form.priority}
                 onChange={(e) =>
                   setForm({ ...form, priority: e.target.value as DeadlinePriority })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {DEADLINE_PRIORITIES.map((p) => (
                   <option key={p} value={p}>
@@ -723,12 +723,12 @@ export default function DeadlinesPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any additional notes or reminders..."
             />
           </div>

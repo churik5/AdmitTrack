@@ -351,25 +351,25 @@ export default function ActivitiesPage() {
         <div className="space-y-4">
           {/* Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.activities.activityName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. Debate Team, Soccer, Part-time Job"
             />
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.category}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.category}</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value as ActivityCategory })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {Object.entries(ACTIVITY_CATEGORIES).map(([val, label]) => (
                 <option key={val} value={val}>
@@ -382,22 +382,22 @@ export default function ActivitiesPage() {
           {/* Organization & Role */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.organization}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.organization}</label>
               <input
                 type="text"
                 value={form.organization}
                 onChange={(e) => setForm({ ...form, organization: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
                 placeholder="e.g. School, Company, Organization"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.role}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.role}</label>
               <input
                 type="text"
                 value={form.role}
                 onChange={(e) => setForm({ ...form, role: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
                 placeholder="e.g. Captain, President, Volunteer"
               />
             </div>
@@ -406,22 +406,22 @@ export default function ActivitiesPage() {
           {/* Dates & Ongoing */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.startDate}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.startDate}</label>
               <input
                 type="date"
                 value={form.startDate}
                 onChange={(e) => setForm({ ...form, startDate: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.endDate}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.endDate}</label>
               <input
                 type="date"
                 value={form.endDate}
                 onChange={(e) => setForm({ ...form, endDate: e.target.value })}
                 disabled={form.ongoing}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:bg-gray-50"
+                className="input-base disabled:opacity-50 disabled:bg-gray-50"
               />
             </div>
             <div className="flex items-end pb-2">
@@ -439,7 +439,7 @@ export default function ActivitiesPage() {
 
           {/* Grades */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.activities.gradesParticipated}
             </label>
             <div className="flex gap-2">
@@ -464,25 +464,25 @@ export default function ActivitiesPage() {
           {/* Hours */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.hoursPerWeek}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.hoursPerWeek}</label>
               <input
                 type="number"
                 min={0}
                 value={form.hoursPerWeek || ''}
                 onChange={(e) => setForm({ ...form, hoursPerWeek: Number(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
                 placeholder="e.g. 10"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.weeksPerYear}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.weeksPerYear}</label>
               <input
                 type="number"
                 min={0}
                 max={52}
                 value={form.weeksPerYear || ''}
                 onChange={(e) => setForm({ ...form, weeksPerYear: Number(e.target.value) || 0 })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
                 placeholder="e.g. 40"
               />
             </div>
@@ -490,12 +490,12 @@ export default function ActivitiesPage() {
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Describe your involvement and contributions..."
             />
             <p className="mt-1 text-xs text-gray-400">
@@ -505,24 +505,24 @@ export default function ActivitiesPage() {
 
           {/* Results */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.activities.results}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.activities.results}</label>
             <textarea
               value={form.results}
               onChange={(e) => setForm({ ...form, results: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Quantifiable outcomes, achievements, or impact..."
             />
           </div>
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any personal notes or reminders..."
             />
           </div>

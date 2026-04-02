@@ -267,25 +267,25 @@ export default function EssaysPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder='e.g. "Common App Personal Statement", "MIT Why Us"'
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.type}</label>
               <select
                 value={form.type}
                 onChange={(e) => setForm({ ...form, type: e.target.value as EssayType })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {Object.entries(ESSAY_TYPES).map(([val]) => (
                   <option key={val} value={val}>
@@ -295,11 +295,11 @@ export default function EssaysPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.status}</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as EssayStatus })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {ESSAY_STATUSES.map((s) => (
                   <option key={s} value={s}>
@@ -311,24 +311,24 @@ export default function EssaysPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.prompt}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.essays.prompt}</label>
             <textarea
               value={form.prompt}
               onChange={(e) => setForm({ ...form, prompt: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Paste the essay prompt here..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.wordLimit}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.essays.wordLimit}</label>
             <input
               type="number"
               min={0}
               value={form.wordLimit || ''}
               onChange={(e) => setForm({ ...form, wordLimit: Number(e.target.value) || 0 })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. 650"
             />
           </div>

@@ -424,7 +424,7 @@ export default function DocumentsPage() {
         <div className="space-y-4">
           {/* File Upload Zone */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.documents.uploadFile}
             </label>
             <input
@@ -475,24 +475,24 @@ export default function DocumentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.documents.fileName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder='e.g. "Official Transcript", "SAT Score Report"'
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.category}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.category}</label>
             <select
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value as DocumentCategory })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {ALL_CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>
@@ -503,13 +503,13 @@ export default function DocumentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.documents.relatedTo}
             </label>
             <select
               value={form.relatedTo}
               onChange={(e) => setForm({ ...form, relatedTo: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               <option value="">{t.documents.none}</option>
               {universities.map((u) => (
@@ -521,23 +521,23 @@ export default function DocumentsPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.documents.comment}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.documents.comment}</label>
             <textarea
               value={form.comment}
               onChange={(e) => setForm({ ...form, comment: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any notes about this document..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.tags}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.tags}</label>
             <input
               type="text"
               value={form.tags}
               onChange={(e) => setForm({ ...form, tags: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="Comma-separated, e.g. official, sent, pending"
             />
             <p className="text-xs text-gray-400 mt-1">Separate tags with commas</p>

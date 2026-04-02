@@ -231,6 +231,21 @@
 .dark .hover\:text-gray-600:hover { color: #d1d5db; }
 .dark .hover\:text-gray-700:hover { color: #e5e7eb; }
 
+/* Guides page — toned-down blue & amber */
+.dark .text-blue-400 { color: #60a5fa; }
+.dark .text-blue-500 { color: #7db8fc; }
+.dark .text-blue-600 { color: #93c5fd; }
+.dark .text-blue-900 { color: #bfdbfe; }
+.dark .text-amber-400 { color: #fbbf24; }
+.dark .text-amber-600 { color: #fcd34d; }
+.dark .text-amber-800 { color: #fcd34d; }
+.dark .text-amber-900 { color: #fde68a; }
+.dark .bg-amber-50 { background-color: rgba(245, 158, 11, 0.1); }
+.dark .bg-amber-200 { background-color: rgba(245, 158, 11, 0.25); }
+.dark .bg-blue-200 { background-color: rgba(59, 130, 246, 0.25); }
+.dark .border-amber-100 { border-color: rgba(245, 158, 11, 0.2); }
+.dark .border-blue-100 { border-color: rgba(59, 130, 246, 0.2); }
+
 /* Dividers */
 .dark .divide-surface-100 > :not([hidden]) ~ :not([hidden]) { border-color: #5a5348; }
 .dark .divide-surface-200 > :not([hidden]) ~ :not([hidden]) { border-color: #5a5348; }

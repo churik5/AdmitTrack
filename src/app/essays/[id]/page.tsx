@@ -328,7 +328,7 @@ export default function EssayDetailPage() {
               type="text"
               value={versionLabel}
               onChange={(e) => setVersionLabel(e.target.value)}
-              className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="flex-1 input-base"
               placeholder="Version label (optional)..."
             />
             <Button
@@ -448,7 +448,7 @@ export default function EssayDetailPage() {
               value={improvementNotes}
               onChange={(e) => setImprovementNotes(e.target.value)}
               rows={4}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Notes for revisions, feedback, things to improve..."
             />
             <Button
@@ -565,24 +565,24 @@ export default function EssayDetailPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.common.title} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={editForm.title}
               onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.type}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.type}</label>
               <select
                 value={editForm.type}
                 onChange={(e) => setEditForm({ ...editForm, type: e.target.value as EssayType })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {Object.entries(ESSAY_TYPES).map(([val]) => (
                   <option key={val} value={val}>
@@ -592,13 +592,13 @@ export default function EssayDetailPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.status}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.status}</label>
               <select
                 value={editForm.status}
                 onChange={(e) =>
                   setEditForm({ ...editForm, status: e.target.value as EssayStatus })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {ESSAY_STATUSES.map((s) => (
                   <option key={s} value={s}>
@@ -610,17 +610,17 @@ export default function EssayDetailPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.prompt}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.essays.prompt}</label>
             <textarea
               value={editForm.prompt}
               onChange={(e) => setEditForm({ ...editForm, prompt: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.essays.wordLimit}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.essays.wordLimit}</label>
             <input
               type="number"
               min={0}
@@ -628,7 +628,7 @@ export default function EssayDetailPage() {
               onChange={(e) =>
                 setEditForm({ ...editForm, wordLimit: Number(e.target.value) || 0 })
               }
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
             />
           </div>
 

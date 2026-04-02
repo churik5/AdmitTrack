@@ -407,13 +407,13 @@ export default function UniversityDetailPage() {
 
               {/* Status update */}
               <div className="pt-4 border-t border-gray-100">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-surface-700 mb-2">
                   {t.common.status}
                 </label>
                 <select
                   value={university.status}
                   onChange={(e) => handleStatusChange(e.target.value as UniversityStatus)}
-                  className="px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                  className="select-base"
                 >
                   {STATUS_OPTION_KEYS.map((key) => (
                     <option key={key} value={key}>
@@ -429,14 +429,14 @@ export default function UniversityDetailPage() {
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <Calendar size={18} className="text-blue-500" />
-                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.deadlines}</span>
+                  <span className="text-sm font-medium text-surface-700">{t.universities.tabs.deadlines}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">{uniDeadlines.length}</p>
               </Card>
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <CheckSquare size={18} className="text-green-500" />
-                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.requirements}</span>
+                  <span className="text-sm font-medium text-surface-700">{t.universities.tabs.requirements}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">
                   {reqCompleted}/{reqTotal}
@@ -445,14 +445,14 @@ export default function UniversityDetailPage() {
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <FileText size={18} className="text-purple-500" />
-                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.essays}</span>
+                  <span className="text-sm font-medium text-surface-700">{t.universities.tabs.essays}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">{linkedEssays.length}</p>
               </Card>
               <Card>
                 <div className="flex items-center gap-3 mb-1">
                   <FolderOpen size={18} className="text-orange-500" />
-                  <span className="text-sm font-medium text-gray-700">{t.universities.tabs.documents}</span>
+                  <span className="text-sm font-medium text-surface-700">{t.universities.tabs.documents}</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">{linkedDocuments.length}</p>
               </Card>
@@ -579,7 +579,7 @@ export default function UniversityDetailPage() {
                     }
                   }}
                   placeholder="e.g. Submit transcript, Write supplemental essay..."
-                  className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                  className="flex-1 input-base"
                   autoFocus
                 />
                 <Button size="sm" onClick={addRequirement} disabled={!newRequirement.trim()}>
@@ -795,43 +795,43 @@ export default function UniversityDetailPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               University Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={editForm.name}
               onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.universities.state}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.universities.state}</label>
             <input
               type="text"
               value={editForm.state}
               onChange={(e) => setEditForm({ ...editForm, state: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">Website</label>
             <input
               type="url"
               value={editForm.website}
               onChange={(e) => setEditForm({ ...editForm, website: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="https://..."
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Application Type</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">Application Type</label>
             <select
               value={editForm.applicationType}
               onChange={(e) =>
                 setEditForm({ ...editForm, applicationType: e.target.value as ApplicationType })
               }
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {Object.entries(APPLICATION_TYPES).map(([val, label]) => (
                 <option key={val} value={val}>
@@ -841,13 +841,13 @@ export default function UniversityDetailPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">Status</label>
             <select
               value={editForm.status}
               onChange={(e) =>
                 setEditForm({ ...editForm, status: e.target.value as UniversityStatus })
               }
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {STATUS_OPTION_KEYS.map((val) => (
                 <option key={val} value={val}>
@@ -857,12 +857,12 @@ export default function UniversityDetailPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">Notes</label>
             <textarea
               value={editForm.notes}
               onChange={(e) => setEditForm({ ...editForm, notes: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
             />
           </div>
           <div className="flex justify-end gap-2 pt-2">
@@ -885,48 +885,48 @@ export default function UniversityDetailPage() {
       >
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               Title <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={deadlineForm.title}
               onChange={(e) => setDeadlineForm({ ...deadlineForm, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. Application deadline, Financial aid form..."
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-surface-700 mb-1">
                 Date <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
                 value={deadlineForm.date}
                 onChange={(e) => setDeadlineForm({ ...deadlineForm, date: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Time</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">Time</label>
               <input
                 type="time"
                 value={deadlineForm.time}
                 onChange={(e) => setDeadlineForm({ ...deadlineForm, time: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">Type</label>
               <select
                 value={deadlineForm.type}
                 onChange={(e) =>
                   setDeadlineForm({ ...deadlineForm, type: e.target.value as DeadlineType })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {Object.entries(DEADLINE_TYPES).map(([val, label]) => (
                   <option key={val} value={val}>
@@ -936,13 +936,13 @@ export default function UniversityDetailPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">Priority</label>
               <select
                 value={deadlineForm.priority}
                 onChange={(e) =>
                   setDeadlineForm({ ...deadlineForm, priority: e.target.value as DeadlinePriority })
                 }
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+                className="select-base"
               >
                 {PRIORITY_OPTION_KEYS.map((val) => (
                   <option key={val} value={val}>
@@ -953,12 +953,12 @@ export default function UniversityDetailPage() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">Notes</label>
             <textarea
               value={deadlineForm.notes}
               onChange={(e) => setDeadlineForm({ ...deadlineForm, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any additional details..."
             />
           </div>

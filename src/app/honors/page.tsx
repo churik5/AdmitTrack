@@ -250,25 +250,25 @@ export default function HonorsPage() {
         <div className="space-y-4">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.honors.honorTitle} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. National Merit Semifinalist, Science Fair 1st Place"
             />
           </div>
 
           {/* Level */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.levelOfRecognition}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.honors.levelOfRecognition}</label>
             <select
               value={form.level}
               onChange={(e) => setForm({ ...form, level: e.target.value as HonorLevel })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white"
+              className="select-base"
             >
               {Object.entries(HONOR_LEVELS).map(([val, label]) => (
                 <option key={val} value={val}>
@@ -281,29 +281,29 @@ export default function HonorsPage() {
           {/* Issued By & Date */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.issuedBy}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.honors.issuedBy}</label>
               <input
                 type="text"
                 value={form.issuedBy}
                 onChange={(e) => setForm({ ...form, issuedBy: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
                 placeholder="e.g. College Board, Science Olympiad"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.dateReceived}</label>
+              <label className="block text-sm font-medium text-surface-700 mb-1">{t.honors.dateReceived}</label>
               <input
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="input-base"
               />
             </div>
           </div>
 
           {/* Grade Received */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium text-surface-700 mb-1">
               {t.honors.gradeWhenReceived}
             </label>
             <div className="flex gap-2">
@@ -327,60 +327,60 @@ export default function HonorsPage() {
 
           {/* Placement */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.placement}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.honors.placement}</label>
             <input
               type="text"
               value={form.placement}
               onChange={(e) => setForm({ ...form, placement: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="e.g. 1st Place, Top 5%, Semifinalist"
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.description}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.description}</label>
             <textarea
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Brief description of the honor or award..."
             />
           </div>
 
           {/* Significance */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.honors.significance}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.honors.significance}</label>
             <textarea
               value={form.significance}
               onChange={(e) => setForm({ ...form, significance: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Why is this honor important? How selective is it?"
             />
           </div>
 
           {/* Link */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.link}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.link}</label>
             <input
               type="url"
               value={form.link}
               onChange={(e) => setForm({ ...form, link: e.target.value })}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="input-base"
               placeholder="https://... (link to award page, certificate, etc.)"
             />
           </div>
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.common.notes}</label>
+            <label className="block text-sm font-medium text-surface-700 mb-1">{t.common.notes}</label>
             <textarea
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
               rows={2}
-              className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
+              className="textarea-base"
               placeholder="Any personal notes or reminders..."
             />
           </div>
