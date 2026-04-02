@@ -127,8 +127,7 @@ export default function ProfilePage() {
     )
   }
 
-  const inputClass =
-    'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent'
+  const inputClass = 'input-base'
 
   return (
     <div>
@@ -196,7 +195,7 @@ export default function ProfilePage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">{t.profile.graduationYear}</label>
-            <select value={graduationYear} onChange={e => setGraduationYear(e.target.value)} className={`${inputClass} bg-white`}>
+            <select value={graduationYear} onChange={e => setGraduationYear(e.target.value)} className="select-base">
               <option value="">{t.profile.selectYear}</option>
               {[2025, 2026, 2027, 2028, 2029, 2030].map(y => (
                 <option key={y} value={y}>{y}</option>
@@ -299,7 +298,7 @@ export default function ProfilePage() {
             <textarea
               value={strengths}
               onChange={e => setStrengths(e.target.value)}
-              className={`${inputClass} h-24 resize-y`}
+              className="textarea-base h-24 resize-y"
             />
           </div>
           <div>
@@ -307,7 +306,7 @@ export default function ProfilePage() {
             <textarea
               value={weaknesses}
               onChange={e => setWeaknesses(e.target.value)}
-              className={`${inputClass} h-24 resize-y`}
+              className="textarea-base h-24 resize-y"
             />
           </div>
           <div>
@@ -315,7 +314,7 @@ export default function ProfilePage() {
             <textarea
               value={notes}
               onChange={e => setNotes(e.target.value)}
-              className={`${inputClass} h-24 resize-y`}
+              className="textarea-base h-24 resize-y"
             />
           </div>
         </div>
