@@ -284,6 +284,25 @@
 .dark .text-emerald-900 { color: #a7f3d0; }
 .dark .bg-emerald-50 { background-color: rgba(16, 185, 129, 0.1); }
 .dark .border-emerald-100 { border-color: rgba(16, 185, 129, 0.2); }
+/* Orange (deadlines guide) */
+.dark .text-orange-500 { color: #fdba74; }
+.dark .text-orange-600 { color: #fdba74; }
+.dark .text-orange-800 { color: #fed7aa; }
+.dark .border-orange-100 { border-color: rgba(249, 115, 22, 0.2); }
+/* Indigo (research guide) */
+.dark .text-indigo-500 { color: #a5b4fc; }
+.dark .text-indigo-600 { color: #a5b4fc; }
+.dark .text-indigo-800 { color: #c7d2fe; }
+.dark .bg-indigo-50 { background-color: rgba(99, 102, 241, 0.1); }
+.dark .border-indigo-100 { border-color: rgba(99, 102, 241, 0.2); }
+/* Violet extra */
+.dark .text-violet-700 { color: #c4b5fd; }
+/* Teal (research guide) */
+.dark .text-teal-800 { color: #99f6e4; }
+.dark .bg-teal-50 { background-color: rgba(20, 184, 166, 0.1); }
+.dark .border-teal-100 { border-color: rgba(20, 184, 166, 0.2); }
+/* Brand extra */
+.dark .text-brand-900 { color: #b9cdff; }
 
 /* Dividers */
 .dark .divide-surface-100 > :not([hidden]) ~ :not([hidden]) { border-color: #5a5348; }
