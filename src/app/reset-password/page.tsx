@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <LanguageSwitcher />
-        <div className="w-full max-w-sm text-center animate-fade-in">
+        <div className="w-full max-w-sm text-center">
           <div className="w-16 h-16 rounded-2xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-5">
             <CheckCircle size={32} className="text-green-600" />
           </div>
@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <LanguageSwitcher />
-      <div className="w-full max-w-sm animate-fade-in">
+      <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-5 shadow-elevated">
             <GraduationCap size={30} className="text-white" />

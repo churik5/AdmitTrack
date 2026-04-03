@@ -47,7 +47,7 @@ export default function Modal({
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4">
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-surface-900/30 dark:bg-black/50 backdrop-blur-[2px] animate-fade-in"
@@ -57,7 +57,7 @@ export default function Modal({
       {/* Modal */}
       <div
         className={cn(
-          'relative w-full bg-white dark:bg-surface-800 rounded-2xl shadow-modal animate-scale-in border border-surface-200/50 dark:border-surface-700/50',
+          'relative w-full bg-white dark:bg-surface-800 rounded-t-2xl sm:rounded-2xl shadow-modal animate-slide-up sm:animate-scale-in border border-surface-200/50 dark:border-surface-700/50',
           sizeStyles[size]
         )}
       >
@@ -85,7 +85,7 @@ export default function Modal({
         )}
 
         {/* Content */}
-        <div className="px-6 py-5 max-h-[80vh] overflow-y-auto">{children}</div>
+        <div className="px-6 py-5 max-h-[90vh] sm:max-h-[80vh] overflow-y-auto">{children}</div>
       </div>
     </div>
   )

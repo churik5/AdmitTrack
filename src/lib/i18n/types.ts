@@ -693,4 +693,22 @@ export interface Translations {
     categories: Record<string, string>
     items: Record<string, { label: string; description: string }>
   }
+
+  tour: {
+    welcomeTitle: string
+    welcomeDesc: string
+    dashboardTitle: string
+    dashboardDesc: string
+    universitiesTitle: string
+    universitiesDesc: string
+    deadlinesTitle: string
+    deadlinesDesc: string
+    doneTitle: string
+    doneDesc: string
+    next: string
+    back: string
+    skip: string
+    start: string
+    stepOf: string
+  }
 }

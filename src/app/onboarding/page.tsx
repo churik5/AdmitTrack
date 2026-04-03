@@ -50,7 +50,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-[75vh] flex flex-col items-center justify-center px-4">
-      <div className="w-full max-w-lg animate-fade-in">
+      <div className="w-full max-w-lg">
         {/* Step 0: Welcome */}
         {step === 0 && (
           <div className="text-center">

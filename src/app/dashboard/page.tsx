@@ -89,7 +89,7 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="animate-fade-in">
+    <div>
       {/* Greeting */}
       <div className="mb-8">
         <h1 className="text-3xl font-display text-surface-900 tracking-tight">
@@ -101,7 +101,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
+      <div data-tour="dashboard-stats" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
         {stats.map((stat, i) => (
           <Link key={stat.label} href={stat.href} style={{ animationDelay: `${i * 60}ms` }} className="animate-slide-up">
             <Card className="card-interactive !p-4">

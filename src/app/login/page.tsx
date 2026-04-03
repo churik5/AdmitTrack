@@ -55,7 +55,7 @@ export default function LoginPage() {
         ))}
       </div>
 
-      <div className="w-full max-w-sm animate-fade-in">
+      <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-5 shadow-elevated">

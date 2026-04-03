@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import Sidebar from './Sidebar'
 import BottomNav from './BottomNav'
+import OnboardingTour from '@/components/onboarding/OnboardingTour'
 
 interface AppShellProps {
   children: ReactNode
@@ -26,12 +27,13 @@ export default function AppShell({ children }: AppShellProps) {
   return (
     <div className="min-h-screen grain-overlay">
       <Sidebar />
-      <main className="md:ml-[15rem] pb-24 md:pb-0">
+      <main className="md:ml-[15rem] pb-28 md:pb-0">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {children}
         </div>
       </main>
       <BottomNav />
+      <OnboardingTour />
     </div>
   )
 }

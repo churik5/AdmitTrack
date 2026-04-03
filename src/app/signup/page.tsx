@@ -76,7 +76,7 @@ export default function SignUpPage() {
           ))}
         </div>
 
-        <div className="w-full max-w-sm text-center animate-fade-in">
+        <div className="w-full max-w-sm text-center">
           <div className="w-16 h-16 rounded-2xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-5">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-600">
               <polyline points="20 6 9 17 4 12" />
@@ -115,7 +115,7 @@ export default function SignUpPage() {
         ))}
       </div>
 
-      <div className="w-full max-w-sm animate-fade-in">
+      <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-5 shadow-elevated">

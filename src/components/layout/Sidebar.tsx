@@ -30,6 +30,7 @@ interface NavItem {
   labelKey: keyof import('@/lib/i18n/types').Translations['nav']
   href: string
   icon: React.ElementType
+  dataTour?: string
 }
 
 interface NavGroup {
@@ -110,6 +111,7 @@ export default function Sidebar() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
+                      {...(item.href === '/universities' ? { 'data-tour': 'nav-universities' } : item.href === '/deadlines' ? { 'data-tour': 'nav-deadlines' } : {})}
                       className={cn(
                         'flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm transition-all duration-200',
                         active

@@ -808,4 +808,22 @@ export const en: Translations = {
       'final-thank-yous': { label: 'Send thank-you notes to recommenders and interviewers', description: 'A brief, genuine thank-you email or handwritten note goes a long way. Let recommenders know your results when decisions arrive — they care about how things turn out.' },
     },
   },
+
+  tour: {
+    welcomeTitle: 'Welcome to AdmitTrack!',
+    welcomeDesc: 'Your personal college admissions workspace. Let us show you around — it only takes a minute.',
+    dashboardTitle: 'Your Dashboard',
+    dashboardDesc: 'This is your command center. Track your progress across universities, activities, essays, and more at a glance.',
+    universitiesTitle: 'Track Universities',
+    universitiesDesc: 'Add every school you\'re considering. Categorize them as reach, target, or likely, and track application status.',
+    deadlinesTitle: 'Never Miss a Deadline',
+    deadlinesDesc: 'All your deadlines in one place. Set personal deadlines 5-7 days before official ones for a safety buffer.',
+    doneTitle: 'You\'re All Set!',
+    doneDesc: 'Start by adding your first university or filling out your profile. You can always revisit the guides for tips.',
+    next: 'Next',
+    back: 'Back',
+    skip: 'Skip',
+    start: 'Get Started',
+    stepOf: 'of',
+  },
 }

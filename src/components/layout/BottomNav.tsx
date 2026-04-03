@@ -79,7 +79,7 @@ export default function BottomNav() {
               <h3 className="text-base font-display text-surface-900 dark:text-surface-100">{t.nav.more}</h3>
               <button
                 onClick={() => setShowMore(false)}
-                className="p-1.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-700 dark:hover:text-surface-300 transition-colors"
+                className="p-2.5 text-surface-400 hover:text-surface-600 rounded-xl hover:bg-surface-100 dark:hover:bg-surface-700 dark:hover:text-surface-300 transition-colors"
               >
                 <X size={18} />
               </button>
@@ -134,8 +134,9 @@ export default function BottomNav() {
             <Link
               key={item.href}
               href={item.href}
+              {...(item.href === '/universities' ? { 'data-tour': 'nav-universities-mobile' } : item.href === '/deadlines' ? { 'data-tour': 'nav-deadlines-mobile' } : {})}
               className={cn(
-                'flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl text-[11px] font-medium transition-all duration-200',
+                'flex flex-col items-center gap-0.5 min-h-[44px] py-2 px-3 rounded-xl text-[11px] font-medium transition-all duration-200',
                 isActive(item.href) ? 'text-brand-600' : 'text-surface-400'
               )}
             >
@@ -146,7 +147,7 @@ export default function BottomNav() {
           <button
             onClick={() => setShowMore(true)}
             className={cn(
-              'flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl text-[11px] font-medium transition-all duration-200',
+              'flex flex-col items-center gap-0.5 min-h-[44px] py-2 px-3 rounded-xl text-[11px] font-medium transition-all duration-200',
               showMore ? 'text-brand-600' : 'text-surface-400'
             )}
           >
