@@ -23,6 +23,7 @@ import {
   DollarSign,
   Moon,
   Sun,
+  Monitor,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/lib/i18n'
@@ -60,7 +61,7 @@ export default function BottomNav() {
   const [showMore, setShowMore] = useState(false)
   const { t } = useI18n()
   const { signOut } = useAuth()
-  const { theme, toggleTheme } = useTheme()
+  const { mode, toggleTheme } = useTheme()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
@@ -107,8 +108,8 @@ export default function BottomNav() {
                 onClick={() => { toggleTheme(); }}
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-medium text-surface-500 hover:bg-surface-100 dark:hover:bg-surface-700 transition-colors"
               >
-                {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-                {theme === 'dark' ? t.common.lightMode : t.common.darkMode}
+                {mode === 'light' ? <Sun size={16} /> : mode === 'dark' ? <Moon size={16} /> : <Monitor size={16} />}
+                {mode === 'light' ? t.common.lightMode : mode === 'dark' ? t.common.darkMode : t.common.systemMode}
               </button>
               <button
                 onClick={() => { setShowMore(false); signOut(); }}

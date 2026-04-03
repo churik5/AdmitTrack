@@ -14,6 +14,7 @@ import { useHonors } from '@/lib/hooks/useHonors'
 import { useI18n } from '@/lib/i18n'
 import { Honor, HonorLevel } from '@/lib/types'
 import { cn, truncate, formatDate, HONOR_LEVELS } from '@/lib/utils'
+import { ListPageSkeleton } from '@/components/ui/PageSkeletons'
 
 const GRADE_OPTIONS = [9, 10, 11, 12]
 
@@ -121,11 +122,7 @@ export default function HonorsPage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600" />
-      </div>
-    )
+    return <ListPageSkeleton />
   }
 
   return (

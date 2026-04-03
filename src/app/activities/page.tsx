@@ -16,6 +16,7 @@ import { useActivities } from '@/lib/hooks/useActivities'
 import { useI18n } from '@/lib/i18n'
 import { Activity, ActivityCategory } from '@/lib/types'
 import { cn, truncate, ACTIVITY_CATEGORIES } from '@/lib/utils'
+import { ListPageSkeleton } from '@/components/ui/PageSkeletons'
 
 const GRADE_OPTIONS = [9, 10, 11, 12]
 
@@ -163,11 +164,7 @@ export default function ActivitiesPage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600" />
-      </div>
-    )
+    return <ListPageSkeleton />
   }
 
   return (

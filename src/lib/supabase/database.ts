@@ -331,7 +331,7 @@ function mapToDb(obj: Record<string, unknown>, userId: string): Record<string, u
   return result
 }
 
-function mapFromDb(row: Record<string, unknown>): Record<string, unknown> {
+export function mapFromDb(row: Record<string, unknown>): Record<string, unknown> {
   const result: Record<string, unknown> = {}
 
   for (const [key, value] of Object.entries(row)) {

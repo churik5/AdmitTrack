@@ -20,6 +20,7 @@ import {
   DollarSign,
   Moon,
   Sun,
+  Monitor,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/lib/supabase/auth-context'
@@ -78,7 +79,7 @@ export default function Sidebar() {
   const pathname = usePathname()
   const { signOut, user } = useAuth()
   const { t } = useI18n()
-  const { theme, toggleTheme } = useTheme()
+  const { mode, toggleTheme } = useTheme()
 
   const isActive = (href: string) =>
     pathname === href || pathname?.startsWith(href + '/')
@@ -148,8 +149,8 @@ export default function Sidebar() {
           onClick={toggleTheme}
           className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-sm text-surface-500 hover:bg-surface-100 dark:hover:bg-surface-800 hover:text-surface-800 dark:hover:text-surface-200 transition-all duration-200 w-full"
         >
-          {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
-          {theme === 'dark' ? t.common.lightMode : t.common.darkMode}
+          {mode === 'light' ? <Sun size={17} /> : mode === 'dark' ? <Moon size={17} /> : <Monitor size={17} />}
+          {mode === 'light' ? t.common.lightMode : mode === 'dark' ? t.common.darkMode : t.common.systemMode}
         </button>
         {user && (
           <button

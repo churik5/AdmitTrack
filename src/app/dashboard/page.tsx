@@ -31,6 +31,7 @@ import {
   CheckCircle2,
 } from 'lucide-react'
 import { daysUntil, getDeadlineColor, formatDateShort, cn } from '@/lib/utils'
+import { DashboardSkeleton } from '@/components/ui/PageSkeletons'
 
 export default function DashboardPage() {
   const { t } = useI18n()
@@ -71,11 +72,7 @@ export default function DashboardPage() {
   }, [universities, activities, honors, essays, t])
 
   if (profileLoading || uniLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-pulse text-surface-400 text-sm">{t.common.loading}</div>
-      </div>
-    )
+    return <DashboardSkeleton />
   }
 
   const greeting = profile?.name ? profile.name.split(' ')[0] : ''

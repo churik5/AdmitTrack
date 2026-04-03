@@ -13,6 +13,7 @@ import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
 import { useNotes } from '@/lib/hooks/useNotes'
 import { cn, formatDate, truncate } from '@/lib/utils'
+import { ListPageSkeleton } from '@/components/ui/PageSkeletons'
 
 type NoteCategory = 'general' | 'university' | 'essay' | 'strategy' | 'advice' | 'idea' | 'requirement' | 'plan'
 
@@ -92,11 +93,7 @@ export default function NotesPage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600" />
-      </div>
-    )
+    return <ListPageSkeleton />
   }
 
   return (

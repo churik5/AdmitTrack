@@ -42,6 +42,7 @@ export interface Translations {
     or: string
     darkMode: string
     lightMode: string
+    systemMode: string
     exportPdf: string
     exporting: string
     reorder: string

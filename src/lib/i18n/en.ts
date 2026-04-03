@@ -42,6 +42,7 @@ export const en: Translations = {
     or: 'or',
     darkMode: 'Dark Mode',
     lightMode: 'Light Mode',
+    systemMode: 'System',
     exportPdf: 'Export PDF',
     exporting: 'Exporting...',
     reorder: 'Reorder',

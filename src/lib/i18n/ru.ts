@@ -42,6 +42,7 @@ export const ru: Translations = {
     or: 'или',
     darkMode: 'Тёмная тема',
     lightMode: 'Светлая тема',
+    systemMode: 'Системная',
     exportPdf: 'Экспорт PDF',
     exporting: 'Экспорт...',
     reorder: 'Изменить порядок',

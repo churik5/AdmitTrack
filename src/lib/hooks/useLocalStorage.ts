@@ -1,9 +1,12 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js'
 import { BaseEntity } from '../types'
 import { useAuth } from '../supabase/auth-context'
+import { createClient } from '../supabase/client'
 import * as db from '../supabase/database'
+import { mapFromDb } from '../supabase/database'
 
 export function useCollection<T extends BaseEntity>(collectionName: string) {
   const { user } = useAuth()
@@ -27,6 +30,45 @@ export function useCollection<T extends BaseEntity>(collectionName: string) {
   useEffect(() => {
     refresh()
   }, [refresh])
+
+  // Supabase Realtime subscription for cross-device/tab sync
+  useEffect(() => {
+    if (!userId) return
+
+    const supabase = createClient()
+    const channel = supabase
+      .channel(`${collectionName}_${userId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: collectionName,
+          filter: `user_id=eq.${userId}`,
+        },
+        (payload: RealtimePostgresChangesPayload<Record<string, unknown>>) => {
+          if (payload.eventType === 'INSERT') {
+            const newItem = mapFromDb(payload.new) as T
+            setItems((prev) => [newItem, ...prev])
+          } else if (payload.eventType === 'UPDATE') {
+            const updated = mapFromDb(payload.new) as T
+            setItems((prev) =>
+              prev.map((item) => (item.id === updated.id ? updated : item))
+            )
+          } else if (payload.eventType === 'DELETE') {
+            const deletedId = payload.old?.id
+            if (deletedId) {
+              setItems((prev) => prev.filter((item) => item.id !== deletedId))
+            }
+          }
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [collectionName, userId])
 
   const getById = useCallback(
     async (id: string) => {

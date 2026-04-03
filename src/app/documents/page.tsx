@@ -14,6 +14,7 @@ import { useDocuments } from '@/lib/hooks/useDocuments'
 import { useUniversities } from '@/lib/hooks/useUniversities'
 import { DocumentCategory } from '@/lib/types'
 import { cn, formatDate, DOCUMENT_CATEGORIES } from '@/lib/utils'
+import { ListPageSkeleton } from '@/components/ui/PageSkeletons'
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10 MB
 
@@ -230,11 +231,7 @@ export default function DocumentsPage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600" />
-      </div>
-    )
+    return <ListPageSkeleton />
   }
 
   return (

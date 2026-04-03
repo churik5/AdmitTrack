@@ -12,6 +12,7 @@ import ProgressBar from '@/components/ui/ProgressBar'
 import { Save, Plus, Trash2, AlertTriangle, Download } from 'lucide-react'
 import { exportProfilePdf } from '@/lib/pdf/exportProfile'
 import { cn } from '@/lib/utils'
+import { DetailPageSkeleton } from '@/components/ui/PageSkeletons'
 import { useAuth } from '@/lib/supabase/auth-context'
 import { useRouter } from 'next/navigation'
 
@@ -120,11 +121,7 @@ export default function ProfilePage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-pulse text-gray-400 text-sm">{t.common.loading}</div>
-      </div>
-    )
+    return <DetailPageSkeleton />
   }
 
   const inputClass = 'input-base'

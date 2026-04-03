@@ -14,6 +14,7 @@ import EmptyState from '@/components/ui/EmptyState'
 import { useResearch } from '@/lib/hooks/useResearch'
 import { Research, ResearchType, ResearchStatus } from '@/lib/types'
 import { cn, truncate, getStatusColor, statusLabel } from '@/lib/utils'
+import { ListPageSkeleton } from '@/components/ui/PageSkeletons'
 
 const STATUS_KEYS: (ResearchStatus | 'all')[] = ['all', 'idea', 'planning', 'in_progress', 'completed', 'published']
 
@@ -129,11 +130,7 @@ export default function ResearchPage() {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600" />
-      </div>
-    )
+    return <ListPageSkeleton />
   }
 
   return (
