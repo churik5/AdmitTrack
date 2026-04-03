@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js'
 import { BaseEntity } from '../types'
 import { useAuth } from '../supabase/auth-context'
@@ -12,6 +12,7 @@ export function useCollection<T extends BaseEntity>(collectionName: string) {
   const { user } = useAuth()
   const [items, setItems] = useState<T[]>([])
   const [loading, setLoading] = useState(true)
+  const initialLoadDone = useRef(false)
 
   const userId = user?.id
 
@@ -21,13 +22,16 @@ export function useCollection<T extends BaseEntity>(collectionName: string) {
       setLoading(false)
       return
     }
-    setLoading(true)
+    // Only show skeleton on initial load, not on subsequent refreshes
+    if (!initialLoadDone.current) setLoading(true)
     const data = await db.getAll<T>(collectionName, userId)
     setItems(data)
     setLoading(false)
+    initialLoadDone.current = true
   }, [collectionName, userId])
 
   useEffect(() => {
+    initialLoadDone.current = false
     refresh()
   }, [refresh])
 
