@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { useI18n } from '@/lib/i18n'
+import { useProfile } from '@/lib/hooks/useProfile'
 
 interface TourStep {
   titleKey: keyof import('@/lib/i18n/types').Translations['tour']
@@ -19,27 +20,23 @@ const TOUR_STEPS: TourStep[] = [
   { titleKey: 'doneTitle', descKey: 'doneDesc' },
 ]
 
-const STORAGE_KEY = 'admittrack-tour-completed'
-
 export default function OnboardingTour() {
   const pathname = usePathname()
   const { t } = useI18n()
+  const { profile, updateProfile } = useProfile()
   const [active, setActive] = useState(false)
   const [step, setStep] = useState(0)
   const [targetRect, setTargetRect] = useState<DOMRect | null>(null)
   const [isMobile, setIsMobile] = useState(false)
   const tooltipRef = useRef<HTMLDivElement>(null)
 
-  // Check if tour should show
+  // Show tour only once — after registration, when onboardingComplete is false
   useEffect(() => {
     if (pathname !== '/dashboard') return
-    const completed = localStorage.getItem(STORAGE_KEY)
-    if (!completed) {
-      // Small delay to let the dashboard render
-      const timer = setTimeout(() => setActive(true), 600)
-      return () => clearTimeout(timer)
-    }
-  }, [pathname])
+    if (!profile || profile.onboardingComplete) return
+    const timer = setTimeout(() => setActive(true), 600)
+    return () => clearTimeout(timer)
+  }, [pathname, profile])
 
   // Detect mobile
   useEffect(() => {
@@ -80,9 +77,9 @@ export default function OnboardingTour() {
   }, [active, step, positionSpotlight])
 
   const completeTour = useCallback(() => {
-    localStorage.setItem(STORAGE_KEY, 'true')
     setActive(false)
-  }, [])
+    updateProfile({ onboardingComplete: true })
+  }, [updateProfile])
 
   const handleNext = () => {
     if (step === TOUR_STEPS.length - 1) {
