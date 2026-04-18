@@ -203,10 +203,10 @@ export default function UniversitiesPage() {
                 key={val}
                 onClick={() => setStatusFilter(val)}
                 className={cn(
-                  'px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors',
+                  'px-3.5 py-1.5 text-[11px] font-sans font-semibold uppercase tracking-[0.14em] rounded-sm whitespace-nowrap transition-all duration-200 border',
                   statusFilter === val
-                    ? 'bg-brand-600 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-brand-700 text-surface-0 border-brand-900 shadow-press'
+                    : 'bg-transparent text-ink-700 border-ink-900/25 hover:border-brand-700 hover:text-brand-700 dark:text-surface-300 dark:border-surface-600 dark:hover:border-brand-600 dark:hover:text-brand-600'
                 )}
               >
                 {val === 'all' ? t.common.all : t.universities.statuses[val]}

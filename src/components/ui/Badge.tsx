@@ -28,7 +28,7 @@ export default function Badge({ children, variant, color, className, size = 'sm'
     <span
       className={cn(
         'inline-flex items-center font-sans font-semibold uppercase',
-        'tracking-[0.16em] rounded-[1px] border border-current/25',
+        'tracking-[0.16em] rounded-[3px] border border-current/25',
         sizeClasses,
         colorClasses,
         className
