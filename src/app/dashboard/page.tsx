@@ -14,6 +14,7 @@ import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import ProgressBar from '@/components/ui/ProgressBar'
+import EngravedIcon, { EngravedIconName } from '@/components/ui/EngravedIcon'
 import {
   GraduationCap,
   Trophy,
@@ -77,12 +78,12 @@ export default function DashboardPage() {
 
   const greeting = profile?.name ? profile.name.split(' ')[0] : ''
 
-  const stats = [
-    { label: t.nav.universities, count: universities.length, icon: GraduationCap, href: '/universities', color: 'text-brand-600 bg-brand-50' },
-    { label: t.nav.activities, count: activities.length, icon: Sparkles, href: '/activities', color: 'text-purple-600 bg-purple-50' },
-    { label: t.nav.honors, count: honors.length, icon: Trophy, href: '/honors', color: 'text-amber-600 bg-amber-50' },
-    { label: t.nav.essays, count: essays.length, icon: PenLine, href: '/essays', color: 'text-emerald-600 bg-emerald-50' },
-    { label: t.nav.documents, count: documents.length, icon: FolderOpen, href: '/documents', color: 'text-orange-600 bg-orange-50' },
+  const stats: { label: string; count: number; engraved: EngravedIconName; href: string }[] = [
+    { label: t.nav.universities, count: universities.length, engraved: 'cap', href: '/universities' },
+    { label: t.nav.activities, count: activities.length, engraved: 'sparks', href: '/activities' },
+    { label: t.nav.honors, count: honors.length, engraved: 'trophy', href: '/honors' },
+    { label: t.nav.essays, count: essays.length, engraved: 'quill', href: '/essays' },
+    { label: t.nav.documents, count: documents.length, engraved: 'scroll', href: '/documents' },
   ]
 
   // Gazette masthead: Vol. I · No. {isoWeek} · {locale date}
@@ -121,12 +122,10 @@ export default function DashboardPage() {
           <Link key={stat.label} href={stat.href} style={{ animationDelay: `${i * 60}ms` }} className="animate-slide-up">
             <Card className="card-interactive !p-4">
               <div className="flex items-center gap-3">
-                <div className={cn('w-10 h-10 rounded-xl flex items-center justify-center', stat.color)}>
-                  <stat.icon size={19} />
-                </div>
+                <EngravedIcon name={stat.engraved} size={28} withFrame />
                 <div>
-                  <p className="text-2xl font-bold font-sans text-surface-900">{stat.count}</p>
-                  <p className="text-xs text-surface-500">{stat.label}</p>
+                  <p className="font-display text-[1.75rem] leading-none text-ink-900 dark:text-surface-100 font-[500]">{stat.count}</p>
+                  <p className="kicker text-[9px] mt-1">{stat.label}</p>
                 </div>
               </div>
             </Card>

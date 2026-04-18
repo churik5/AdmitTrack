@@ -5,20 +5,11 @@ import {
   BookOpen,
   ChevronDown,
   ChevronRight,
-  Layers,
-  PenLine,
-  Award,
-  FolderOpen,
-  FileEdit,
-  Heart,
-  CalendarClock,
-  ListChecks,
-  FlaskConical,
-  Rocket,
 } from 'lucide-react'
 import PageHeader from '@/components/layout/PageHeader'
 import Card from '@/components/ui/Card'
 import SearchInput from '@/components/ui/SearchInput'
+import EngravedIcon from '@/components/ui/EngravedIcon'
 import { cn } from '@/lib/utils'
 import { useI18n } from '@/lib/i18n'
 
@@ -34,7 +25,7 @@ const guides: Guide[] = [
   {
     id: 'activity-vs-honor',
     title: 'Activity vs Honor: What\'s the Difference?',
-    icon: <Layers size={20} className="text-blue-600" />,
+    icon: <EngravedIcon name="book" size={24} withFrame />,
     searchText: 'activity honor difference award club sport job project volunteering recognition prize scholarship',
     content: (
       <div className="space-y-4">
@@ -105,7 +96,7 @@ const guides: Guide[] = [
   {
     id: 'writing-descriptions',
     title: 'Writing Activity Descriptions (150 Characters)',
-    icon: <PenLine size={20} className="text-violet-600" />,
+    icon: <EngravedIcon name="quill" size={24} withFrame />,
     searchText: 'writing activity description 150 characters common app short concise impact verbs numbers',
     content: (
       <div className="space-y-4">
@@ -191,7 +182,7 @@ const guides: Guide[] = [
   {
     id: 'honor-levels',
     title: 'How to Evaluate Honor Levels',
-    icon: <Award size={20} className="text-amber-600" />,
+    icon: <EngravedIcon name="trophy" size={24} withFrame />,
     searchText: 'honor level school regional state national international award recognition evaluate',
     content: (
       <div className="space-y-4">
@@ -272,7 +263,7 @@ const guides: Guide[] = [
   {
     id: 'organizing-documents',
     title: 'Organizing Your Documents',
-    icon: <FolderOpen size={20} className="text-emerald-600" />,
+    icon: <EngravedIcon name="scroll" size={24} withFrame />,
     searchText: 'documents organize files naming convention checklist transcript recommendation letters resume',
     content: (
       <div className="space-y-4">
@@ -371,7 +362,7 @@ const guides: Guide[] = [
   {
     id: 'writing-essays',
     title: 'Writing Strong Essays',
-    icon: <FileEdit size={20} className="text-rose-600" />,
+    icon: <EngravedIcon name="quill" size={24} withFrame />,
     searchText: 'essay writing personal statement show tell specific structure hook context reflection pitfalls',
     content: (
       <div className="space-y-4">
@@ -446,7 +437,7 @@ const guides: Guide[] = [
   {
     id: 'why-us-essay',
     title: 'The "Why Us" Essay Formula',
-    icon: <Heart size={20} className="text-pink-600" />,
+    icon: <EngravedIcon name="ribbon" size={24} withFrame />,
     searchText: 'why us essay supplement college specific research programs professors clubs traditions fit',
     content: (
       <div className="space-y-4">
@@ -510,7 +501,7 @@ const guides: Guide[] = [
   {
     id: 'managing-deadlines',
     title: 'Managing Deadlines Effectively',
-    icon: <CalendarClock size={20} className="text-orange-600" />,
+    icon: <EngravedIcon name="calendar" size={24} withFrame />,
     searchText: 'deadline management calendar early decision regular decision rolling admission timeline',
     content: (
       <div className="space-y-4">
@@ -567,7 +558,7 @@ const guides: Guide[] = [
   {
     id: 'building-college-list',
     title: 'Building Your College List',
-    icon: <ListChecks size={20} className="text-teal-600" />,
+    icon: <EngravedIcon name="scroll" size={24} withFrame />,
     searchText: 'college list reach target likely safety schools how many factors ranking fit',
     content: (
       <div className="space-y-4">
@@ -640,7 +631,7 @@ const guides: Guide[] = [
   {
     id: 'research-projects',
     title: 'Research & Projects: What Counts?',
-    icon: <FlaskConical size={20} className="text-indigo-600" />,
+    icon: <EngravedIcon name="microscope" size={24} withFrame />,
     searchText: 'research project independent competition mentor lab publication science STEM contribution',
     content: (
       <div className="space-y-4">
@@ -701,7 +692,7 @@ const guides: Guide[] = [
   {
     id: 'using-admittrack',
     title: 'How to Use AdmitTrack Effectively',
-    icon: <Rocket size={20} className="text-brand-600" />,
+    icon: <EngravedIcon name="sparks" size={24} withFrame />,
     searchText: 'admittrack guide tutorial how to use profile universities activities honors deadlines essays documents checklist',
     content: (
       <div className="space-y-4">

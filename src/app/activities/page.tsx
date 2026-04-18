@@ -248,7 +248,7 @@ export default function ActivitiesPage() {
       {/* Empty state */}
       {activities.length === 0 && (
         <EmptyState
-          icon={ActivityIcon}
+          engraved="sparks"
           title={t.activities.noActivities}
           description={t.activities.noActivitiesDesc}
           actionLabel={t.activities.firstActivity}

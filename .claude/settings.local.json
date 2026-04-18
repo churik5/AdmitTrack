@@ -18,7 +18,15 @@
       "Bash(ls -la /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/activities/[id]/)",
       "Bash(head -30 /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/essays/[id]/page.tsx)",
       "Bash(npm run:*)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(grep -c 'text-gray\\\\|border-gray\\\\|bg-gray\\\\|bg-white' /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/universities/[id]/page.tsx)",
+      "Bash(grep -oP 'text-gray-\\\\d+|border-gray-\\\\d+|bg-gray-\\\\d+|hover:bg-gray-\\\\d+|hover:text-gray-\\\\d+|bg-white' /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/universities/[id]/page.tsx)",
+      "Bash(grep -oE 'text-gray-[0-9]+|border-gray-[0-9]+|bg-gray-[0-9]+|hover:bg-gray-[0-9]+|hover:text-gray-[0-9]+|bg-white' /Users/aleksandrchurilov/Desktop/AdmitTrack/src/app/universities/[id]/page.tsx)",
+      "Bash(grep -v ':0$')",
+      "Bash(sort -t: -k2 -rn)",
+      "Bash(grep -r \"\\\\.on\\\\|subscribe\\\\|realtime\\\\|channel\" /Users/aleksandrchurilov/Desktop/AdmitTrack/src --include=*.ts --include=*.tsx)",
+      "Bash(npx tsc:*)",
+      "Bash(git reset:*)"
     ]
   }
 }

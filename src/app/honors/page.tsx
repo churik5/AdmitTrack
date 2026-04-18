@@ -174,7 +174,7 @@ export default function HonorsPage() {
       {/* Empty state */}
       {honors.length === 0 && (
         <EmptyState
-          icon={Award}
+          engraved="trophy"
           title={t.honors.noHonors}
           description={t.honors.noHonorsDesc}
           actionLabel={t.honors.firstHonor}

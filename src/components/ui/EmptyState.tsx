@@ -2,9 +2,11 @@
 
 import { LucideIcon } from 'lucide-react'
 import Button from './Button'
+import EngravedIcon, { EngravedIconName } from './EngravedIcon'
 
 interface EmptyStateProps {
-  icon: LucideIcon
+  icon?: LucideIcon
+  engraved?: EngravedIconName
   title: string
   description?: string
   actionLabel?: string
@@ -15,6 +17,7 @@ interface EmptyStateProps {
 // italic lede. No boxed icon cell.
 export default function EmptyState({
   icon: Icon,
+  engraved,
   title,
   description,
   actionLabel,
@@ -29,11 +32,17 @@ export default function EmptyState({
         <span className="flex-1 h-px bg-ink-900/20 dark:bg-surface-100/15" />
       </div>
 
-      <Icon
-        size={32}
-        strokeWidth={1}
-        className="text-ink-900/40 dark:text-surface-500 mb-5"
-      />
+      {engraved ? (
+        <div className="mb-5">
+          <EngravedIcon name={engraved} size={44} withFrame />
+        </div>
+      ) : Icon ? (
+        <Icon
+          size={32}
+          strokeWidth={1}
+          className="text-ink-900/40 dark:text-surface-500 mb-5"
+        />
+      ) : null}
 
       <h3 className="font-display text-[1.75rem] leading-tight text-ink-900 dark:text-surface-100 mb-2 font-[500]">
         {title}
