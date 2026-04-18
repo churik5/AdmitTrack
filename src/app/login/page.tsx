@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { useAuth } from '@/lib/supabase/auth-context'
 import { useI18n } from '@/lib/i18n'
 import Button from '@/components/ui/Button'
-import { GraduationCap, LogIn, Eye, EyeOff } from 'lucide-react'
+import Crest from '@/components/ui/Crest'
+import { LogIn, Eye, EyeOff } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -56,13 +57,18 @@ export default function LoginPage() {
       </div>
 
       <div className="w-full max-w-sm">
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mx-auto mb-5 shadow-elevated">
-            <GraduationCap size={30} className="text-white" />
+        {/* Crest */}
+        <div className="text-center mb-10">
+          <div className="flex justify-center mb-6">
+            <Crest size={104} />
           </div>
-          <h1 className="text-3xl font-display text-surface-900 tracking-tight">AdmitTrack</h1>
-          <p className="text-sm text-surface-500 mt-2">{t.auth.signInSubtitle}</p>
+          <p className="kicker mb-2">Anno MMXXVI</p>
+          <h1 className="font-display text-[2.5rem] leading-none text-ink-900 dark:text-surface-100 tracking-tight font-[500]">
+            Admit<span className="italic text-brand-700">Track</span>
+          </h1>
+          <p className="mt-3 font-serif italic text-[14px] text-ink-700/80 dark:text-surface-400">
+            — {t.auth.signInSubtitle}
+          </p>
         </div>
 
         {/* Form */}

@@ -26,6 +26,7 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/lib/supabase/auth-context'
 import { useI18n } from '@/lib/i18n'
 import { useTheme } from '@/lib/theme'
+import Crest from '@/components/ui/Crest'
 
 interface NavItem {
   labelKey: keyof import('@/lib/i18n/types').Translations['nav']
@@ -97,23 +98,26 @@ export default function Sidebar() {
       <span aria-hidden className="absolute top-0 bottom-0 right-[-4px] w-px bg-ink-900/10 dark:bg-surface-100/10" />
 
       {/* ============== MASTHEAD ============== */}
-      <div className="px-6 pt-7 pb-5 border-b border-ink-900/20 dark:border-surface-700 relative">
-        <Link href="/dashboard" className="block group">
-          <p className="kicker text-[9px] mb-2">Anno MMXXVI</p>
-          <div className="flex items-baseline gap-2">
-            <span className="font-display text-[1.9rem] leading-none tracking-tight text-ink-900 dark:text-surface-100 font-[500]">
-              Admit
-            </span>
-            <span className="font-display italic text-[1.9rem] leading-none tracking-tight text-brand-700 font-[500]">
-              Track
-            </span>
+      <div className="px-5 pt-6 pb-5 border-b border-ink-900/20 dark:border-surface-700 relative">
+        <Link href="/dashboard" className="flex items-center gap-3 group">
+          <Crest size={44} />
+          <div className="min-w-0">
+            <p className="kicker text-[8px] mb-0.5">Anno MMXXVI</p>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-display text-[1.5rem] leading-none tracking-tight text-ink-900 dark:text-surface-100 font-[500]">
+                Admit
+              </span>
+              <span className="font-display italic text-[1.5rem] leading-none tracking-tight text-brand-700 font-[500]">
+                Track
+              </span>
+            </div>
+            <p className="mt-1 font-serif italic text-[10px] text-ink-700/70 dark:text-surface-400 truncate">
+              a chronicle of applications
+            </p>
           </div>
-          <p className="mt-2 font-serif italic text-[11px] text-ink-700/70 dark:text-surface-400">
-            a chronicle of applications
-          </p>
         </Link>
         {/* Crimson stub under masthead */}
-        <span className="absolute -bottom-px left-6 h-[3px] w-12 bg-brand-700" />
+        <span className="absolute -bottom-px left-5 h-[3px] w-12 bg-brand-700" />
       </div>
 
       {/* ============== NAVIGATION ============== */}

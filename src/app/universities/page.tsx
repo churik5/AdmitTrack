@@ -10,6 +10,7 @@ import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
 import EmptyState from '@/components/ui/EmptyState'
+import Notice from '@/components/ui/Notice'
 import SortableList from '@/components/ui/SortableList'
 import { useUniversities } from '@/lib/hooks/useUniversities'
 import { useDeadlines } from '@/lib/hooks/useDeadlines'
@@ -183,10 +184,10 @@ export default function UniversitiesPage() {
         }
       />
 
-      {/* Disclaimer */}
-      <div className="mb-5 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800">
+      {/* Disclaimer — editorial Nota Bene */}
+      <Notice kicker="N.B." tone="warn" className="mb-6">
         {t.universities.disclaimer}
-      </div>
+      </Notice>
 
       {/* Filters */}
       {universities.length > 0 && (

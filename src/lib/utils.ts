@@ -44,39 +44,52 @@ export function cn(...classes: (string | boolean | undefined | null)[]): string 
   return classes.filter(Boolean).join(' ')
 }
 
+// Ivy palette — crimson / navy / forest / gold / ink tones.
+// Every status maps into the Ivy gamut to avoid off-theme blues/greens.
+const IVY_PARCHMENT = 'bg-surface-100/90 text-ink-700 dark:bg-[#2a2319] dark:text-surface-200'
+const IVY_CRIMSON   = 'bg-[#f3d9d9]/80 text-[#631818] dark:bg-[#4e1313]/70 dark:text-[#e4b8b8]'
+const IVY_NAVY      = 'bg-[#d9e1ed]/80 text-[#0f2847] dark:bg-[#1a2d4a]/70 dark:text-[#b8c9e0]'
+const IVY_FOREST    = 'bg-[#d9e4dc]/80 text-[#1f3d2c] dark:bg-[#1d3328]/80 dark:text-[#b8d4c3]'
+const IVY_GOLD      = 'bg-[#ecdcae]/80 text-[#6b4d12] dark:bg-[#3d2d10]/80 dark:text-[#d9b872]'
+const IVY_INK_MUTED = 'bg-surface-200/70 text-ink-700/60 dark:bg-[#2a2319] dark:text-surface-500'
+
 export function getDeadlineColor(days: number): string {
-  if (days < 0) return 'text-red-600 bg-red-50'
-  if (days <= 3) return 'text-red-600 bg-red-50'
-  if (days <= 7) return 'text-orange-600 bg-orange-50'
-  if (days <= 14) return 'text-yellow-600 bg-yellow-50'
-  if (days <= 30) return 'text-blue-600 bg-blue-50'
-  return 'text-gray-600 bg-gray-50'
+  if (days < 0) return IVY_CRIMSON
+  if (days <= 3) return IVY_CRIMSON
+  if (days <= 7) return IVY_GOLD
+  if (days <= 14) return IVY_GOLD
+  if (days <= 30) return IVY_NAVY
+  return IVY_PARCHMENT
 }
 
 export function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    researching: 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300',
-    planning: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-    in_progress: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
-    submitted: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-    accepted: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-    rejected: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
-    waitlisted: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
-    deferred: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
-    withdrawn: 'bg-gray-100 text-gray-500 dark:bg-gray-900/30 dark:text-gray-400',
-    brainstorming: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-    outlining: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-    drafting: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300',
-    revising: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
-    polishing: 'bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300',
-    final: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-    idea: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-    completed: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-    published: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
-    upcoming: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-    overdue: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+    // University pipeline
+    researching: IVY_PARCHMENT,
+    planning: IVY_NAVY,
+    in_progress: IVY_GOLD,
+    submitted: IVY_NAVY,
+    accepted: IVY_FOREST,
+    rejected: IVY_CRIMSON,
+    waitlisted: IVY_GOLD,
+    deferred: IVY_GOLD,
+    withdrawn: IVY_INK_MUTED,
+    // Essay pipeline
+    brainstorming: IVY_PARCHMENT,
+    outlining: IVY_NAVY,
+    drafting: IVY_GOLD,
+    revising: IVY_GOLD,
+    polishing: IVY_NAVY,
+    final: IVY_FOREST,
+    // Honor / research
+    idea: IVY_PARCHMENT,
+    completed: IVY_FOREST,
+    published: IVY_FOREST,
+    // Deadline
+    upcoming: IVY_NAVY,
+    overdue: IVY_CRIMSON,
   }
-  return colors[status] || 'bg-gray-100 text-gray-700 dark:bg-gray-900/30 dark:text-gray-300'
+  return colors[status] || IVY_PARCHMENT
 }
 
 export function statusLabel(status: string): string {

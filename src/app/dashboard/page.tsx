@@ -85,16 +85,34 @@ export default function DashboardPage() {
     { label: t.nav.documents, count: documents.length, icon: FolderOpen, href: '/documents', color: 'text-orange-600 bg-orange-50' },
   ]
 
+  // Gazette masthead: Vol. I · No. {isoWeek} · {locale date}
+  const now = new Date()
+  const startOfYear = new Date(now.getFullYear(), 0, 1)
+  const isoWeek = Math.ceil(((now.getTime() - startOfYear.getTime()) / 86400000 + startOfYear.getDay() + 1) / 7)
+  const issueDate = now.toLocaleDateString(undefined, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+
   return (
     <div>
-      {/* Greeting */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-display text-surface-900 tracking-tight">
+      {/* Gazette masthead */}
+      <div className="relative mb-8 pb-5 above-paper">
+        <div className="flex items-center justify-between gap-3 pb-3 border-b border-ink-900/15 dark:border-surface-100/10 mb-5">
+          <p className="kicker text-[9px]">Vol. I · № {String(isoWeek).padStart(2, '0')}</p>
+          <p className="hidden sm:block font-serif italic text-[12px] text-ink-700/70 dark:text-surface-400">
+            {issueDate}
+          </p>
+          <p className="kicker text-[9px]">The Admit Gazette</p>
+        </div>
+        <p className="kicker mb-2">§ &nbsp; Morning Edition</p>
+        <h1 className="font-display text-[3rem] md:text-[3.5rem] leading-[0.95] tracking-tight text-ink-900 dark:text-surface-100 font-[500]">
           {t.dashboard.greeting}{greeting ? `, ${greeting}` : ''}
         </h1>
-        <p className="text-sm text-surface-500 mt-2">
-          {t.dashboard.overview}
+        <p className="mt-3 font-serif italic text-[15px] text-ink-700/80 dark:text-surface-300/90 leading-relaxed max-w-2xl">
+          — {t.dashboard.overview}
         </p>
+        {/* Double-rule with crimson stub */}
+        <div className="absolute -bottom-px left-0 right-0 h-px bg-ink-900/25 dark:bg-surface-100/15" />
+        <div className="absolute -bottom-[5px] left-0 right-0 h-px bg-ink-900/15 dark:bg-surface-100/10" />
+        <span className="absolute -bottom-[5px] left-0 h-[5px] w-14 bg-brand-700" />
       </div>
 
       {/* Stats Grid */}

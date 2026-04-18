@@ -10,6 +10,7 @@ interface SearchInputProps {
   className?: string
 }
 
+// Editorial search — ink underline, italic placeholder, no boxy fill.
 export default function SearchInput({
   value,
   onChange,
@@ -17,24 +18,33 @@ export default function SearchInput({
   className,
 }: SearchInputProps) {
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn('relative group', className)}>
       <Search
-        size={16}
-        className="absolute left-3.5 top-1/2 -translate-y-1/2 text-surface-400 pointer-events-none"
+        size={15}
+        strokeWidth={1.5}
+        className="absolute left-0.5 top-1/2 -translate-y-1/2 text-ink-900/50 dark:text-surface-400 pointer-events-none transition-colors group-focus-within:text-brand-700"
       />
       <input
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full pl-10 pr-9 py-2.5 text-sm bg-white/80 dark:bg-surface-800/80 backdrop-blur-sm border border-surface-200 rounded-xl placeholder:text-surface-400 dark:placeholder:text-surface-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-400 transition-all duration-200"
+        className={cn(
+          'w-full pl-7 pr-8 py-2 font-serif italic text-[15px]',
+          'bg-transparent border-0 border-b border-ink-900/30 dark:border-surface-600',
+          'placeholder:text-ink-900/40 dark:placeholder:text-surface-500 text-ink-900 dark:text-surface-100',
+          'focus:outline-none focus:border-brand-700 dark:focus:border-brand-600',
+          'transition-colors duration-200',
+        )}
+        style={{ fontStyle: value ? 'normal' : 'italic' }}
       />
       {value && (
         <button
           onClick={() => onChange('')}
-          className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-surface-400 hover:text-surface-600 rounded-lg transition-colors"
+          className="absolute right-0 top-1/2 -translate-y-1/2 p-1 text-ink-900/40 hover:text-brand-700 transition-colors"
+          aria-label="Clear"
         >
-          <X size={14} />
+          <X size={14} strokeWidth={1.5} />
         </button>
       )}
     </div>
