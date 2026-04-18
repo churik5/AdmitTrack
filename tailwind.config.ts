@@ -10,62 +10,85 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Crimson — Harvard oxblood, the dominant accent
         brand: {
-          50: '#f0f4ff',
-          100: '#dfe8ff',
-          200: '#b9cdff',
-          300: '#8aabff',
-          400: '#5580f0',
-          500: '#3b5ccc',
-          600: '#2d47a6',
-          700: '#233a8a',
-          800: '#1c2f6e',
-          900: '#162350',
-          950: '#0e1630',
+          50:  '#faf1f1',
+          100: '#f2dcdc',
+          200: '#e4b8b8',
+          300: '#cd8686',
+          400: '#b15858',
+          500: '#8f2f2f',
+          600: '#791f1f',
+          700: '#631818',
+          800: '#4e1313',
+          900: '#3a0d0d',
+          950: '#1f0606',
         },
+        // Parchment / ivory paper
         surface: {
-          0: '#ffffff',
-          50: '#fafaf8',
-          100: '#f5f4f0',
-          200: '#eceae4',
-          300: '#dedad2',
-          400: '#c4bfb3',
-          500: '#a09889',
-          600: '#7c7466',
-          700: '#5a5348',
-          800: '#3d3832',
-          900: '#252220',
+          0:   '#fdfaf1',   // pure paper
+          50:  '#f8f1e0',   // warm ivory
+          100: '#efe6d1',
+          200: '#e0d4b8',
+          300: '#c4b690',
+          400: '#9e916a',
+          500: '#6e634a',
+          600: '#4a4232',
+          700: '#332d22',
+          800: '#211d16',
+          900: '#14110c',
         },
+        // Ink — near-black text
+        ink: {
+          900: '#14110c',
+          800: '#1f1a12',
+          700: '#2c2518',
+        },
+        // Supporting ivy colors (Yale / Dartmouth / parchment gold)
         accent: {
-          amber: '#d4a039',
-          emerald: '#2e9e6e',
-          coral: '#d45a3b',
-          plum: '#8b5fbf',
+          navy:    '#0f2847',   // Yale blue
+          forest:  '#1f3d2c',   // Dartmouth green
+          gold:    '#a67c1f',   // parchment gold
+          plum:    '#631818',   // alias → crimson
+          crimson: '#8f2f2f',
+          amber:   '#a67c1f',
+          emerald: '#1f3d2c',
+          coral:   '#b15858',
+          ink:     '#14110c',
         },
       },
       fontFamily: {
-        display: ['"DM Serif Display"', 'Georgia', 'serif'],
-        sans: ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif:   ['"EB Garamond"', 'Georgia', 'serif'],
+        sans:    ['"Work Sans"', 'system-ui', 'sans-serif'],
+        mono:    ['"JetBrains Mono"', 'monospace'],
       },
       fontSize: {
         '2xs': ['0.65rem', { lineHeight: '1rem' }],
       },
+      letterSpacing: {
+        'masthead': '0.32em',
+        'smallcaps': '0.18em',
+      },
       boxShadow: {
-        'soft': '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)',
-        'card': '0 1px 4px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.03)',
-        'elevated': '0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
-        'modal': '0 8px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+        'soft':     '0 1px 2px rgba(31, 23, 14, 0.06)',
+        'card':     '0 1px 0 rgba(31, 23, 14, 0.04), inset 0 0 0 1px rgba(31, 23, 14, 0.04)',
+        'elevated': '0 1px 0 rgba(31, 23, 14, 0.05), 0 8px 24px -12px rgba(31, 23, 14, 0.18)',
+        'modal':    '0 12px 48px rgba(31, 23, 14, 0.22), 0 2px 8px rgba(31, 23, 14, 0.1)',
+        'ring':     'inset 0 0 0 1px rgba(31, 23, 14, 0.1)',
+        'press':    'inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 0 rgba(31,23,14,0.15)',
       },
       borderRadius: {
-        '2xl': '1rem',
-        '3xl': '1.25rem',
+        'xl':  '0.375rem',
+        '2xl': '0.5rem',
+        '3xl': '0.75rem',
       },
       animation: {
-        'fade-in': 'fadeIn 300ms ease-out',
-        'slide-up': 'slideUp 300ms ease-out',
-        'scale-in': 'scaleIn 200ms ease-out',
-        'page-enter': 'pageEnter 250ms ease-out',
+        'fade-in': 'fadeIn 400ms ease-out',
+        'slide-up': 'slideUp 400ms cubic-bezier(.2,.7,.2,1)',
+        'scale-in': 'scaleIn 220ms ease-out',
+        'page-enter': 'pageEnter 350ms cubic-bezier(.2,.7,.2,1)',
+        'ornament-draw': 'ornamentDraw 700ms ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -83,6 +106,10 @@ const config: Config = {
         pageEnter: {
           from: { opacity: '0', transform: 'translateY(6px)' },
           to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        ornamentDraw: {
+          from: { transform: 'scaleX(0)', opacity: '0' },
+          to: { transform: 'scaleX(1)', opacity: '1' },
         },
       },
     },

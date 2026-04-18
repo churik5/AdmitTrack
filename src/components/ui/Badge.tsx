@@ -12,17 +12,23 @@ interface BadgeProps {
   size?: 'sm' | 'md'
 }
 
+// Editorial tag — small-caps, thin ruled border, no rounded corners.
+// Evokes a bookplate or library catalog label.
 export default function Badge({ children, variant, color, className, size = 'sm' }: BadgeProps) {
-  const colorClasses = color || (variant ? getStatusColor(variant) : 'bg-surface-100 text-surface-700 dark:bg-surface-800 dark:text-surface-300')
+  const colorClasses =
+    color ||
+    (variant
+      ? getStatusColor(variant)
+      : 'bg-surface-100 text-ink-800 dark:bg-surface-800 dark:text-surface-200')
 
-  const sizeClasses = size === 'sm'
-    ? 'px-2 py-0.5 text-2xs'
-    : 'px-2.5 py-0.5 text-xs'
+  const sizeClasses =
+    size === 'sm' ? 'px-2 py-[2px] text-[10px]' : 'px-2.5 py-1 text-[11px]'
 
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-lg font-medium tracking-wide uppercase',
+        'inline-flex items-center font-sans font-semibold uppercase',
+        'tracking-[0.16em] rounded-[1px] border border-current/25',
         sizeClasses,
         colorClasses,
         className
